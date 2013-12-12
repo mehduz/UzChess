@@ -15,5 +15,5 @@ public class VerificateurCavalier extends Deplacement {
         
         return depVertical <= 2 && depHorizontal <= 2 && depHorizontal != depVertical;
     }
-
-}
+ 
+} 
