@@ -6,16 +6,20 @@ public class VerificateurTour extends Deplacement {
     
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
-        boolean verif=false;
-       //typeVefir== pour ligne (0)colonne(1) ou diago(2)
-        if ( dep.getLigne()== arr.getLigne() && this.moteurDeJeu.getJeuEchecs().getEchiquier().verifierInter(dep, arr, 0) )
-            verif=true;
         
-                
-        if (dep.getColonne() == arr.getColonne() && this.moteurDeJeu.getJeuEchecs().getEchiquier().verifierInter(dep, arr, 1)  )
-            verif=true;
-        return verif;
-           
+        int colCaseDep = dep.getColonne();
+        int ligCaseDep = dep.getLigne();
+        int colCaseArr = arr.getColonne();
+        int ligCaseArr = arr.getLigne(); 
+        
+       //typeVefir== pour ligne (0)colonne(1) ou diago(2)
+        if ( ligCaseDep !=  ligCaseArr && colCaseDep != colCaseArr )
+            return false;
+        int verifType = (ligCaseDep == ligCaseArr) ? 0 : 1;
+        
+        Echiquier ech = moteurDeJeu.getJeuEchecs().getEchiquier();
+        return ech.verifierInter(dep, arr, verifType);
+       
     }
 
  
