@@ -1,24 +1,27 @@
-package uzchess.core;
+package uzchess.core.rules;
+
+import uzchess.core.model.Case;
+import uzchess.core.model.Echiquier;
 
 
-public class VerificateurTour extends Deplacement {
+public class VerificateurTour implements Deplacement {
 //on arrive dans cette méthode tout est nikel il faut juste verifier que déplacement comforme
     
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
         
-        int colCaseDep = dep.getColonne();
-        int ligCaseDep = dep.getLigne();
-        int colCaseArr = arr.getColonne();
-        int ligCaseArr = arr.getLigne(); 
+        byte colCaseDep = dep.getColonne();
+        byte ligCaseDep = dep.getLigne();
+        byte colCaseArr = arr.getColonne();
+        byte ligCaseArr = arr.getLigne(); 
         
        //typeVefir== pour ligne (0)colonne(1) ou diago(2)
         if ( ligCaseDep !=  ligCaseArr && colCaseDep != colCaseArr )
             return false;
         int verifType = (ligCaseDep == ligCaseArr) ? 0 : 1;
         
-        Echiquier ech = moteurDeJeu.getJeuEchecs().getEchiquier();
-        return ech.verifierInter(dep, arr, verifType);
+        Echiquier ech = Echiquier.getInstance();
+        return ech.verifCasesInter(dep, arr, verifType);
        
     }
 

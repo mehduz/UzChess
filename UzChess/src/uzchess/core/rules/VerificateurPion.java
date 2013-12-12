@@ -1,23 +1,27 @@
-package uzchess.core;
+package uzchess.core.rules;
 
-public class VerificateurPion extends Deplacement {
+import uzchess.core.model.Case;
+import uzchess.core.model.Echiquier;
+
+public class VerificateurPion implements Deplacement {
 
  
 //penser  dep début, prise diago
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
+        
        boolean verif=false;
-       int colDep=dep.getColonne();
-       int colArr=arr.getColonne();
-       int ligDep=dep.getLigne();
-       int ligArr=arr.getLigne();
+       byte colDep=dep.getColonne();
+       byte colArr=arr.getColonne();
+       byte ligDep=dep.getLigne();
+       byte ligArr=arr.getLigne();
          
        if(arr.getPiece()!=null){
            System.out.println("case occupée");
    
            if(ligArr==ligDep+1)
            {  
-               if( colArr == colDep+1 || colDep == colArr-1)
+               if( ( colArr == colDep+1 ) || ( colDep == colArr-1 ))
                     verif=true;
            }
            
@@ -31,7 +35,7 @@ public class VerificateurPion extends Deplacement {
                    if(ligArr==ligDep+1)
                         verif=true;
                    if( ligArr==ligDep+2)
-                       verif=this.moteurDeJeu.getJeuEchecs().getEchiquier().verifierInter(dep, arr, 1);
+                       verif=Echiquier.getInstance().verifCasesInter(dep, arr, 1);
                }
                else
                    verif = ligArr==ligDep+1;

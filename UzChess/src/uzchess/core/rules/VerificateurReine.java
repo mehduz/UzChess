@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 
-package uzchess.core;
+package uzchess.core.rules;
+
+import uzchess.core.model.Case;
 
 /**
  *
  * @author 20130317
  */
-public class VerificateurReine extends Deplacement{
+public class VerificateurReine implements Deplacement{
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {

@@ -1,28 +1,31 @@
 package uzchess.core;
 
+import uzchess.core.model.Echiquier;
+import uzchess.constantes.Couleur;
+
 public class JeuEchecs {
 
-  private boolean tour;
-  private int compteurCoups;
-  private MoteurDeJeu moteurDeJeu;
-  private Echiquier echiquier;
-  
-  public void initialiser() {
-  }
+    private Couleur tour;
+    private short compteurCoups;
+    private MoteurDeJeu moteurDeJeu;
+    private Echiquier echiquier;
 
-  public void quitter() {
-  }
+    public void initialiser() {
+    }
 
-  public void abandonner() {
-  }
+    public void quitter() {
+    }
 
-  public void detecterFin() {
-  }
+    public void abandonner() {
+    }
 
-  public void jouer() {
-  }
+    public void detecterFin() {
+    }
 
-    public boolean getTour() {
+    public void jouer() {
+    }
+
+    public Couleur getTour() {
         return tour;
     }
 
@@ -37,7 +40,5 @@ public class JeuEchecs {
     public Echiquier getEchiquier() {
         return echiquier;
     }
-  
-  
 
 }
