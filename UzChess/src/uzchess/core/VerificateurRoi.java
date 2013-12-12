@@ -14,7 +14,16 @@ public class VerificateurRoi extends Deplacement{
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        int ligneCaseDep = dep.getLigne();
+        int colonneCaseDep = dep.getColonne();
+        int ligneCaseArr = arr.getLigne();
+        int colonneCaseArr = arr.getColonne();
+        
+        int decLigne = Math.abs(ligneCaseDep - ligneCaseArr);
+        int decColonne = Math.abs(colonneCaseDep - colonneCaseArr);
+        
+        return new VerificateurReine().verifierDeplacement(dep,arr) && ( decLigne + decColonne <= 2 );
     }
     
 }
