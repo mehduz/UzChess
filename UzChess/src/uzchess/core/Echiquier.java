@@ -4,54 +4,48 @@ public class Echiquier {
 
     private Case[][] cases;
 
-    private boolean verifLigne(int ligneCaseDep, int ligneCaseArr, int colonneCaseDep)
+    private boolean verifInterLigne(int ligneCaseDep, int ligneCaseArr, int colonneCaseDep)
     {
         int i;
+        if(ligneCaseDep > ligneCaseArr)
+        {
+            int tmp = ligneCaseDep;
+            ligneCaseDep = ligneCaseArr;
+            ligneCaseArr = tmp;
+        }
         
-        if(ligneCaseDep < ligneCaseArr)
-                {
-                    i = ligneCaseDep;
-                    while( i < ligneCaseArr && cases[i][colonneCaseDep].getPiece()== null ){
-                        i++;
-                    }
-                    if (i < ligneCaseArr)
-                        return false;
-                }
-        
+        i = ligneCaseDep;
+        while( i < ligneCaseArr && cases[i][colonneCaseDep].getPiece()== null ){
+            i++;
+        }
+        if (i < ligneCaseArr)
+            return false; 
         return true;
     }
     
-    private boolean verifColonne(int colonneCaseDep, int colonneCaseArr, int ligneCaseDep)
+    private boolean verifInterColonne(int colonneCaseDep, int colonneCaseArr, int ligneCaseDep)
     {
-        int i;
-        if(colonneCaseDep < colonneCaseArr)
-                {
-                    for(i=colonneCaseDep; i < colonneCaseArr; i++)
-                    {
-                        if(cases[ligneCaseDep][i] != null)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                if(colonneCaseDep > colonneCaseArr)
-                {
-                    for(i=colonneCaseDep; i > colonneCaseArr; i--)
-                    {
-                        if(cases[ligneCaseDep][i] != null)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                return true;
+       int i;
+        if(colonneCaseDep > colonneCaseArr)
+        {
+            int tmp = colonneCaseDep;
+            colonneCaseDep = colonneCaseArr;
+            colonneCaseArr = tmp;
+        }
+        
+        i = colonneCaseDep;
+        while( i < colonneCaseArr && cases[ligneCaseDep][i].getPiece()== null ){
+            i++;
+        }
+        if (i < colonneCaseArr)
+            return false; 
+        return true;
     }
    
     private boolean verifDiagonale(int ligneCaseDep, int ligneCaseArr, int colonneCaseDep, int colonneCaseArr)
     {
         int i, j;
+        
         if(ligneCaseDep < ligneCaseArr && colonneCaseDep < colonneCaseArr)
                 {
                     for(i=ligneCaseDep; i > ligneCaseArr; i--)
@@ -113,16 +107,15 @@ public class Echiquier {
         int colonneCaseDep = dep.getColonne();
         int ligneCaseArr = arr.getLigne();
         int colonneCaseArr = arr.getColonne();
-        int i,j;
-        
+      
         switch (typeVerif)
         {
             
             //LIGNE
-            case 0 : verifLigne(ligneCaseDep, ligneCaseArr, colonneCaseDep); break;
+            case 0 : verifInterLigne(ligneCaseDep, ligneCaseArr, colonneCaseDep); break;
             
             //COLONNE
-            case 1 : verifColonne(colonneCaseDep, colonneCaseArr, ligneCaseDep); break;
+            case 1 : verifInterColonne(colonneCaseDep, colonneCaseArr, ligneCaseDep); break;
             
             //DIAGONALE
             case 2 : verifDiagonale(ligneCaseDep, ligneCaseArr, colonneCaseDep, colonneCaseArr); break;
