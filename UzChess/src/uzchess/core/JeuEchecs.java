@@ -4,8 +4,8 @@ public class JeuEchecs {
 
   private boolean tour;
   private int compteurCoups;
-  private MoteurDeJeu myMoteurDeJeu;
-  private Echiquier myEchiquier;
+  private MoteurDeJeu moteurDeJeu;
+  private Echiquier echiquier;
   
   public void initialiser() {
   }
@@ -21,5 +21,23 @@ public class JeuEchecs {
 
   public void jouer() {
   }
+
+    public boolean getTour() {
+        return tour;
+    }
+
+    public int getCompteurCoups() {
+        return compteurCoups;
+    }
+
+    public MoteurDeJeu getMoteurDeJeu() {
+        return moteurDeJeu;
+    }
+
+    public Echiquier getEchiquier() {
+        return echiquier;
+    }
+  
+  
 
 }
