@@ -1,5 +1,6 @@
 package uzchess.core.rules;
 
+import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -7,7 +8,7 @@ public class VerificateurFou implements Deplacement {
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
-        
+
         byte ligneCaseDep = dep.getLigne();
         byte colonneCaseDep = dep.getColonne();
         byte ligneCaseArr = arr.getLigne();
@@ -18,7 +19,11 @@ public class VerificateurFou implements Deplacement {
 
         //Si la case arrivé est sur le même ligne ou la même colonne
         Echiquier ech = Echiquier.getInstance();
-        return (decLigne == decColonne) && (ech.verifCasesInter(dep, arr));
+        if (decLigne != decColonne) {
+            return false;
+        }
+        Direction dir = (ligneCaseArr > ligneCaseDep) ? (colonneCaseArr > colonneCaseDep) ? Direction.SE : Direction.SO : (colonneCaseArr > colonneCaseDep) ? Direction.NE : Direction.NO;
+        return ech.verifCasesInter(dep, arr, dir);
 
     }
 

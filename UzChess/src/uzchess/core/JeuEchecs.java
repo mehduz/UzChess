@@ -27,9 +27,9 @@ public class JeuEchecs {
 
     public Couleur getTour() {
         return tour;
-    }
+    } 
 
-    public int getCompteurCoups() {
+    public short getCompteurCoups() {
         return compteurCoups;
     }
 

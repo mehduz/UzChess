@@ -11,22 +11,14 @@ public class Echiquier {
 
     private static class SingletonHolder {
 
-        /**
-         * Instance unique non préinitialisée
-         */
         private final static Echiquier instance = new Echiquier();
     }
 
-    /**
-     * Point d'accès pour l'instance unique du singleton
-     *
-     * @return
-     */
     public static Echiquier getInstance() {
         return SingletonHolder.instance;
     }
 
-    public boolean verifCasesInter( Case caseDep, Case caseArr, Direction type) {
+    public boolean verifCasesInter(Case caseDep, Case caseArr, Direction type) {
 
         boolean verif = false;
         switch (type) {
@@ -85,7 +77,7 @@ public class Echiquier {
     private boolean verifS(Case caseDep, Case caseArr) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public Case[][] getEchiquier(Case c) {
         return cases;
     }

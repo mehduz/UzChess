@@ -34,8 +34,8 @@ public class VerificateurPion implements Deplacement {
                if(ligDep==1) {
                    if(ligArr==ligDep+1)
                         verif=true;
-                   if( ligArr==ligDep+2)
-                       verif=Echiquier.getInstance().verifCasesInter(dep, arr, 1);
+                   /*if( ligArr==ligDep+2)
+                       verif=Echiquier.getInstance().verifCasesInter(dep, arr, 1);*/
                }
                else
                    verif = ligArr==ligDep+1;
