@@ -23,7 +23,7 @@ public class VerificateurRoi extends Deplacement{
         int decLigne = Math.abs(ligneCaseDep - ligneCaseArr);
         int decColonne = Math.abs(colonneCaseDep - colonneCaseArr);
         
-        return new VerificateurReine().verifierDeplacement(dep,arr) && ( decLigne + decColonne <= 2 );
+        return new VerificateurReine().verifierDeplacement(dep,arr) &&  decLigne<=1 && decColonne <= 1 ;
     }
     
 }
