@@ -3,7 +3,7 @@ package uzchess.core;
 public class Echiquier {
 
     private Case[][] cases;
-
+    
     public boolean verifierInter(Case dep, Case arr, int typeVerif) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
