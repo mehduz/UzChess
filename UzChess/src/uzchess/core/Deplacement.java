@@ -4,4 +4,5 @@ public interface Deplacement{
     
   public void verifierDeplacement();
   
+  //Uz
 }
