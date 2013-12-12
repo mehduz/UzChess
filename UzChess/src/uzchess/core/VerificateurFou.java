@@ -14,7 +14,8 @@ public class VerificateurFou extends Deplacement {
         int decColonne = Math.abs(colonneCaseDep - colonneCaseArr);
         
         //Si la case arrivé est sur le même ligne ou la même colonne
-        return moteurDeJeu.getJeuEchecs().getEchiquier().verifierInter(dep, arr, 2) && decLigne == decColonne; 
+        Echiquier ech = moteurDeJeu.getJeuEchecs().getEchiquier();
+        return ech.verifierInter(dep, arr, 2) && decLigne == decColonne; 
            
     }
 
