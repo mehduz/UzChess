@@ -14,7 +14,7 @@ public class VerificateurReine extends Deplacement{
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return new VerificateurFou().verifierDeplacement(dep, arr) || new VerificateurTour().verifierDeplacement(dep, arr);
     }
     
 }
