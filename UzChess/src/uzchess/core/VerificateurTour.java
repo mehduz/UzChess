@@ -13,9 +13,12 @@ public class VerificateurTour extends Deplacement {
         int ligCaseArr = arr.getLigne(); 
         
        //typeVefir== pour ligne (0)colonne(1) ou diago(2)
-        if ( ligCaseDep !=  ligCaseArr && colCaseDep != colCaseDep )
+        if ( ligCaseDep !=  ligCaseArr && colCaseDep != colCaseArr )
             return false;
-        return this.moteurDeJeu.getJeuEchecs().getEchiquier().verifierInter(dep, arr, 1);
+        int verifType = (ligCaseDep == ligCaseArr) ? 0 : 1;
+        
+        Echiquier ech = moteurDeJeu.getJeuEchecs().getEchiquier();
+        return ech.verifierInter(dep, arr, verifType);
        
     }
 
