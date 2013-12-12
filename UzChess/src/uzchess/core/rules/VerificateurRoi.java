@@ -17,13 +17,13 @@ public class VerificateurRoi implements Deplacement{
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
         
-        byte ligneCaseDep = dep.getLigne();
-        byte colonneCaseDep = dep.getColonne();
-        byte ligneCaseArr = arr.getLigne();
-        byte colonneCaseArr = arr.getColonne();
+        byte ligCaseDep = dep.getLigne();
+        byte colCaseDep = dep.getColonne();
+        byte ligCaseArr = arr.getLigne();
+        byte colCaseArr = arr.getColonne();
         
-        byte decLigne = ( byte ) Math.abs(ligneCaseDep - ligneCaseArr);
-        byte decColonne = ( byte ) Math.abs(colonneCaseDep - colonneCaseArr);
+        byte decLigne = ( byte ) Math.abs(ligCaseDep - ligCaseArr);
+        byte decColonne = ( byte ) Math.abs(colCaseDep - colCaseArr);
         
         return new VerificateurReine().verifierDeplacement(dep,arr) &&  decLigne <= 1 && decColonne <= 1 ;
     }

@@ -12,10 +12,10 @@ public class VerificateurCavalier implements Deplacement {
         byte colCaseArr = arr.getColonne();
         byte ligCaseArr = arr.getLigne();
 
-        byte depVertical = (byte) Math.abs(ligCaseArr - ligCaseDep);
-        byte depHorizontal = (byte) Math.abs(colCaseArr - colCaseDep);
+        byte depVer = (byte) Math.abs(ligCaseArr - ligCaseDep);
+        byte depHor = (byte) Math.abs(colCaseArr - colCaseDep);
 
-        return (depVertical <= 2) && (depHorizontal <= 2) && (depHorizontal != depVertical);
+        return (depVer <= 2) && (depHor <= 2) && (depHor != depVer);
     }
 
 }
