@@ -44,8 +44,7 @@ public class VerificateurPion implements Deplacement {
                     if (ligArr == ligDep - 1) {
                         verif = true;
                     } else {
-                        Direction dir = (ligArr == ligDep - 2) ? Direction.NE : Direction.NO;
-                        verif = ech.verifCasesInter(ech.getCasesInter(dep, arr, dir));
+                        verif = ech.verifCasesInter(ech.getCasesInter(dep, arr));
                     }
 
                 } else {
@@ -81,12 +80,10 @@ public class VerificateurPion implements Deplacement {
                     if (ligArr == ligDep + 1) {
                         verif = true;
                     } else {
-                        Direction dir = (ligArr == ligDep + 2) ? Direction.NE : Direction.NO;
-                        verif = ech.verifCasesInter(ech.getCasesInter(dep, arr, dir));
+                        verif = ech.verifCasesInter(ech.getCasesInter(dep, arr));
                     }
                 } else {
-                    Direction dir = (ligArr == ligDep + 2) ? Direction.SE : Direction.SO;
-                    verif = ech.verifCasesInter(ech.getCasesInter(dep, arr, dir));
+                    verif = ech.verifCasesInter(ech.getCasesInter(dep, arr));
                 }
 
             } else {

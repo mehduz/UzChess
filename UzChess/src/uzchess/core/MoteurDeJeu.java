@@ -25,6 +25,7 @@ public class MoteurDeJeu {
     }
     
     public void detecterMat() {
+        
         Echiquier ech = Echiquier.getInstance();
         Case caseRN=ech.getCaseRoiN();
         Case caseRB=ech.getCaseRoiB();

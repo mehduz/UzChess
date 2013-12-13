@@ -21,7 +21,7 @@ public class VerificateurFou implements Deplacement {
         if (decVer != decHor) {
             return false;
         }
-        return ech.verifCasesInter(ech.getCasesInter(dep, arr, ech.getDirection(dep, arr)));
+        return ech.verifCasesInter(ech.getCasesInter(dep, arr));
 
     }
 

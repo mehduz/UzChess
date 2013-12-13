@@ -20,6 +20,6 @@ public class VerificateurTour implements Deplacement {
         }
 
         Echiquier ech = Echiquier.getInstance();
-        return ech.verifCasesInter( ech.getCasesInter(dep, arr, ech.getDirection(dep, arr)) );
+        return ech.verifCasesInter( ech.getCasesInter(dep, arr ));
     }
 }
