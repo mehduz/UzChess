@@ -21,6 +21,7 @@ public class JeuEchecs {
 
     public void detecterFin() 
     {
+        moteurDeJeu.detecterEchec();
         moteurDeJeu.detecterMat();
         moteurDeJeu.detecterPat();
     }

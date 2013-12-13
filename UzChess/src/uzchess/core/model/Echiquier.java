@@ -1,9 +1,11 @@
 package uzchess.core.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
+import uzchess.core.rules.Deplacement;
 
 public class Echiquier {
 
@@ -205,6 +207,21 @@ public class Echiquier {
         this.roiNMoved = roiNMoved;
     }
     
+    public boolean isMenace(Case maCase)
+    {
+        Collection <Case> casesAdverses;
+        if( maCase.getCouleur() == Couleur.BLANC )
+            casesAdverses = piecesB.values();
+        else
+            casesAdverses = piecesN.values();
+        for( Case c : casesAdverses ){
+            Piece p = c.getPiece();
+            boolean check = p.getDeplacement().verifierDeplacement(c, maCase);
+            if( check == true )
+                return false;            
+        }
+        return true;   
+    }
     
     
 }
