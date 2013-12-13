@@ -215,7 +215,7 @@ public class Echiquier {
         else
             casesAdverses = piecesN.values();
         
-        ArrayList<Case> maListMenace = new ArrayList<Case>();
+        ArrayList<Case> maListMenace = new ArrayList<>();
                 
         for( Case c : casesAdverses ){
             Piece p = c.getPiece();
