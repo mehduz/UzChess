@@ -145,4 +145,10 @@ public class Echiquier {
         this.cases = cases;
     }
     
+    public void isMenace(Case maCase)
+    {
+        /*Pour n'importe quelle case dire si elle est menacé*/
+        
+        
+    }
 }
