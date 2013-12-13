@@ -1,95 +1,53 @@
 package uzchess.core.rules;
 
-import uzchess.constantes.*;
+import uzchess.constantes.Couleur;
+import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
 public class VerificateurPion implements Deplacement {
 
 //penser  dep début, prise diago
+    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
 
-        boolean verif = false;
-
-        if (dep.getPiece().getCouleur() == Couleur.BLANC) {
-            verif = verifierDeplacementPionBlanc(dep, arr);
-        } else {
-            verif = verifierDeplacementPionNoir(dep, arr);
+        Couleur c = dep.getCouleur();
+        if (arr.getPiece() != null) {
+            return verifAvance(dep , arr, c);
         }
-
-        return verif;
+        return verifPrend(dep, arr, c);
     }
 
-    private boolean verifierDeplacementPionBlanc(Case dep, Case arr) {
+    private boolean verifAvance(Case dep, Case arr, Couleur c) {
+        
+        byte ligDep = dep.getLigne();
+        byte ligArr = arr.getLigne();
+        
+        Direction dir = Echiquier.getInstance().getDirection(dep, arr);
+        if ( c == Couleur.BLANC && dir != Direction.N )
+            return false;
+        if ( c == Couleur.NOIR && dir != Direction.S )
+            return false;
+        if( Math.abs(ligArr - ligDep) != 1)
+            return false;
+        return true;
+    }
+    
+    private boolean verifPrend(Case dep, Case arr, Couleur c){
+        
         byte colDep = dep.getColonne();
         byte colArr = arr.getColonne();
         byte ligDep = dep.getLigne();
         byte ligArr = arr.getLigne();
-        boolean verif = false;
-        if (arr.getPiece() != null) {
-            System.out.println("case occupée");
-
-            if (ligArr == ligDep - 1) {
-                if ((colArr == colDep + 1) || (colDep == colArr - 1)) {
-                    verif = true;
-                }
-            }
-
-        } else {
-            Echiquier ech = Echiquier.getInstance();
-            //System.out.println("case vide"); 
-            if (colArr == colDep) {
-                if (ligDep == 1) {
-                    if (ligArr == ligDep - 1) {
-                        verif = true;
-                    } else {
-                        verif = ech.verifCasesInter(ech.getCasesInter(dep, arr));
-                    }
-
-                } else {
-                    verif = ligArr == ligDep - 1;
-                }
-            }
-
-        }
-
-        return verif;
-    }
-
-    private boolean verifierDeplacementPionNoir(Case dep, Case arr) {
-        byte colDep = dep.getColonne();
-        byte colArr = arr.getColonne();
-        byte ligDep = dep.getLigne();
-        byte ligArr = arr.getLigne();
-        boolean verif = false;
-        if (arr.getPiece() != null) {
-            System.out.println("case occupée");
-
-            if (ligArr == ligDep + 1) {
-                if ((colArr == colDep + 1) || (colDep == colArr - 1)) {
-                    verif = true;
-                }
-            }
-
-        } else {
-            Echiquier ech = Echiquier.getInstance();
-            //System.out.println("case vide");
-            if (colArr == colDep) {
-                if (ligDep == 1) {
-                    if (ligArr == ligDep + 1) {
-                        verif = true;
-                    } else {
-                        verif = ech.verifCasesInter(ech.getCasesInter(dep, arr));
-                    }
-                } else {
-                    verif = ech.verifCasesInter(ech.getCasesInter(dep, arr));
-                }
-
-            } else {
-                verif = ligArr == ligDep + 1;
-            }
-        }
-        return verif;
+        
+        Direction dir = Echiquier.getInstance().getDirection(dep, arr);
+        if ( c == Couleur.BLANC && dir != Direction.NE && dir != Direction.NO )
+            return false;
+        if ( c == Couleur.NOIR && dir != Direction.SE  && dir != Direction.SO )
+            return false;
+        if( Math.abs(ligArr - ligDep) != 1 ||  Math.abs(ligArr - ligDep) != Math.abs(colArr - colDep))
+            return false;
+        return true;
     }
 }

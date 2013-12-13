@@ -40,8 +40,9 @@ public class VerificateurRoi implements Deplacement {
     }
 
     private boolean verifierRoque(Case dep, Case arr) {
-
-        Echiquier ech = Echiquier.getInstance();
+        
+        throw new UnsupportedOperationException();
+        /*Echiquier ech = Echiquier.getInstance();
         Couleur col = dep.getCouleur();
         Direction dir = ech.getDirection(dep, arr);
 
@@ -51,8 +52,10 @@ public class VerificateurRoi implements Deplacement {
         if ((ech.isRoiMoved(col)) || (ech.verifCasesInter(ech.getCasesInter(dep, arr)))) {
             return false;
         }
-        if( dir == Direction.O)
-        return true;
+        if( dir == Direction.O ){
+            
+        }
+        return true;*/
     }
 
     private void noticeKingMove(Couleur color) {

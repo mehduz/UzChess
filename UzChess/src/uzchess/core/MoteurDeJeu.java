@@ -27,10 +27,13 @@ public class MoteurDeJeu {
     public void detecterMat() {
         
         Echiquier ech = Echiquier.getInstance();
+        
         Case caseRN=ech.getCaseRoiN();
         Case caseRB=ech.getCaseRoiB();
+        
         byte colRN=caseRN.getColonne();
         byte ligRN=caseRN.getLigne();
+        
         byte cmpt=0;
         Case caseV=new Case();
         for(byte i=-1;i<2;i++){
