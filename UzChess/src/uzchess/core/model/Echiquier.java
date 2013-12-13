@@ -206,21 +206,24 @@ public class Echiquier {
     private void setRoiNMoved(boolean roiNMoved) {
         this.roiNMoved = roiNMoved;
     }
-    //renvoie une arrayList de Case
-    public boolean isMenace(Case maCase)
+    
+    public ArrayList<Case> isMenace(Case maCase)
     {
         Collection <Case> casesAdverses;
         if( maCase.getCouleur() == Couleur.BLANC )
             casesAdverses = piecesB.values();
         else
             casesAdverses = piecesN.values();
+        
+        ArrayList<Case> maListMenace = new ArrayList<Case>();
+                
         for( Case c : casesAdverses ){
             Piece p = c.getPiece();
             boolean check = p.getDeplacement().verifierDeplacement(c, maCase);
             if( check == true )
-                return false;            
+                maListMenace.add(c);
         }
-        return true;   
+        return maListMenace;
     }
     
     
