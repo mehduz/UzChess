@@ -6,6 +6,7 @@
 package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
+import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -39,14 +40,19 @@ public class VerificateurRoi implements Deplacement {
     }
 
     private boolean verifierRoque(Case dep, Case arr) {
-        throw new UnsupportedOperationException(); 
-        /*Echiquier ech = Echiquier.getInstance();
+
+        Echiquier ech = Echiquier.getInstance();
         Couleur col = dep.getCouleur();
-        if (ech.isRoiMoved(col)) {
+        Direction dir = ech.getDirection(dep, arr);
+
+        if (dir != Direction.O && dir != Direction.E) {
             return false;
         }
-        
-        if( ech.getCasesInter( dep, arr ))*/
+        if ((ech.isRoiMoved(col)) || (ech.verifCasesInter(ech.getCasesInter(dep, arr)))) {
+            return false;
+        }
+        if( dir == Direction.O)
+        return true;
     }
 
     private void noticeKingMove(Couleur color) {

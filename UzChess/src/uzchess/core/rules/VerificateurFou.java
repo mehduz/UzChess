@@ -1,6 +1,5 @@
 package uzchess.core.rules;
 
-import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 

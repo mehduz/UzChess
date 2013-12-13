@@ -20,7 +20,7 @@ public class Echiquier {
     private Echiquier() {
     }
 
-    public boolean getCasesInter(Case dep, Case arr) {
+    public ArrayList<Case> getCasesInter(Case dep, Case arr) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -38,111 +38,8 @@ public class Echiquier {
     }
 
     public boolean verifCasesInter(ArrayList<Case> aVerif) {
-
         throw new UnsupportedOperationException();
-        /*boolean verif = false;
-        switch (type) {
-
-            case O:
-                verif = verifO(caseDep, caseArr);
-                break;
-            case NO:
-                verif = verifNO(caseDep, caseArr);
-                break;
-            case N:
-                verif = verifN(caseDep, caseArr);
-                break;
-            case NE:
-                verif = verifNE(caseDep, caseArr);
-                break;
-            case E:
-                verif = verifE(caseDep, caseArr);
-                break;
-            case SE:
-                verif = verifSE(caseDep, caseArr);
-                break;
-            case S:
-                verif = verifS(caseDep, caseArr);
-                break;
-            case SO:
-                verif = verifSO(caseDep, caseArr);
-            default:
-                break;
-        }
-        return verif;
-        */
     }
-
-    /*private boolean verifO(Case caseDep, Case caseArr) {
-        byte iCol = caseDep.getColonne();
-        while(cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne())
-            iCol--;
-        return iCol == caseArr.getColonne();
-    }
-
-    private boolean verifNO(Case caseDep, Case caseArr) {
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
-        {
-            iLig--;
-            iCol--;
-        }
-        return iCol == caseArr.getColonne() && iLig >= caseArr.getColonne();
-    }
-
-    private boolean verifN(Case caseDep, Case caseArr) {
-        byte iLig = caseDep.getLigne();
-        while(cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne())
-            iLig--;
-        return iLig == caseArr.getLigne();
-    }
-
-    private boolean verifNE(Case caseDep, Case caseArr) {
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
-        {
-            iLig--;
-            iCol++;
-        }
-        return iCol == caseArr.getColonne() && iLig == caseArr.getColonne();
-    }
-
-    private boolean verifE(Case caseDep, Case caseArr) {
-        byte iCol = caseDep.getColonne();
-        while(cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne())
-            iCol++;
-        return iCol == caseArr.getColonne();
-    }
-
-    private boolean verifSE(Case caseDep, Case caseArr) {
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
-        {
-            iLig++;
-            iCol++;
-        }
-        return iCol == caseArr.getColonne() && iLig == caseArr.getColonne();
-    }
-    
-    private boolean verifSO(Case caseDep, Case caseArr) {
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
-        {
-            iLig++;
-            iCol--;
-        }
-        return iCol == caseArr.getColonne() && iLig == caseArr.getColonne();
-    }
-    private boolean verifS(Case caseDep, Case caseArr) {
-        byte iLig = caseDep.getLigne();
-        while(cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne())
-            iLig++;
-        return iLig == caseArr.getLigne();
-    }*/
 
     public Case[][] getEchiquier(Case c) {
         return cases;
@@ -241,7 +138,7 @@ public class Echiquier {
         }else if (lArr > lDep ){
                 dir = ( cArr > cDep) ? Direction.SE : Direction.SO;
         }else{
-                dir = 
+                dir = ( cArr > cDep) ? Direction.NE : Direction.NO;
         } 
         
         return dir;
