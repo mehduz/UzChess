@@ -206,7 +206,7 @@ public class Echiquier {
     private void setRoiNMoved(boolean roiNMoved) {
         this.roiNMoved = roiNMoved;
     }
-    
+    //renvoie une arrayList de Case
     public boolean isMenace(Case maCase)
     {
         Collection <Case> casesAdverses;
