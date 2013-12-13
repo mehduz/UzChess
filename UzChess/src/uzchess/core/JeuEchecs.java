@@ -19,7 +19,10 @@ public class JeuEchecs {
     public void abandonner() {
     }
 
-    public void detecterFin() {
+    public void detecterFin() 
+    {
+        moteurDeJeu.detecterMat();
+        moteurDeJeu.detecterPat();
     }
 
     public void jouer() {

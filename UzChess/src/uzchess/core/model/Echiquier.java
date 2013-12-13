@@ -50,6 +50,8 @@ public class Echiquier {
             case S:
                 verif = verifS(caseDep, caseArr);
                 break;
+            case SO:
+                verif = verifSO(caseDep, caseArr);
             default:
                 break;
         }
@@ -57,31 +59,74 @@ public class Echiquier {
     }
 
     private boolean verifO(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iCol = caseDep.getColonne();
+        while(cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne())
+            iCol--;
+        return iCol == caseArr.getColonne();
     }
 
     private boolean verifNO(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
+        {
+            iLig--;
+            iCol--;
+        }
+        return iCol == caseArr.getColonne() && iLig >= caseArr.getColonne();
     }
 
     private boolean verifN(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iLig = caseDep.getLigne();
+        while(cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne())
+            iLig--;
+        return iLig == caseArr.getLigne();
     }
 
     private boolean verifNE(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
+        {
+            iLig--;
+            iCol++;
+        }
+        return iCol == caseArr.getColonne() && iLig == caseArr.getColonne();
     }
 
     private boolean verifE(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iCol = caseDep.getColonne();
+        while(cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne())
+            iCol++;
+        return iCol == caseArr.getColonne();
     }
 
     private boolean verifSE(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
+        {
+            iLig++;
+            iCol++;
+        }
+        return iCol == caseArr.getColonne() && iLig == caseArr.getColonne();
     }
-
+    
+    private boolean verifSO(Case caseDep, Case caseArr) {
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while(cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne())
+        {
+            iLig++;
+            iCol--;
+        }
+        return iCol == caseArr.getColonne() && iLig == caseArr.getColonne();
+    }
     private boolean verifS(Case caseDep, Case caseArr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte iLig = caseDep.getLigne();
+        while(cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne())
+            iLig++;
+        return iLig == caseArr.getLigne();
     }
 
     public Case[][] getEchiquier(Case c) {

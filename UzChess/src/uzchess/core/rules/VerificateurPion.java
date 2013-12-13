@@ -1,6 +1,8 @@
-package uzchess.core.rules;
 
+package uzchess.core.rules;
+import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
+import uzchess.core.model.Echiquier;
 
 public class VerificateurPion implements Deplacement {
 
@@ -24,22 +26,30 @@ public class VerificateurPion implements Deplacement {
             }
 
         } else {
-
+            Echiquier ech = Echiquier.getInstance();
             System.out.println("case vide");
             if (colArr == colDep) {
                 if (ligDep == 1) {
                     if (ligArr == ligDep + 1) {
                         verif = true;
                     }
-                    /*if( ligArr==ligDep+2)
-                     verif=Echiquier.getInstance().verifCasesInter(dep, arr, 1);*/
+                    else{
+                         Direction dir = (ligArr == ligDep+2) ? Direction.NE : Direction.NO;
+                         verif=ech.verifCasesInter(dep, arr, dir);
+                    }
+                     
                 } else {
                     verif = ligArr == ligDep + 1;
                 }
             }
 
         }
+         
+        
         return verif;
     }
 
 } 
+
+
+   
