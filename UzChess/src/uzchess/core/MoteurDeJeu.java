@@ -1,7 +1,9 @@
 package uzchess.core;
 
+import java.util.ArrayList;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.Piece;
 
 public class MoteurDeJeu {
 
@@ -51,5 +53,9 @@ public class MoteurDeJeu {
     public void detecterPat() {
     }
 
+    //renvoie la liste des cases accessible par la piece
+     public ArrayList<Case> deplacementPossible(Piece piece){
+         throw new UnsupportedOperationException();
+     }
     
 }
