@@ -45,7 +45,8 @@ public class VerificateurRoi implements Deplacement {
         if (ech.isRoiMoved(col)) {
             return false;
         }
-        if( ech.getCasesInter( dep, arr ).)*/
+        
+        if( ech.getCasesInter( dep, arr ))*/
     }
 
     private void noticeKingMove(Couleur color) {

@@ -42,7 +42,7 @@ public class VerificateurPion implements Deplacement {
 
         } else {
             Echiquier ech = Echiquier.getInstance();
-            System.out.println("case vide");
+            //System.out.println("case vide"); 
             if (colArr == colDep) {
                 if (ligDep == 1) {
                     if (ligArr == ligDep - 1) {
@@ -80,7 +80,7 @@ public class VerificateurPion implements Deplacement {
             
         } else {
             Echiquier ech = Echiquier.getInstance();
-            System.out.println("case vide");
+            //System.out.println("case vide");
             if (colArr == colDep) {
                 if (ligDep == 1) {
                     if (ligArr == ligDep + 1) {

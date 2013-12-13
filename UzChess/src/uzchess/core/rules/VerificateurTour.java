@@ -20,9 +20,7 @@ public class VerificateurTour implements Deplacement {
             return false;
         }
 
-        Direction dir = (ligCaseDep == ligCaseArr) ? (colCaseDep > colCaseArr) ? Direction.O : Direction.E : (ligCaseDep > ligCaseArr) ? Direction.S : Direction.N;
-
         Echiquier ech = Echiquier.getInstance();
-        return ech.verifCasesInter( ech.getCasesInter(dep, arr, dir) );
+        return ech.verifCasesInter( ech.getCasesInter(dep, arr, ech.getDirection(dep, arr)) );
     }
 }
