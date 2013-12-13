@@ -5,7 +5,10 @@ import uzchess.constantes.Direction;
 public class Echiquier {
 
     private Case[][] cases;
-
+    
+    private boolean roiNMoved;
+    private boolean roiBMoved;
+    
     private Echiquier() {
     }
 
@@ -92,5 +95,13 @@ public class Echiquier {
 
     public void setCases(Case[][] cases) {
         this.cases = cases;
+    }
+    
+    public boolean isRoiNMoved() {
+        return roiNMoved;
+    }
+
+    public boolean isRoiBMoved() {
+        return roiBMoved;
     }
 }
