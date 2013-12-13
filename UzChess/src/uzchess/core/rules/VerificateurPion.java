@@ -50,7 +50,7 @@ public class VerificateurPion implements Deplacement {
                     }
                     else{
                          Direction dir = (ligArr == ligDep-2) ? Direction.NE : Direction.NO;
-                         verif=ech.verifCasesInter(ech.getCasesInter(dep, arr, dir));
+                         verif=ech.verifCasesInter(dep, arr, dir);
                     }
                      
                 } else {
@@ -61,6 +61,42 @@ public class VerificateurPion implements Deplacement {
         }
          
         
+        return verif;
+        
+    }
+     private boolean verifierDeplacementPionNoir(Case dep,Case arr){
+        byte colDep = dep.getColonne();
+        byte colArr = arr.getColonne();
+        byte ligDep = dep.getLigne();
+        byte ligArr = arr.getLigne();
+        boolean verif=false;
+        if (arr.getPiece() != null) {
+            System.out.println("case occupée");
+
+            if (ligArr == ligDep - 1) {
+                if ((colArr == colDep + 1) || (colDep == colArr - 1)) {
+                    verif = true;
+                }
+            }
+
+        } else {
+            Echiquier ech = Echiquier.getInstance();
+            System.out.println("case vide");
+            if (colArr == colDep) {
+                if (ligDep == 1) {
+                    if (ligArr == ligDep - 1) {
+                        verif = true;
+                    }
+                    else{
+                         Direction dir = (ligArr == ligDep-2) ? Direction.NE : Direction.NO;
+                         verif=ech.verifCasesInter(ech.getCasesInter(dep, arr, dir));
+                    }
+                     
+                } else {
+                    verif = ligArr == ligDep - 1;
+                }
+            }
+        }
         return verif;
         
     }
