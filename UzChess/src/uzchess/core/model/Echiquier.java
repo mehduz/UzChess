@@ -9,19 +9,15 @@ import uzchess.constantes.Direction;
 public class Echiquier {
 
     private Case[][] cases;
-    
+
     private HashMap<Piece, Case> piecesN;
     private HashMap<Piece, Case> piecesB;
     private Case caseRoiB;
     private Case caseRoiN;
     private boolean roiBMoved;
     private boolean roiNMoved;
-    
-    private Echiquier() {
-    }
 
-    public ArrayList<Case> getCasesInter(Case dep, Case arr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Echiquier() {
     }
 
     private static class SingletonHolder {
@@ -32,13 +28,138 @@ public class Echiquier {
     public static Echiquier getInstance() {
         return SingletonHolder.instance;
     }
-    
-    public ArrayList<Case> getCasesInter(Case caseDep, Case caseArr, Direction type){
-         throw new UnsupportedOperationException();
+
+    public ArrayList<Case> getCasesInter(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        Direction maDir;
+        maDir = getDirection(caseDep, caseArr);
+        switch (maDir) {
+
+            case O:
+                maListInter = getO(caseDep, caseArr);
+                break;
+            case NO:
+                maListInter = getNO(caseDep, caseArr);
+                break;
+            case N:
+                maListInter = getN(caseDep, caseArr);
+                break;
+            case NE:
+                maListInter = getNE(caseDep, caseArr);
+                break;
+            case E:
+                maListInter = getE(caseDep, caseArr);
+                break;
+            case SE:
+                maListInter = getSE(caseDep, caseArr);
+                break;
+            case S:
+                maListInter = getS(caseDep, caseArr);
+                break;
+            case SO:
+                maListInter = getSO(caseDep, caseArr);
+            default:
+                break;
+        };
+        return maListInter;
+    }
+
+    private ArrayList<Case> getO(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iCol = caseDep.getColonne();
+        while (cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne()) {
+            maListInter.add(cases[caseDep.getLigne()][iCol]);
+            iCol--;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getNO(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+            maListInter.add(cases[iLig][iCol]);
+            iLig--;
+            iCol--;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getN(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iLig = caseDep.getLigne();
+        while (cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne()) {
+            maListInter.add(cases[iLig][caseDep.getColonne()]);
+            iLig--;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getNE(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+            maListInter.add(cases[iLig][iCol]);
+            iLig--;
+            iCol++;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getE(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iCol = caseDep.getColonne();
+        while (cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne()) {
+            maListInter.add(cases[caseDep.getLigne()][iCol]);
+            iCol++;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getSE(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+            maListInter.add(cases[iLig][iCol]);
+            iLig++;
+            iCol++;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getSO(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iCol = caseDep.getColonne();
+        byte iLig = caseDep.getLigne();
+        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+            maListInter.add(cases[iLig][iCol]);
+            iLig++;
+            iCol--;
+        }
+        return maListInter;
+    }
+
+    private ArrayList<Case> getS(Case caseDep, Case caseArr) {
+        ArrayList<Case> maListInter = new ArrayList<>();
+        byte iLig = caseDep.getLigne();
+        while (cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne()) {
+            maListInter.add(cases[iLig][caseDep.getColonne()]);
+            iLig++;
+        }
+        return maListInter;
     }
 
     public boolean verifCasesInter(ArrayList<Case> aVerif) {
-        throw new UnsupportedOperationException();
+
+        for (Case c : aVerif) {
+            if (c.getPiece() != null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Case[][] getEchiquier(Case c) {
@@ -56,7 +177,7 @@ public class Echiquier {
     public void setCases(Case[][] cases) {
         this.cases = cases;
     }
-    
+
     public HashMap<Piece, Case> getPiecesN() {
         return piecesN;
     }
@@ -72,10 +193,11 @@ public class Echiquier {
     public Case getCaseRoiN() {
         return caseRoiN;
     }
-    
-    public boolean isRoiMoved(Couleur c){
-        if( c == Couleur.BLANC )
+
+    public boolean isRoiMoved(Couleur c) {
+        if (c == Couleur.BLANC) {
             return isRoiBMoved();
+        }
         return isRoiNMoved();
     }
 
@@ -86,10 +208,10 @@ public class Echiquier {
     private boolean isRoiNMoved() {
         return roiNMoved;
     }
-    
+
     public void setRoiMoved(Couleur color) {
-        if(color == Couleur.BLANC){
-            setRoiBMoved( true );
+        if (color == Couleur.BLANC) {
+            setRoiBMoved(true);
             return;
         }
         setRoiNMoved(true);
@@ -102,33 +224,34 @@ public class Echiquier {
     private void setRoiNMoved(boolean roiNMoved) {
         this.roiNMoved = roiNMoved;
     }
-    
-    public ArrayList<Case> isMenace(Case maCase)
-    {
-        Collection <Case> casesAdverses;
-        if( maCase.getCouleur() == Couleur.BLANC )
+
+    public ArrayList<Case> isMenace(Case maCase) {
+        Collection<Case> casesAdverses;
+        if (maCase.getCouleur() == Couleur.BLANC) {
             casesAdverses = piecesB.values();
-        else
+        } else {
             casesAdverses = piecesN.values();
-        
+        }
+
         ArrayList<Case> maListMenace = new ArrayList<>();
-                
-        for( Case c : casesAdverses ){
+
+        for (Case c : casesAdverses) {
             Piece p = c.getPiece();
             boolean check = p.getDeplacement().verifierDeplacement(c, maCase);
-            if( check == true )
+            if (check == true) {
                 maListMenace.add(c);
+            }
         }
         return maListMenace;
     }
-    
-    public Direction getDirection(Case dep, Case arr){
-        
+
+    public Direction getDirection(Case dep, Case arr) {
+
         int lDep = dep.getLigne();
         int cDep = dep.getColonne();
-        int lArr= arr.getLigne();
+        int lArr = arr.getLigne();
         int cArr = arr.getColonne();
-        
+
         Direction dir;
         
         if(lArr == lDep){
@@ -143,6 +266,5 @@ public class Echiquier {
         
         return dir;
     }
-    
-    
+
 }
