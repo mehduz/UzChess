@@ -242,7 +242,7 @@ public class Echiquier {
                 dir = ( cArr > cDep) ? Direction.SE : Direction.SO;
         }else{
                 dir = 
-        }
+        } 
         
         return dir;
     }
