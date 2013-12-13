@@ -1,6 +1,7 @@
 package uzchess.core;
 
 import java.util.ArrayList;
+import uzchess.constantes.Couleur;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 import uzchess.core.model.Piece;
@@ -55,7 +56,25 @@ public class MoteurDeJeu {
 
     //renvoie la liste des cases accessible par la piece
      public ArrayList<Case> deplacementPossible(Piece piece){
-         throw new UnsupportedOperationException();
+         
+         ArrayList<Case> cases=new ArrayList<>();
+         Echiquier ech = Echiquier.getInstance();
+        
+         Case caseV;
+         Case dep;
+         
+         dep = (piece.getCouleur()==Couleur.BLANC)?ech.getPiecesB().get(piece):ech.getPiecesN().get(piece);
+         
+         
+         for(byte i=0;i<8;i++){
+            for(byte j=0;j<8;j++){
+                caseV = ech.getCases()[i][j];
+                if(piece.getDeplacement().verifierDeplacement(dep, caseV))
+                    cases.add(caseV);
+            }
+        }
+         
+        return cases;
      }
     
 }
