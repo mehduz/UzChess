@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
-import uzchess.core.rules.Deplacement;
 
 public class Echiquier {
 
@@ -221,6 +220,28 @@ public class Echiquier {
                 return false;            
         }
         return true;   
+    }
+    
+    public Direction getDirection(Case dep, Case arr){
+        
+        int lDep = dep.getLigne();
+        int cDep = dep.getColonne();
+        int lArr= arr.getLigne();
+        int cArr = arr.getColonne();
+        
+        Direction dir;
+        
+        if(lArr == lDep){
+                dir = ( cArr > cDep) ? Direction.E : Direction.O;
+        }else if(cArr == cDep){
+                dir = ( lArr > lDep) ? Direction.S : Direction.N;
+        }else if (lArr > lDep ){
+                dir = ( cArr > cDep) ? Direction.SE : Direction.SO;
+        }else{
+                dir = 
+        }
+        
+        return dir;
     }
     
     
