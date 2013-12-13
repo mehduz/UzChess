@@ -1,7 +1,10 @@
 package uzchess.core.model;
 
+import java.util.Collection;
 import java.util.HashMap;
+import static uzchess.constantes.Couleur.*;
 import uzchess.constantes.Direction;
+import uzchess.core.rules.Deplacement;
 
 public class Echiquier {
 
@@ -145,10 +148,20 @@ public class Echiquier {
         this.cases = cases;
     }
     
-    public void isMenace(Case maCase)
+    public boolean isMenace(Case maCase)
     {
-        /*Pour n'importe quelle case dire si elle est menacé*/
-        
-        
+        Collection <Case> casesAdverses;
+        if( maCase.getCouleur() == BLANC )
+            casesAdverses = piecesB.values();
+        else
+            casesAdverses = piecesN.values();
+        for( Case c : casesAdverses ){
+            Piece p = c.getPiece();
+            boolean check = p.getDeplacement().verifierDeplacement(c, maCase);
+            if( check == true )
+                return false;            
+        }
+        return true;   
     }
+    
 }
