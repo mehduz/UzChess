@@ -1,6 +1,6 @@
 package uzchess.core.rules;
 
-import uzchess.core.model.Case;
+import uzchess.core.entities.Case;
 
 public class VerificateurCavalier implements Deplacement {
 

@@ -6,7 +6,7 @@
 
 package uzchess.core.rules;
 
-import uzchess.core.model.Case;
+import uzchess.core.entities.Case;
 
 /**
  *

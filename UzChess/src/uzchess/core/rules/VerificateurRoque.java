@@ -3,19 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package uzchess.core.rules;
 
 import uzchess.core.entities.Case;
+import uzchess.core.entities.Echiquier;
 
 /**
  *
  * @author 20130317
  */
-public class VerificateurReine implements Deplacement {
+public class VerificateurRoque implements Deplacement{
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
-        return new VerificateurFou().verifierDeplacement(dep, arr) || new VerificateurTour().verifierDeplacement(dep, arr);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Echiquier.getInstance().isRoiBMoved();
     }
-
+    
 }

@@ -6,8 +6,11 @@ import uzchess.constantes.Direction;
 public class Echiquier {
 
     private Case[][] cases;
+    
     private HashMap<Piece, Case> piecesN;
     private HashMap<Piece, Case> piecesB;
+    private Case caseRoiB;
+    private Case caseRoiN;
     
     private Echiquier() {
     }
