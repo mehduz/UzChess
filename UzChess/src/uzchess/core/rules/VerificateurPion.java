@@ -53,5 +53,3 @@ public class VerificateurPion implements Deplacement {
 
 
    
-       
-       
