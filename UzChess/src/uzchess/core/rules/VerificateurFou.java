@@ -22,8 +22,7 @@ public class VerificateurFou implements Deplacement {
         if (decVer != decHor) {
             return false;
         }
-        Direction dir = (ligCaseArr > ligCaseDep) ? (colCaseArr > colCaseDep) ? Direction.SE : Direction.SO : (colCaseArr > colCaseDep) ? Direction.NE : Direction.NO;
-        return ech.verifCasesInter(ech.getCasesInter(dep, arr, dir));
+        return ech.verifCasesInter(ech.getCasesInter(dep, arr, ech.getDirection(dep, arr)));
 
     }
 
