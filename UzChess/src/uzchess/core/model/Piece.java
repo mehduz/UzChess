@@ -1,4 +1,4 @@
-package uzchess.core.entities;
+package uzchess.core.model;
 
 import uzchess.constantes.Couleur;
 import uzchess.core.rules.Deplacement;

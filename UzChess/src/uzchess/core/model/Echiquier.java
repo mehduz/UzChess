@@ -1,4 +1,4 @@
-package uzchess.core.entities;
+package uzchess.core.model;
 
 import java.util.HashMap;
 import uzchess.constantes.Direction;

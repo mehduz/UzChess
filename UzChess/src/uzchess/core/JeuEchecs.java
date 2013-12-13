@@ -1,6 +1,6 @@
 package uzchess.core;
 
-import uzchess.core.entities.Echiquier;
+import uzchess.core.model.Echiquier;
 import uzchess.constantes.Couleur;
 
 public class JeuEchecs {

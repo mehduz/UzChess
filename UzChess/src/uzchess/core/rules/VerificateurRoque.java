@@ -6,8 +6,8 @@
 
 package uzchess.core.rules;
 
-import uzchess.core.entities.Case;
-import uzchess.core.entities.Echiquier;
+import uzchess.core.model.Case;
+import uzchess.core.model.Echiquier;
 
 /**
  *
