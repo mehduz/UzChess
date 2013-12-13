@@ -1,6 +1,8 @@
 package uzchess.core.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 
 public class Echiquier {
@@ -11,8 +13,14 @@ public class Echiquier {
     private HashMap<Piece, Case> piecesB;
     private Case caseRoiB;
     private Case caseRoiN;
+    private boolean roiBMoved;
+    private boolean roiNMoved;
     
     private Echiquier() {
+    }
+
+    public boolean getCasesInter(Case dep, Case arr) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static class SingletonHolder {
@@ -23,10 +31,15 @@ public class Echiquier {
     public static Echiquier getInstance() {
         return SingletonHolder.instance;
     }
+    
+    public ArrayList<Case> getCasesInter(Case caseDep, Case caseArr, Direction type){
+         throw new UnsupportedOperationException();
+    }
 
-    public boolean verifCasesInter(Case caseDep, Case caseArr, Direction type) {
+    public boolean verifCasesInter(ArrayList<Case> aVerif) {
 
-        boolean verif = false;
+        throw new UnsupportedOperationException();
+        /*boolean verif = false;
         switch (type) {
 
             case O:
@@ -56,9 +69,10 @@ public class Echiquier {
                 break;
         }
         return verif;
+        */
     }
 
-    private boolean verifO(Case caseDep, Case caseArr) {
+    /*private boolean verifO(Case caseDep, Case caseArr) {
         byte iCol = caseDep.getColonne();
         while(cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne())
             iCol--;
@@ -127,7 +141,7 @@ public class Echiquier {
         while(cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne())
             iLig++;
         return iLig == caseArr.getLigne();
-    }
+    }*/
 
     public Case[][] getEchiquier(Case c) {
         return cases;
@@ -144,5 +158,53 @@ public class Echiquier {
     public void setCases(Case[][] cases) {
         this.cases = cases;
     }
+    
+    public HashMap<Piece, Case> getPiecesN() {
+        return piecesN;
+    }
+
+    public HashMap<Piece, Case> getPiecesB() {
+        return piecesB;
+    }
+
+    public Case getCaseRoiB() {
+        return caseRoiB;
+    }
+
+    public Case getCaseRoiN() {
+        return caseRoiN;
+    }
+    
+    public boolean isRoiMoved(Couleur c){
+        if( c == Couleur.BLANC )
+            return isRoiBMoved();
+        return isRoiNMoved();
+    }
+
+    private boolean isRoiBMoved() {
+        return roiBMoved;
+    }
+
+    private boolean isRoiNMoved() {
+        return roiNMoved;
+    }
+    
+    public void setRoiMoved(Couleur color) {
+        if(color == Couleur.BLANC){
+            setRoiBMoved( true );
+            return;
+        }
+        setRoiNMoved(true);
+    }
+
+    private void setRoiBMoved(boolean roiBMoved) {
+        this.roiBMoved = roiBMoved;
+    }
+
+    private void setRoiNMoved(boolean roiNMoved) {
+        this.roiNMoved = roiNMoved;
+    }
+    
+    
     
 }

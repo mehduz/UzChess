@@ -8,7 +8,6 @@ public class Piece {
     private Couleur couleur;
 
     private byte valeur;
-    private Case casePiece;
     private Deplacement deplacement;
 
     public void deplacer() {
@@ -20,10 +19,6 @@ public class Piece {
 
     public byte getValeur() {
         return valeur;
-    }
-
-    public Case getCasePiece() {
-        return casePiece;
     }
 
     public Deplacement getDeplacement() {
