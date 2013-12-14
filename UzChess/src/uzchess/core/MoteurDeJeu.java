@@ -1,5 +1,6 @@
 package uzchess.core;
 
+import java.util.ArrayList;
 import uzchess.constantes.Couleur;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
@@ -21,7 +22,7 @@ public class MoteurDeJeu {
         return !(ech.isMenace(caseRoiAChecker).isEmpty());
     }
     
-    public void detecterMat() {
+    public boolean detecterMat() {
         
         Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         
@@ -30,9 +31,17 @@ public class MoteurDeJeu {
         Couleur c = JeuEchecs.getInstance().getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC ) ? ech.getCaseRoiB() : ech.getCaseRoiN();
         
-        byte colRN=caseRN.getColonne();
-        byte ligRN=caseRN.getLigne();
+        ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
         
+        if(!depPossible.isEmpty()){
+            for(Case ca : depPossible){
+                if(ech.isMenace(ca).isEmpty()){
+                    return false;
+                }
+            }
+        }
+        
+        return false;
     }
 
     public void detecterPat() {
