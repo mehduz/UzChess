@@ -13,7 +13,7 @@ import uzchess.core.model.Echiquier;
 
 /**
  *
- * @author 20130317
+ * @author mehdi
  */
 public class VerificateurRoi implements Deplacement {
 
@@ -27,8 +27,11 @@ public class VerificateurRoi implements Deplacement {
 
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
-
-        if (verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne)) {
+            
+        boolean condition1 = JeuEchecs.getInstance().getEchiquier().isMenace(arr).isEmpty();
+        boolean condition2 = (verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne));
+        
+        if (condition1 && condition2){
             noticeKingMove(dep.getCouleur());
             return true; 
         }
