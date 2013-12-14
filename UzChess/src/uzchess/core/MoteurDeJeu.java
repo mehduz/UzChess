@@ -27,10 +27,11 @@ public class MoteurDeJeu {
         
         Case caseRN=ech.getCaseRoiN();
         Case caseRB=ech.getCaseRoiB();
+        Couleur c = JeuEchecs.getInstance().getTour();
+        Case caseRoiAChecker = (c == Couleur.BLANC ) ? ech.getCaseRoiB() : ech.getCaseRoiN();
         
         byte colRN=caseRN.getColonne();
         byte ligRN=caseRN.getLigne();
-      
         
     }
 
