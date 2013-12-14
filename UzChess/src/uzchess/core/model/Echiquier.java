@@ -17,18 +17,7 @@ public class Echiquier {
     private boolean roiBMoved;
     private boolean roiNMoved;
 
-    private Echiquier() {
-    }
-
-    private static class SingletonHolder {
-
-        private final static Echiquier instance = new Echiquier();
-    }
-
-    public static Echiquier getInstance() {
-        return SingletonHolder.instance;
-    }
-
+    
     public ArrayList<Case> getCasesInter(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
         Direction maDir;
@@ -60,7 +49,7 @@ public class Echiquier {
                 maListInter = getSO(caseDep, caseArr);
             default:
                 break;
-        };
+        }
         return maListInter;
     }
 
@@ -226,19 +215,15 @@ public class Echiquier {
     }
 
     public ArrayList<Case> isMenace(Case maCase) {
+
         Collection<Case> casesAdverses;
-        if (maCase.getCouleur() == Couleur.BLANC) {
-            casesAdverses = piecesB.values();
-        } else {
-            casesAdverses = piecesN.values();
-        }
+        casesAdverses = (maCase.getCouleur() == Couleur.BLANC) ? piecesB.values() : piecesN.values();
 
         ArrayList<Case> maListMenace = new ArrayList<>();
 
         for (Case c : casesAdverses) {
             Piece p = c.getPiece();
-            boolean check = p.getDeplacement().verifierDeplacement(c, maCase);
-            if (check == true) {
+            if (p.getDeplacement().verifierDeplacement(c, maCase)) {
                 maListMenace.add(c);
             }
         }
@@ -253,17 +238,17 @@ public class Echiquier {
         int cArr = arr.getColonne();
 
         Direction dir;
-        
-        if(lArr == lDep){
-                dir = ( cArr > cDep) ? Direction.E : Direction.O;
-        }else if(cArr == cDep){
-                dir = ( lArr > lDep) ? Direction.S : Direction.N;
-        }else if (lArr > lDep ){
-                dir = ( cArr > cDep) ? Direction.SE : Direction.SO;
-        }else{
-                dir = ( cArr > cDep) ? Direction.NE : Direction.NO;
-        } 
-        
+
+        if (lArr == lDep) {
+            dir = (cArr > cDep) ? Direction.E : Direction.O;
+        } else if (cArr == cDep) {
+            dir = (lArr > lDep) ? Direction.S : Direction.N;
+        } else if (lArr > lDep) {
+            dir = (cArr > cDep) ? Direction.SE : Direction.SO;
+        } else {
+            dir = (cArr > cDep) ? Direction.NE : Direction.NO;
+        }
+
         return dir;
     }
 

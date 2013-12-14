@@ -1,5 +1,6 @@
 package uzchess.core.rules;
 
+import uzchess.core.JeuEchecs;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -14,12 +15,12 @@ public class VerificateurTour implements Deplacement {
         byte colCaseArr = arr.getColonne();
         byte ligCaseArr = arr.getLigne();
 
-        //typeVefir== pour ligne (0)colonne(1) ou diago(2)
+       
         if (ligCaseDep != ligCaseArr && colCaseDep != colCaseArr) {
             return false;
         }
 
-        Echiquier ech = Echiquier.getInstance();
-        return ech.verifCasesInter( ech.getCasesInter(dep, arr ));
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
+        return ech.verifCasesInter( ech.getCasesInter(dep, arr )); 
     }
 }

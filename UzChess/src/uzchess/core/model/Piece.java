@@ -24,5 +24,9 @@ public class Piece {
     public Deplacement getDeplacement() {
         return deplacement;
     }
+    
+    public void estPrise(){
+        throw new UnsupportedOperationException();
+    }
 
 }

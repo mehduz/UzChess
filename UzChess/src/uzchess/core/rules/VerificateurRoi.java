@@ -7,6 +7,7 @@ package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
+import uzchess.core.JeuEchecs;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -27,11 +28,10 @@ public class VerificateurRoi implements Deplacement {
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
 
-        if (verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr)) {
+        if (verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne)) {
             noticeKingMove(dep.getCouleur());
-            return true;
+            return true; 
         }
-
         return false;
     }
 
@@ -39,27 +39,22 @@ public class VerificateurRoi implements Deplacement {
         return (new VerificateurReine().verifierDeplacement(dep, arr)) && (decLigne <= 1 && decColonne <= 1);
     }
 
-    private boolean verifierRoque(Case dep, Case arr) {
+    private boolean verifierRoque(Case dep, Case arr, byte decLigne) {
         
-        throw new UnsupportedOperationException();
-        /*Echiquier ech = Echiquier.getInstance();
+        //throw new UnsupportedOperationException();
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         Couleur col = dep.getCouleur();
         Direction dir = ech.getDirection(dep, arr);
 
-        if (dir != Direction.O && dir != Direction.E) {
-            return false;
-        }
-        if ((ech.isRoiMoved(col)) || (ech.verifCasesInter(ech.getCasesInter(dep, arr)))) {
-            return false;
-        }
-        if( dir == Direction.O ){
-            
-        }
-        return true;*/
+        boolean condition1 = ( dir == Direction.O || dir == Direction.E );
+        boolean condition2 = (!(ech.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep,arr))));
+        boolean condition3 = ((decLigne == 3 && dir == Direction.O) || (decLigne == 2 && dir == Direction.E));
+        
+        return condition1 && condition2 && condition3;
     }
 
     private void noticeKingMove(Couleur color) {
-        Echiquier ech = Echiquier.getInstance();
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         ech.setRoiMoved(color);
     }
 

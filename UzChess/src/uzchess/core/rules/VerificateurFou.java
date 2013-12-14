@@ -1,5 +1,6 @@
 package uzchess.core.rules;
 
+import uzchess.core.JeuEchecs;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -17,7 +18,7 @@ public class VerificateurFou implements Deplacement {
         byte decHor = (byte) Math.abs(colCaseDep - colCaseArr);
 
         //Si la case arrivé est sur le même ligne ou la même colonne
-        Echiquier ech = Echiquier.getInstance();
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         if (decVer != decHor) {
             return false;
         }

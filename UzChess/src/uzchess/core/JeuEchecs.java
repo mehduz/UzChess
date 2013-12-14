@@ -6,9 +6,21 @@ import uzchess.constantes.Couleur;
 public class JeuEchecs {
 
     private Couleur tour;
-    private short compteurCoups;
+    private byte compteurCoups;
     private MoteurDeJeu moteurDeJeu;
     private Echiquier echiquier;
+    
+    private JeuEchecs() {
+    }
+
+    private static class SingletonHolder {
+
+        private final static JeuEchecs instance = new JeuEchecs();
+    }
+
+    public static JeuEchecs getInstance() {
+        return SingletonHolder.instance;
+    }
 
     public void initialiser() {
     }
@@ -33,7 +45,7 @@ public class JeuEchecs {
         return tour;
     } 
 
-    public short getCompteurCoups() {
+    public byte getCompteurCoups() {
         return compteurCoups;
     }
 
