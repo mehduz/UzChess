@@ -1,84 +1,44 @@
 package uzchess.core;
 
-import java.util.ArrayList;
 import uzchess.constantes.Couleur;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
-import uzchess.core.model.Piece;
 
 public class MoteurDeJeu {
 
-    public void verifierCoup() {
+    private boolean echec;
+
+    public void verifierCoup(Case dep, Case arr){
+        
     }
 
-    public void detecterEchec() 
+    public boolean detecterEchec() 
     {
-        //utiliser isMenace de Echiquier...
-        // trouver case du roi et demander isMeance...
-        Echiquier ech = Echiquier.getInstance();
-        if(ech.isMenace( ech.getCaseRoiB() ) ) {
-           System.out.println("le Roi Blanc est en echec!");
-        }
-        if(ech.isMenace( ech.getCaseRoiN() ) ) {
-           System.out.println("le Roi Noir est en echec!");
-        }
+        JeuEchecs jeu = JeuEchecs.getInstance();
+        Couleur c = jeu.getTour();
+        Echiquier ech = jeu.getEchiquier();
+        Case caseRoiAChecker = (c == Couleur.BLANC ) ? ech.getCaseRoiN() : ech.getCaseRoiB();
+        return !(ech.isMenace(caseRoiAChecker).isEmpty());
     }
     
     public void detecterMat() {
         
-        Echiquier ech = Echiquier.getInstance();
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         
         Case caseRN=ech.getCaseRoiN();
         Case caseRB=ech.getCaseRoiB();
         
         byte colRN=caseRN.getColonne();
         byte ligRN=caseRN.getLigne();
+      
         
-        byte cmpt=0;
-        Case caseV=new Case();
-        for(byte i=-1;i<2;i++){
-            for(byte j=-1;j<2;j++){
-                caseV.setColonne((byte) (colRN+i));
-                caseV.setLigne((byte) (ligRN+j));
-                if(ech.isMenace(caseV)){
-                    cmpt++;
-                    System.out.println("case menacée");
-                }
-                    
-            }
-        }
-        if(cmpt==9)
-        {
-            //roi peut pas bouger...
-        }
-        else //pas mat...
-        ;
     }
 
     public void detecterPat() {
+    } 
+    
+    public boolean isThereEchec() {
+        return echec;
     }
-
-    //renvoie la liste des cases accessible par la piece
-     public ArrayList<Case> deplacementPossible(Piece piece){
-         
-         ArrayList<Case> cases=new ArrayList<>();
-         Echiquier ech = Echiquier.getInstance();
-        
-         Case caseV;
-         Case dep;
-         
-         dep = (piece.getCouleur()==Couleur.BLANC)?ech.getPiecesB().get(piece):ech.getPiecesN().get(piece);
-         
-         
-         for(byte i=0;i<8;i++){
-            for(byte j=0;j<8;j++){
-                caseV = ech.getCases()[i][j];
-                if(piece.getDeplacement().verifierDeplacement(dep, caseV))
-                    cases.add(caseV);
-            }
-        }
-         
-        return cases;
-     }
     
 }

@@ -251,5 +251,22 @@ public class Echiquier {
 
         return dir;
     }
+    
+    public ArrayList<Case> deplacementPossible(Piece piece){
+         
+         ArrayList<Case> casesP =new ArrayList<>();
+    
+         Case caseV, dep;
+         dep = (piece.getCouleur()==Couleur.BLANC)?getPiecesB().get(piece):getPiecesN().get(piece);
+        
+         for(byte i=0; i<8 ; i++){
+            for( byte j=0; j<8; j++){
+                caseV = getCases()[i][j];
+                if(piece.getDeplacement().verifierDeplacement(dep, caseV))
+                    casesP.add(caseV);
+            }
+        }
+        return casesP;
+     }
 
 }
