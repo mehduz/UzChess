@@ -23,12 +23,15 @@ public class JeuEchecs {
     }
 
     public void initialiser() {
+        
     }
 
     public void quitter() {
+        
     }
 
     public void abandonner() {
+        
     }
 
     public void detecterFin() 

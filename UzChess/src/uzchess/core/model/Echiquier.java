@@ -17,7 +17,6 @@ public class Echiquier {
     private boolean roiBMoved;
     private boolean roiNMoved;
 
-    
     public ArrayList<Case> getCasesInter(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
         Direction maDir;
@@ -167,12 +166,11 @@ public class Echiquier {
         this.cases = cases;
     }
 
-    public HashMap<Piece, Case> getPiecesN() {
+    public HashMap<Piece, Case> getPieces(Couleur c) {
+        if (c == Couleur.BLANC) {
+            return piecesB;
+        }
         return piecesN;
-    }
-
-    public HashMap<Piece, Case> getPiecesB() {
-        return piecesB;
     }
 
     public Case getCaseRoiB() {
@@ -251,22 +249,23 @@ public class Echiquier {
 
         return dir;
     }
-    
-    public ArrayList<Case> deplacementPossible(Piece piece){
-         
-         ArrayList<Case> casesP =new ArrayList<>();
-    
-         Case caseV, dep;
-         dep = (piece.getCouleur()==Couleur.BLANC)?getPiecesB().get(piece):getPiecesN().get(piece);
-        
-         for(byte i=0; i<8 ; i++){
-            for( byte j=0; j<8; j++){
+
+    public ArrayList<Case> deplacementPossible(Piece piece) {
+
+        ArrayList<Case> casesP = new ArrayList<>();
+
+        Case caseV, dep;
+        dep = getPieces(piece.getCouleur()).get(piece);
+
+        for (byte i = 0; i < 8; i++) {
+            for (byte j = 0; j < 8; j++) {
                 caseV = getCases()[i][j];
-                if(piece.getDeplacement().verifierDeplacement(dep, caseV))
+                if (piece.getDeplacement().verifierDeplacement(dep, caseV)) {
                     casesP.add(caseV);
+                }
             }
         }
         return casesP;
-     }
+    }
 
 }
