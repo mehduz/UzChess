@@ -72,8 +72,10 @@ public class MoteurDeJeu {
         //le roi ne peut pas se déplacer et aucune piece ne peut le sauver, donc il y'a mat
         return true;
     }
+    
 
     public void detecterPat() {
+        
     }
 
     public boolean isThereEchec() {
