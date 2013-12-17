@@ -7,7 +7,7 @@ package uzchess.constantes;
 
 /**
  *
- * @author user
+ * @author mehdi
  */
 public enum Direction {
 
