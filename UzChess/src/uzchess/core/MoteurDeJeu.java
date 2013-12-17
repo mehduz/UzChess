@@ -64,7 +64,7 @@ public class MoteurDeJeu {
         //on teste les interceptions possibles
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {
-                if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter)) {
+                if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter, false)) {
                     return false;
                 }
             }

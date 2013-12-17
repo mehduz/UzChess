@@ -18,7 +18,7 @@ import uzchess.core.model.Echiquier;
 public class VerificateurRoi implements Deplacement {
 
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr) {
+    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         byte ligCaseDep = dep.getLigne();
         byte colCaseDep = dep.getColonne();
@@ -27,32 +27,34 @@ public class VerificateurRoi implements Deplacement {
 
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
-            
+
         boolean condition1 = JeuEchecs.getInstance().getEchiquier().isMenace(arr).isEmpty();
         boolean condition2 = (verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne));
-        
-        if (condition1 && condition2){
-            noticeKingMove(dep.getCouleur());
-            return true; 
+
+        if (condition1 && condition2) {
+            if (noticeMove) {
+                noticeKingMove(dep.getCouleur());
+            }
+            return true;
         }
         return false;
     }
 
     private boolean verifierNormal(Case dep, Case arr, int decLigne, int decColonne) {
-        return (new VerificateurReine().verifierDeplacement(dep, arr)) && (decLigne <= 1 && decColonne <= 1);
+        return (new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1);
     }
 
     private boolean verifierRoque(Case dep, Case arr, byte decLigne) {
-        
-        //throw new UnsupportedOperationException();
+
         Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         Couleur col = dep.getCouleur();
         Direction dir = ech.getDirection(dep, arr);
 
-        boolean condition1 = ( dir == Direction.O || dir == Direction.E );
-        boolean condition2 = (!(ech.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep,arr))));
+        boolean condition1 = (dir == Direction.O || dir == Direction.E);
+        boolean condition2 = (!(ech.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep, arr))));
         boolean condition3 = ((decLigne == 3 && dir == Direction.O) || (decLigne == 2 && dir == Direction.E));
-        
+
+        //Attention la tour doit se déplacer, et la piece avec laquelle on swappe doit obligatoirement être une Tour
         return condition1 && condition2 && condition3;
     }
 

@@ -8,7 +8,7 @@ public class VerificateurTour implements Deplacement {
 //on arrive dans cette méthode tout est nikel il faut juste verifier que déplacement comforme
 
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr) {
+    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         byte colCaseDep = dep.getColonne();
         byte ligCaseDep = dep.getLigne();

@@ -5,7 +5,7 @@ import uzchess.core.model.Case;
 public class VerificateurCavalier implements Deplacement {
 
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr) {
+    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         byte colCaseDep = dep.getColonne();
         byte ligCaseDep = dep.getLigne();

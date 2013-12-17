@@ -221,7 +221,7 @@ public class Echiquier {
 
         for (Case c : casesAdverses) {
             Piece p = c.getPiece();
-            if (p.getDeplacement().verifierDeplacement(c, maCase)) {
+            if (p.getDeplacement().verifierDeplacement(c, maCase, false)) {
                 maListMenace.add(c);
             }
         }
@@ -260,7 +260,7 @@ public class Echiquier {
         for (byte i = 0; i < 8; i++) {
             for (byte j = 0; j < 8; j++) {
                 caseV = getCases()[i][j];
-                if (piece.getDeplacement().verifierDeplacement(dep, caseV)) {
+                if (piece.getDeplacement().verifierDeplacement(dep, caseV, false)) {
                     casesP.add(caseV);
                 }
             }

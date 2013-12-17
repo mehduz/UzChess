@@ -9,7 +9,7 @@ public class VerificateurPion implements Deplacement {
 
 //penser  dep début, prise diago
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr) {
+    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         Couleur c = dep.getCouleur();
         Direction dir = JeuEchecs.getInstance().getEchiquier().getDirection(dep, arr);
