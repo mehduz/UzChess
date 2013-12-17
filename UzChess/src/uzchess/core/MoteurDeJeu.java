@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import uzchess.constantes.Couleur;
+import uzchess.constantes.TypeTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 import uzchess.core.model.Piece;
@@ -12,6 +13,12 @@ import uzchess.core.rules.VerificateurCavalier;
 public class MoteurDeJeu {
 
     private boolean echec = false;
+    private boolean roiBMoved;
+    private boolean roiNMoved;
+    private boolean tourBOMoved;
+    private boolean tourBEMoved;
+    private boolean tourNEMoved;
+    private boolean tourNOMoved;
 
     public void verifierCoup(Case dep, Case arr) {
 
@@ -72,14 +79,114 @@ public class MoteurDeJeu {
         //le roi ne peut pas se déplacer et aucune piece ne peut le sauver, donc il y'a mat
         return true;
     }
-    
 
     public void detecterPat() {
-        
+
     }
 
     public boolean isThereEchec() {
         return echec;
+    }
+
+    public void setTourMoved(TypeTour t, boolean val) {
+        switch (t) {
+            case TBE:
+                setTourBEMoved(val);
+                break;
+            case TBO:
+                setTourBOMoved(val);
+                break;
+            case TNE:
+                setTourNEMoved(val);
+                break;
+            case TNO:
+                setTourNOMoved(val);
+            default:
+                break;
+        }
+    }
+
+    private boolean isTourBOMoved() {
+        return tourBOMoved;
+    }
+
+    private boolean isTourBEMoved() {
+        return tourBEMoved;
+    }
+
+    private boolean isTourNEMoved() {
+        return tourNEMoved;
+    }
+
+    private boolean isTourNOMoved() {
+        return tourNOMoved;
+    }
+
+    private void setTourBOMoved(boolean tourBOMoved) {
+        this.tourBOMoved = tourBOMoved;
+    }
+
+    private void setTourBEMoved(boolean tourBEMoved) {
+        this.tourBEMoved = tourBEMoved;
+    }
+
+    private void setTourNEMoved(boolean tourNEMoved) {
+        this.tourNEMoved = tourNEMoved;
+    }
+
+    private void setTourNOMoved(boolean tourNOMoved) {
+        this.tourNOMoved = tourNOMoved;
+    }
+
+    public boolean isTourMoved(TypeTour t) {
+        boolean ret = false;
+        switch (t) {
+            case TBE:
+                ret = isTourBEMoved();
+                break;
+            case TBO:
+                ret = isTourBOMoved();
+                break;
+            case TNE:
+                ret = isTourNEMoved();
+                break;
+            case TNO:
+                ret = isTourNOMoved();
+            default:
+                break;
+        }
+        return ret;
+    }
+
+    public void setRoiMoved(Couleur color) {
+        if (color == Couleur.BLANC) {
+            setRoiBMoved(true);
+            return;
+        }
+        setRoiNMoved(true);
+    }
+
+    private void setRoiBMoved(boolean roiBMoved) {
+        this.roiBMoved = roiBMoved;
+    }
+
+    private void setRoiNMoved(boolean roiNMoved) {
+        this.roiNMoved = roiNMoved;
+    }
+
+    public boolean isRoiMoved(Couleur c) {
+        if (c == Couleur.BLANC) {
+            return isRoiBMoved();
+        }
+        return isRoiNMoved();
+    }
+
+    private boolean isRoiBMoved() {
+        return roiBMoved;
+    }
+
+    private boolean isRoiNMoved() {
+        return roiNMoved;
     }
 
 }

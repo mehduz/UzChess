@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
-import uzchess.constantes.TypeTour;
 
 public class Echiquier {
 
@@ -15,14 +14,6 @@ public class Echiquier {
     private HashMap<Piece, Case> piecesB;
     private Case caseRoiB;
     private Case caseRoiN;
-    
-    private boolean roiBMoved;
-    private boolean roiNMoved;
-    private boolean tourBOMoved;
-    private boolean tourBEMoved;
-    private boolean tourNEMoved;
-    private boolean tourNOMoved;
-
 
     public ArrayList<Case> getCasesInter(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
@@ -188,97 +179,12 @@ public class Echiquier {
         return caseRoiN;
     }
 
-    public boolean isRoiMoved(Couleur c) {
-        if (c == Couleur.BLANC) {
-            return isRoiBMoved();
-        }
-        return isRoiNMoved();
-    }
-
-    private boolean isRoiBMoved() {
-        return roiBMoved;
-    }
-
-    private boolean isRoiNMoved() {
-        return roiNMoved;
-    }
-
     public HashMap<Piece, Case> getPiecesN() {
         return piecesN;
     }
 
     public HashMap<Piece, Case> getPiecesB() {
         return piecesB;
-    }
-
-    public boolean isTourMoved(TypeTour t){
-        boolean ret = false;
-        switch(t){
-            case TBE :
-                ret = isTourBEMoved();
-                break;
-            case TBO :
-                ret = isTourBOMoved();
-                break;
-            case TNE : 
-                ret = isTourNEMoved();
-                break;
-            case TNO :
-                ret = isTourNOMoved();
-            default :
-                break;  
-        }
-        return ret;
-    }
-    
-    public void setTourMoved(TypeTour t, boolean val){
-        switch(t){
-            case TBE :
-                setTourBEMoved(val);
-                break;
-            case TBO :
-                setTourBOMoved(val);
-                break;
-            case TNE : 
-                setTourNEMoved(val);
-                break;
-            case TNO :
-                setTourNOMoved(val);
-            default :
-                break;  
-        }
-    }
-    
-    private boolean isTourBOMoved() {
-        return tourBOMoved;
-    }
-
-    private boolean isTourBEMoved() {
-        return tourBEMoved;
-    }
-
-    private boolean isTourNEMoved() {
-        return tourNEMoved;
-    }
-
-    private boolean isTourNOMoved() {
-        return tourNOMoved;
-    }
-    
-    public void setRoiMoved(Couleur color) {
-        if (color == Couleur.BLANC) {
-            setRoiBMoved(true);
-            return;
-        }
-        setRoiNMoved(true);
-    }
-
-    private void setRoiBMoved(boolean roiBMoved) {
-        this.roiBMoved = roiBMoved;
-    }
-
-    private void setRoiNMoved(boolean roiNMoved) {
-        this.roiNMoved = roiNMoved;
     }
 
     public ArrayList<Case> isMenace(Case maCase) {
@@ -351,21 +257,5 @@ public class Echiquier {
 
     public void setCaseRoiN(Case caseRoiN) {
         this.caseRoiN = caseRoiN;
-    }
-
-    private void setTourBOMoved(boolean tourBOMoved) {
-        this.tourBOMoved = tourBOMoved;
-    }
-
-    private void setTourBEMoved(boolean tourBEMoved) {
-        this.tourBEMoved = tourBEMoved;
-    }
-
-    private void setTourNEMoved(boolean tourNEMoved) {
-        this.tourNEMoved = tourNEMoved;
-    }
-
-    private void setTourNOMoved(boolean tourNOMoved) {
-        this.tourNOMoved = tourNOMoved;
     }
 }

@@ -9,6 +9,7 @@ import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.constantes.TypeTour;
 import uzchess.core.JeuEchecs;
+import uzchess.core.MoteurDeJeu;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -29,14 +30,15 @@ public class VerificateurRoi implements Deplacement {
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
 
-        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
+        JeuEchecs jeu = JeuEchecs.getInstance();        
+        Echiquier ech = jeu.getEchiquier();
 
         boolean condition1 = ech.isMenace(arr).isEmpty();
         boolean condition2 = verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne, noticeMove);
 
         if (condition1 && condition2) {
             if (noticeMove) {
-                ech.setRoiMoved(dep.getCouleur());
+                jeu.getMoteurDeJeu().setRoiMoved(dep.getPiece().getCouleur());
             }
             return true;
         }
@@ -45,40 +47,42 @@ public class VerificateurRoi implements Deplacement {
 
     private boolean verifierNormal(Case dep, Case arr, byte decLigne, byte decColonne) {
         return (new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1);
-    }
+    } 
 
     private boolean verifierRoque(Case dep, Case arr, byte decLigne, boolean noticeMove) {
-
-        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
-        Couleur col = dep.getCouleur();
+        
+        JeuEchecs jeu = JeuEchecs.getInstance();
+        Echiquier ech = jeu.getEchiquier();
+        MoteurDeJeu mdj = jeu.getMoteurDeJeu();
+        Couleur col = dep.getPiece().getCouleur();
         Direction dir = ech.getDirection(dep, arr);
 
         boolean condition0 = dir == Direction.O;
         boolean condition1 = dir == Direction.E;
-        boolean condition2 = (!(ech.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep, arr))));
+        boolean condition2 = (!(mdj.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep, arr))));
         boolean condition3 = (decLigne == 3) && (dir == Direction.O);
         boolean condition4 = (decLigne == 2) && (dir == Direction.E);
-        boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !ech.isTourMoved(TypeTour.TBO)) || (condition4 && !ech.isTourMoved(TypeTour.TBE))
-                : (condition3 && !ech.isTourMoved(TypeTour.TNO)) || (condition4 && !ech.isTourMoved(TypeTour.TNE));
+        boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !mdj.isTourMoved(TypeTour.TBO)) || (condition4 && !mdj.isTourMoved(TypeTour.TBE))
+                : (condition3 && !mdj.isTourMoved(TypeTour.TNO)) || (condition4 && !mdj.isTourMoved(TypeTour.TNE));
 
-        //Attention la tour doit se déplacer, et la piece avec laquelle on swappe doit obligatoirement être une Tour
+     
         if ((condition0 || condition1) && condition2 && condition5) {
             if (noticeMove) {
-                if (dep.getCouleur() == Couleur.BLANC) {
-                    if (Direction == Direction.O) {
-                        ech.setTourMoved(TypeTour.TBO, true);
+                if (dep.getPiece().getCouleur() == Couleur.BLANC) {
+                    if (dir == Direction.O) {
+                        mdj.setTourMoved(TypeTour.TBO, true);
                     } else {
-                        ech.setTourMoved(TypeTour.TBE, true);
+                        mdj.setTourMoved(TypeTour.TBE, true);
                     }
-                } else if (Direction == Direction.O) {
-                    ech.setTourMoved(TypeTour.TNO, true);
+                } else if (dir == Direction.O) {
+                    mdj.setTourMoved(TypeTour.TNO, true);
                 } else {
-                    ech.setTourMoved(TypeTour.TBE, true);
+                    mdj.setTourMoved(TypeTour.TBE, true);
                 }
-                ech.setTourMoved(TypeTour.TNO, true);
+                mdj.setTourMoved(TypeTour.TNO, true);
             }
             return true;
         }
         return false;
-    }
+    } 
 }
