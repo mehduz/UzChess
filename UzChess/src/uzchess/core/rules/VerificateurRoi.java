@@ -29,19 +29,21 @@ public class VerificateurRoi implements Deplacement {
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
 
-        boolean condition1 = JeuEchecs.getInstance().getEchiquier().isMenace(arr).isEmpty();
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
+
+        boolean condition1 = ech.isMenace(arr).isEmpty();
         boolean condition2 = verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne, noticeMove);
 
         if (condition1 && condition2) {
             if (noticeMove) {
-                noticeKingMove(dep.getCouleur());
+                ech.setRoiMoved(dep.getCouleur());
             }
             return true;
         }
         return false;
     }
 
-    private boolean verifierNormal(Case dep, Case arr, int decLigne, int decColonne) {
+    private boolean verifierNormal(Case dep, Case arr, byte decLigne, byte decColonne) {
         return (new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1);
     }
 
@@ -57,20 +59,26 @@ public class VerificateurRoi implements Deplacement {
         boolean condition3 = (decLigne == 3) && (dir == Direction.O);
         boolean condition4 = (decLigne == 2) && (dir == Direction.E);
         boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !ech.isTourMoved(TypeTour.TBO)) || (condition4 && !ech.isTourMoved(TypeTour.TBE))
-                                                    : (condition3 && !ech.isTourMoved(TypeTour.TNO)) || (condition4 && !ech.isTourMoved(TypeTour.TNE));
+                : (condition3 && !ech.isTourMoved(TypeTour.TNO)) || (condition4 && !ech.isTourMoved(TypeTour.TNE));
+
         //Attention la tour doit se déplacer, et la piece avec laquelle on swappe doit obligatoirement être une Tour
-        boolean condition6;
-        
-        return (condition1 || condition2) && condition2 && condition5;
+        if ((condition0 || condition1) && condition2 && condition5) {
+            if (noticeMove) {
+                if (dep.getCouleur() == Couleur.BLANC) {
+                    if (Direction == Direction.O) {
+                        ech.setTourMoved(TypeTour.TBO, true);
+                    } else {
+                        ech.setTourMoved(TypeTour.TBE, true);
+                    }
+                } else if (Direction == Direction.O) {
+                    ech.setTourMoved(TypeTour.TNO, true);
+                } else {
+                    ech.setTourMoved(TypeTour.TBE, true);
+                }
+                ech.setTourMoved(TypeTour.TNO, true);
+            }
+            return true;
+        }
+        return false;
     }
-
-    private void noticeKingMove(Couleur color) {
-        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
-        ech.setRoiMoved(color);
-    }
-
-    private void noticeTourMove() {
-
-    }
-
 }

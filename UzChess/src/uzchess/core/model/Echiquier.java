@@ -231,6 +231,24 @@ public class Echiquier {
         return ret;
     }
     
+    public void setTourMoved(TypeTour t, boolean val){
+        switch(t){
+            case TBE :
+                setTourBEMoved(val);
+                break;
+            case TBO :
+                setTourBOMoved(val);
+                break;
+            case TNE : 
+                setTourNEMoved(val);
+                break;
+            case TNO :
+                setTourNOMoved(val);
+            default :
+                break;  
+        }
+    }
+    
     private boolean isTourBOMoved() {
         return tourBOMoved;
     }
@@ -319,4 +337,35 @@ public class Echiquier {
         return casesP;
     }
 
+    public void setPiecesN(HashMap<Piece, Case> piecesN) {
+        this.piecesN = piecesN;
+    }
+
+    public void setPiecesB(HashMap<Piece, Case> piecesB) {
+        this.piecesB = piecesB;
+    }
+
+    public void setCaseRoiB(Case caseRoiB) {
+        this.caseRoiB = caseRoiB;
+    }
+
+    public void setCaseRoiN(Case caseRoiN) {
+        this.caseRoiN = caseRoiN;
+    }
+
+    private void setTourBOMoved(boolean tourBOMoved) {
+        this.tourBOMoved = tourBOMoved;
+    }
+
+    private void setTourBEMoved(boolean tourBEMoved) {
+        this.tourBEMoved = tourBEMoved;
+    }
+
+    private void setTourNEMoved(boolean tourNEMoved) {
+        this.tourNEMoved = tourNEMoved;
+    }
+
+    private void setTourNOMoved(boolean tourNOMoved) {
+        this.tourNOMoved = tourNOMoved;
+    }
 }

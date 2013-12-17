@@ -59,5 +59,4 @@ public class JeuEchecs {
     public Echiquier getEchiquier() {
         return echiquier;
     }
-
 }
