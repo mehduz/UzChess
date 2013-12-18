@@ -18,7 +18,7 @@ public class VerificateurPion implements Deplacement {
         if (arr.getPiece() != null) {
             return verifAvance(dep, arr, c, dir);
         }
-        return new VerificateurPion().verifierDeplacement(dep, arr, noticeMove);
+        return new VerificateurPionPrend().verifierDeplacement(dep, arr, noticeMove);
     }
 
     private boolean verifAvance(Case dep, Case arr, Couleur c, Direction dir) {

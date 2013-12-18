@@ -8,15 +8,17 @@ package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
-import uzchess.core.JeuEchecs;
 import uzchess.core.model.Case;
+import uzchess.core.model.Echiquier;
 
 /**
  *
  * @author user
  */
-public class VerficateurPionPrend implements Deplacement{
+public class VerificateurPionPrend implements Deplacement{
 
+    private Echiquier ech;
+    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
         
@@ -24,7 +26,7 @@ public class VerficateurPionPrend implements Deplacement{
         byte ligArr = arr.getLigne();
                         
         Couleur c = dep.getCouleur();
-        Direction dir = JeuEchecs.getInstance().getEchiquier().getDirection(dep, arr);
+        Direction dir = ech.getDirection(dep, arr);
         
         boolean condition1 = (c == Couleur.BLANC && ( dir == Direction.NE || dir == Direction.NO ));
         boolean condition2 = (c == Couleur.NOIR && ( dir == Direction.SE || dir == Direction.SO ));
