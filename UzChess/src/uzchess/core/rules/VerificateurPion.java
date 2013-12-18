@@ -18,7 +18,7 @@ public class VerificateurPion implements Deplacement {
         if (arr.getPiece() != null) {
             return verifAvance(dep, arr, c, dir);
         }
-        return verifPrend(dep, arr, c, dir);
+        return new VerificateurPion().verifierDeplacement(dep, arr, noticeMove);
     }
 
     private boolean verifAvance(Case dep, Case arr, Couleur c, Direction dir) {
@@ -32,18 +32,5 @@ public class VerificateurPion implements Deplacement {
         boolean condition2 = (dist == 1 || (dist == 2 && (( nbCoups == 0  && c == Couleur.BLANC) || ( (nbCoups == 1) && (c == Couleur.NOIR)))));
         
         return condition1 && condition2;
-           
-    }
-
-    private boolean verifPrend(Case dep, Case arr, Couleur c, Direction dir) {
-
-        byte ligDep = dep.getLigne();
-        byte ligArr = arr.getLigne();
-
-        boolean condition1 = (c == Couleur.BLANC && ( dir == Direction.NE || dir == Direction.NO ));
-        boolean condition2 = (c == Couleur.NOIR && ( dir == Direction.SE || dir == Direction.SO ));
-        boolean condition3 = (Math.abs(ligArr - ligDep) == 1);
-           
-        return condition1 && condition2 && condition3;
     }
 }

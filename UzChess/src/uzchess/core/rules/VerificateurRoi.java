@@ -8,7 +8,6 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.constantes.TypeTour;
-import uzchess.core.JeuEchecs;
 import uzchess.core.MoteurDeJeu;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
@@ -19,7 +18,8 @@ import uzchess.core.model.Echiquier;
  */
 public class VerificateurRoi implements Deplacement {
 
-    private JeuEchecs jeu;
+    private MoteurDeJeu mdj;
+    private Echiquier ech;
     
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
@@ -31,29 +31,21 @@ public class VerificateurRoi implements Deplacement {
 
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
-        
-        Echiquier ech = jeu.getEchiquier();
 
         boolean condition1 = ech.isMenace(arr).isEmpty();
-        boolean condition2 = verifierNormal(dep, arr, decLigne, decColonne) || verifierRoque(dep, arr, decLigne, noticeMove);
+        boolean condition2 = ((new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1)) || verifierRoque(dep, arr, decLigne, noticeMove);
 
         if (condition1 && condition2) {
             if (noticeMove) {
-                jeu.getMoteurDeJeu().setRoiMoved(dep.getPiece().getCouleur());
+                mdj.setRoiMoved(dep.getPiece().getCouleur());
             }
             return true;
         }
         return false;
     }
 
-    private boolean verifierNormal(Case dep, Case arr, byte decLigne, byte decColonne) {
-        return (new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1);
-    } 
-
     private boolean verifierRoque(Case dep, Case arr, byte decLigne, boolean noticeMove) {
-        
-        Echiquier ech = jeu.getEchiquier();
-        MoteurDeJeu mdj = jeu.getMoteurDeJeu();
+       
         Couleur col = dep.getPiece().getCouleur();
         Direction dir = ech.getDirection(dep, arr);
 
