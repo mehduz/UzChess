@@ -8,11 +8,13 @@ import uzchess.core.model.Case;
 public class VerificateurPion implements Deplacement {
 
 //penser  dep début, prise diago
+    private JeuEchecs jeu;
+    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         Couleur c = dep.getCouleur();
-        Direction dir = JeuEchecs.getInstance().getEchiquier().getDirection(dep, arr);
+        Direction dir = jeu.getEchiquier().getDirection(dep, arr);
         if (arr.getPiece() != null) {
             return verifAvance(dep, arr, c, dir);
         }
@@ -24,7 +26,7 @@ public class VerificateurPion implements Deplacement {
         byte ligDep = dep.getLigne();
         byte ligArr = arr.getLigne();
         byte dist = (byte) Math.abs(ligArr - ligDep);
-        byte nbCoups = JeuEchecs.getInstance().getCompteurCoups();
+        byte nbCoups = jeu.getCompteurCoups();
         
         boolean condition1 = (( c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S));
         boolean condition2 = (dist == 1 || (dist == 2 && (( nbCoups == 0  && c == Couleur.BLANC) || ( (nbCoups == 1) && (c == Couleur.NOIR)))));

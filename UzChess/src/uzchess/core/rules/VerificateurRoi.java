@@ -19,6 +19,8 @@ import uzchess.core.model.Echiquier;
  */
 public class VerificateurRoi implements Deplacement {
 
+    private JeuEchecs jeu;
+    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
@@ -29,8 +31,7 @@ public class VerificateurRoi implements Deplacement {
 
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
-
-        JeuEchecs jeu = JeuEchecs.getInstance();        
+        
         Echiquier ech = jeu.getEchiquier();
 
         boolean condition1 = ech.isMenace(arr).isEmpty();
@@ -51,7 +52,6 @@ public class VerificateurRoi implements Deplacement {
 
     private boolean verifierRoque(Case dep, Case arr, byte decLigne, boolean noticeMove) {
         
-        JeuEchecs jeu = JeuEchecs.getInstance();
         Echiquier ech = jeu.getEchiquier();
         MoteurDeJeu mdj = jeu.getMoteurDeJeu();
         Couleur col = dep.getPiece().getCouleur();
