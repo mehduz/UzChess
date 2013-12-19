@@ -4,15 +4,13 @@ import java.io.*;
 import java.util.*;
 import uzchess.core.JeuEchecs;
 
-public class DalFichier implements IDal, Serializable {
+public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializable {
     
     private JeuEchecs partie;
     
-    public JeuEchecs getPartie() {
-        return this.partie;
-    }
-    
+    @Override
     public JeuEchecs charger(String nomFichier) {
+        
         FileInputStream fIn; 
         ObjectInputStream sIn;
         JeuEchecs p = null;
@@ -36,6 +34,7 @@ public class DalFichier implements IDal, Serializable {
 
     }
     
+    @Override
     public void sauvegarder(String nomFichier) {
 
         FileOutputStream fOut;//Flux de sortie permettant d'écrire dans un fichier
@@ -46,7 +45,7 @@ public class DalFichier implements IDal, Serializable {
         try {
             fOut = new FileOutputStream (nomFichier + ".dat");
             sOut = new ObjectOutputStream (fOut);
-            sOut.writeObject(this.getPartie ());
+            sOut.writeObject(this.partie);
             sOut.flush ();
             sOut.close ();
             fOut.close ();
@@ -71,6 +70,7 @@ public class DalFichier implements IDal, Serializable {
 
     @Override
     public ArrayList<String> getListePartie() {
+        
         Reader fIn;
         BufferedReader bIn;
         ArrayList<String> res = new ArrayList<>();

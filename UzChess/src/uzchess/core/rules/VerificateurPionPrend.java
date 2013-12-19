@@ -9,7 +9,6 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
-import uzchess.core.model.Echiquier;
 
 /**
  *

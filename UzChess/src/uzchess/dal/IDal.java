@@ -5,18 +5,14 @@
  */
 
 package uzchess.dal;
-
-import java.util.Collection;
-import uzchess.core.JeuEchecs;
-
 /**
  *
  * @author user
  */
-public interface IDal {
+public interface IDal < T, S> {
     
-    public void charger();
-    public void sauvegarder();
-    public Collection<String> getListePartie();
+    public T charger(String nomFichier);
+    public void sauvegarder(String nomFichier);
+    public S getListePartie();
     
 }
