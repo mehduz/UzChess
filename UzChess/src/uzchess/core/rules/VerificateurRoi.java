@@ -8,7 +8,8 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.constantes.TypeTour;
-import uzchess.core.MoteurDeJeu;
+import uzchess.core.StatutRoi;
+import uzchess.core.StatutTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -18,7 +19,8 @@ import uzchess.core.model.Echiquier;
  */
 public class VerificateurRoi implements Deplacement {
 
-    private MoteurDeJeu mdj;
+    private StatutTour st;
+    private StatutRoi sr;
     private Echiquier ech;
     
     @Override
@@ -37,7 +39,7 @@ public class VerificateurRoi implements Deplacement {
 
         if (condition1 && condition2) {
             if (noticeMove) {
-                mdj.setRoiMoved(dep.getPiece().getCouleur());
+                sr.setRoiMoved(dep.getPiece().getCouleur());
             }
             return true;
         }
@@ -51,27 +53,27 @@ public class VerificateurRoi implements Deplacement {
 
         boolean condition0 = dir == Direction.O;
         boolean condition1 = dir == Direction.E;
-        boolean condition2 = (!(mdj.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep, arr))));
+        boolean condition2 = (!(sr.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep, arr))));
         boolean condition3 = (decLigne == 3) && (dir == Direction.O);
         boolean condition4 = (decLigne == 2) && (dir == Direction.E);
-        boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !mdj.isTourMoved(TypeTour.TBO)) || (condition4 && !mdj.isTourMoved(TypeTour.TBE))
-                : (condition3 && !mdj.isTourMoved(TypeTour.TNO)) || (condition4 && !mdj.isTourMoved(TypeTour.TNE));
+        boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !st.isTourMoved(TypeTour.TBO)) || (condition4 && !st.isTourMoved(TypeTour.TBE))
+                : (condition3 && !st.isTourMoved(TypeTour.TNO)) || (condition4 && !st.isTourMoved(TypeTour.TNE));
 
      
         if ((condition0 || condition1) && condition2 && condition5) {
             if (noticeMove) {
                 if (dep.getPiece().getCouleur() == Couleur.BLANC) {
                     if (dir == Direction.O) {
-                        mdj.setTourMoved(TypeTour.TBO, true);
+                        st.setTourMoved(TypeTour.TBO, true);
                     } else {
-                        mdj.setTourMoved(TypeTour.TBE, true);
+                        st.setTourMoved(TypeTour.TBE, true);
                     }
                 } else if (dir == Direction.O) {
-                    mdj.setTourMoved(TypeTour.TNO, true);
+                    st.setTourMoved(TypeTour.TNO, true);
                 } else {
-                    mdj.setTourMoved(TypeTour.TBE, true);
+                    st.setTourMoved(TypeTour.TBE, true);
                 }
-                mdj.setTourMoved(TypeTour.TNO, true);
+                st.setTourMoved(TypeTour.TNO, true);
             }
             return true;
         }

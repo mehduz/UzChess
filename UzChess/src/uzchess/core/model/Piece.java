@@ -9,9 +9,6 @@ public class Piece {
     private byte valeur;
     private Deplacement deplacement;
 
-    public void deplacer() {
-    }
-
     public Couleur getCouleur() {
         return couleur;
     }
@@ -22,6 +19,10 @@ public class Piece {
 
     public Deplacement getDeplacement() {
         return deplacement;
+    }
+    
+    public void deplacer() {
+        throw new UnsupportedOperationException();
     }
     
     public void estPrise(){

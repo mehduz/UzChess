@@ -2,7 +2,7 @@ package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.TypeTour;
-import uzchess.core.MoteurDeJeu;
+import uzchess.core.StatutTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 
@@ -10,7 +10,7 @@ public class VerificateurTour implements Deplacement {
 //on arrive dans cette méthode tout est nikel il faut juste verifier que déplacement comforme
 
     Echiquier ech;
-    MoteurDeJeu mdj;
+    StatutTour st;
     
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
@@ -31,7 +31,7 @@ public class VerificateurTour implements Deplacement {
                 byte col  = dep.getColonne();
                 TypeTour typeTour;
                 typeTour = (c == Couleur.BLANC)?( dep.getColonne() == 0)? TypeTour.TBO : TypeTour.TBE : ( dep.getColonne() == 0)? TypeTour.TNO : TypeTour.TNE ;
-                mdj.setTourMoved(typeTour, noticeMove);
+                st.setTourMoved(typeTour, noticeMove);
             }
         }
         
