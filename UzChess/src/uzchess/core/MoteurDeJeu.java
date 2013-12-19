@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import uzchess.constantes.Couleur;
-import uzchess.constantes.TypeTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 import uzchess.core.model.Piece;
@@ -13,29 +12,22 @@ import uzchess.core.rules.VerificateurCavalier;
 public class MoteurDeJeu {
 
     private boolean echec = false;
-    private boolean roiBMoved;
-    private boolean roiNMoved;
-    private boolean tourBOMoved;
-    private boolean tourBEMoved;
-    private boolean tourNEMoved;
-    private boolean tourNOMoved;
+    private Echiquier ech;
+    private JeuEchecs jeu;
 
     public void verifierCoup(Case dep, Case arr) {
 
     }
 
     public boolean detecterEchec() {
-        JeuEchecs jeu = JeuEchecs.getInstance();
         Couleur c = jeu.getTour();
-        Echiquier ech = jeu.getEchiquier();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiN() : ech.getCaseRoiB();
         return (echec = (ech.isMenace(caseRoiAChecker).isEmpty()));
     }
 
     public boolean detecterMat() {
-
-        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
-        Couleur c = JeuEchecs.getInstance().getTour();
+        
+        Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
 
         //on recupere les possibilités de déplacement du Roi
@@ -81,112 +73,13 @@ public class MoteurDeJeu {
     }
 
     public void detecterPat() {
-
+           throw new UnsupportedOperationException();
     }
 
     public boolean isThereEchec() {
         return echec;
     }
 
-    public void setTourMoved(TypeTour t, boolean val) {
-        switch (t) {
-            case TBE:
-                setTourBEMoved(val);
-                break;
-            case TBO:
-                setTourBOMoved(val);
-                break;
-            case TNE:
-                setTourNEMoved(val);
-                break;
-            case TNO:
-                setTourNOMoved(val);
-            default:
-                break;
-        }
-    }
-
-    private boolean isTourBOMoved() {
-        return tourBOMoved;
-    }
-
-    private boolean isTourBEMoved() {
-        return tourBEMoved;
-    }
-
-    private boolean isTourNEMoved() {
-        return tourNEMoved;
-    }
-
-    private boolean isTourNOMoved() {
-        return tourNOMoved;
-    }
-
-    private void setTourBOMoved(boolean tourBOMoved) {
-        this.tourBOMoved = tourBOMoved;
-    }
-
-    private void setTourBEMoved(boolean tourBEMoved) {
-        this.tourBEMoved = tourBEMoved;
-    }
-
-    private void setTourNEMoved(boolean tourNEMoved) {
-        this.tourNEMoved = tourNEMoved;
-    }
-
-    private void setTourNOMoved(boolean tourNOMoved) {
-        this.tourNOMoved = tourNOMoved;
-    }
-
-    public boolean isTourMoved(TypeTour t) {
-        boolean ret = false;
-        switch (t) {
-            case TBE:
-                ret = isTourBEMoved();
-                break;
-            case TBO:
-                ret = isTourBOMoved();
-                break;
-            case TNE:
-                ret = isTourNEMoved();
-                break;
-            case TNO:
-                ret = isTourNOMoved();
-            default:
-                break;
-        }
-        return ret;
-    }
-
-    public void setRoiMoved(Couleur color) {
-        if (color == Couleur.BLANC) {
-            setRoiBMoved(true);
-            return;
-        }
-        setRoiNMoved(true);
-    }
-
-    private void setRoiBMoved(boolean roiBMoved) {
-        this.roiBMoved = roiBMoved;
-    }
-
-    private void setRoiNMoved(boolean roiNMoved) {
-        this.roiNMoved = roiNMoved;
-    }
-
-    public boolean isRoiMoved(Couleur c) {
-        if (c == Couleur.BLANC) {
-            return isRoiBMoved();
-        }
-        return isRoiNMoved();
-    }
-
-    private boolean isRoiBMoved() {
-        return roiBMoved;
-    }
-
-    private boolean isRoiNMoved() {
-        return roiNMoved;
-    }
+   
 
 }

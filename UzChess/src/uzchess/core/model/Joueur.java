@@ -19,4 +19,17 @@ public class Joueur {
     public byte getScore() {
         return score;
     }
+
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public void setScore(byte score) {
+        this.score = score;
+    }
+    
 }

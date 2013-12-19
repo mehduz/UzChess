@@ -15,33 +15,32 @@ public class JeuEchecs {
 
     private static class SingletonHolder {
 
-        private final static JeuEchecs instance = new JeuEchecs();
+        private final static JeuEchecs INSTANCE = new JeuEchecs();
     }
 
     public static JeuEchecs getInstance() {
-        return SingletonHolder.instance;
+        return SingletonHolder.INSTANCE;
     }
 
     public void initialiser() {
-        
+          throw new UnsupportedOperationException();
     }
 
     public void quitter() {
-        
+          throw new UnsupportedOperationException();
     }
 
     public void abandonner() {
-        
+          throw new UnsupportedOperationException();
     }
 
     public void detecterFin() 
     {
-        moteurDeJeu.detecterEchec();
-        moteurDeJeu.detecterMat();
-        moteurDeJeu.detecterPat();
+         throw new UnsupportedOperationException();
     }
 
     public void jouer() {
+       throw new UnsupportedOperationException();
     }
 
     public Couleur getTour() {

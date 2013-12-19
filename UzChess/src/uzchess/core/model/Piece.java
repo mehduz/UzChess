@@ -6,7 +6,6 @@ import uzchess.core.rules.Deplacement;
 public class Piece {
 
     private Couleur couleur;
-
     private byte valeur;
     private Deplacement deplacement;
 
