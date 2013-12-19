@@ -17,6 +17,6 @@ public interface IDal {
     
     public void charger();
     public void sauvegarder();
-    public Collection<JeuEchecs> getListePartie();
+    public Collection<String> getListePartie();
     
 }
