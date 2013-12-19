@@ -55,7 +55,7 @@ public class VerificateurRoi implements Deplacement {
 
         boolean condition0 = dir == Direction.O;
         boolean condition1 = dir == Direction.E;
-        boolean condition2 = (!(sr.isRoiMoved(col)) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr))));
+        boolean condition2 = !(sr.isRoiMoved(col)) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
         boolean condition3 = (decLigne == 3) && (dir == Direction.O);
         boolean condition4 = (decLigne == 2) && (dir == Direction.E);
         boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !st.isTourMoved(TypeTour.TBO)) || (condition4 && !st.isTourMoved(TypeTour.TBE))

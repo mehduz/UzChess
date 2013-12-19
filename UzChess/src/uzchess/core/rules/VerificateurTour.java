@@ -27,14 +27,13 @@ public class VerificateurTour implements Deplacement {
             return false;
         }
         
-        if(CheckCasesInterUtility.verifCasesInter( CaseInterUtility.getCasesInter(dep, arr ))){
-            if(noticeMove){
-                Couleur c = dep.getPiece().getCouleur();
-                byte col  = dep.getColonne();
-                TypeTour typeTour;
-                typeTour = (c == Couleur.BLANC)?( dep.getColonne() == 0)? TypeTour.TBO : TypeTour.TBE : ( dep.getColonne() == 0)? TypeTour.TNO : TypeTour.TNE ;
-                st.setTourMoved(typeTour, noticeMove);
-            }
+        if(CheckCasesInterUtility.verifCasesInter( CaseInterUtility.getCasesInter(dep, arr )) && noticeMove ){
+            
+            Couleur c = dep.getPiece().getCouleur();
+            byte col  = dep.getColonne();
+            TypeTour typeTour;
+            typeTour = (c == Couleur.BLANC)?( col == 0)? TypeTour.TBO : TypeTour.TBE : ( col == 0)? TypeTour.TNO : TypeTour.TNE ;
+            st.setTourMoved(typeTour, noticeMove);
         }
         
         return true;

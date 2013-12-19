@@ -31,6 +31,7 @@ public class StatutTour {
                 break;
             case TNO:
                 setTourNOMoved(val);
+                break;
             default:
                 break;
         }
@@ -82,6 +83,7 @@ public class StatutTour {
                 break;
             case TNO:
                 ret = isTourNOMoved();
+                break;
             default:
                 break;
         }

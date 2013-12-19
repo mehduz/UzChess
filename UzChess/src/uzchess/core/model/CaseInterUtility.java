@@ -55,6 +55,7 @@ public class CaseInterUtility {
                 break;
             case SO:
                 maListInter = getSO(caseDep, caseArr);
+                break;
             default:
                 break;
         }

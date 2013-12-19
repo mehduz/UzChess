@@ -28,9 +28,10 @@ public class VerificateurPion implements Deplacement {
         byte dist = (byte) Math.abs(ligArr - ligDep);
         byte nbCoups = jeu.getCompteurCoups();
         
-        boolean condition1 = (( c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S));
-        boolean condition2 = (dist == 1 || (dist == 2 && (( nbCoups == 0  && c == Couleur.BLANC) || ( (nbCoups == 1) && (c == Couleur.NOIR)))));
+        boolean condition1 = ( c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
+        boolean condition2 =  dist == 1;
+        boolean condition3 = (dist == 2 && (( nbCoups == 0  && c == Couleur.BLANC) || ( (nbCoups == 1) && (c == Couleur.NOIR))));
         
-        return condition1 && condition2;
+        return condition1 && (condition2 || condition3);
     }
 }

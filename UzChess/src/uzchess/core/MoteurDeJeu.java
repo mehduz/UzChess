@@ -23,7 +23,8 @@ public class MoteurDeJeu {
     public boolean detecterEchec() {
         Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiN() : ech.getCaseRoiB();
-        return (echec = (ech.isMenace(caseRoiAChecker).isEmpty()));
+        echec = (ech.isMenace(caseRoiAChecker).isEmpty());
+        return echec;
     }
 
     public boolean detecterMat() {
@@ -42,12 +43,14 @@ public class MoteurDeJeu {
                 }
             }
         }
+        
         //là le roi ne peut pas bouger, aux autres pieces d'essayer de rompre l'echecs
         //si plusieus pieces adverses menacent notre roi, on perd car une piece à nous ne peut pas bloquer 2 directions en même temps
         ArrayList<Case> casesMenace = ech.isMenace(caseRoiAChecker);
         if (casesMenace.size() > 1) {
             return true;
         }
+        
         Case caseMenace = casesMenace.listIterator().next();
 
         //On recupere les cases où on peut intercepter 
