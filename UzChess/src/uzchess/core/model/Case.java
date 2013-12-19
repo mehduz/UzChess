@@ -1,6 +1,7 @@
 package uzchess.core.model;
 
 import uzchess.constantes.Couleur;
+import uzchess.constantes.Direction;
 
 public class Case {
 
@@ -41,6 +42,28 @@ public class Case {
     
      public void setCouleur(Couleur c) {
         couleur = c;
+    }
+     
+    public Direction getDirection( Case arr) {
+
+        int lDep = this.getLigne();
+        int cDep = this.getColonne();
+        int lArr = arr.getLigne();
+        int cArr = arr.getColonne();
+
+        Direction dir;
+
+        if (lArr == lDep) {
+            dir = (cArr > cDep) ? Direction.E : Direction.O;
+        } else if (cArr == cDep) {
+            dir = (lArr > lDep) ? Direction.S : Direction.N;
+        } else if (lArr > lDep) {
+            dir = (cArr > cDep) ? Direction.SE : Direction.SO;
+        } else {
+            dir = (cArr > cDep) ? Direction.NE : Direction.NO;
+        }
+        
+        return dir;
     }
 
 }

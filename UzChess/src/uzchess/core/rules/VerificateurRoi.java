@@ -12,6 +12,8 @@ import uzchess.core.StatutRoi;
 import uzchess.core.StatutTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.CheckCasesInterUtility;
+import uzchess.core.model.CaseInterUtility;
 
 /**
  *
@@ -49,11 +51,11 @@ public class VerificateurRoi implements Deplacement {
     private boolean verifierRoque(Case dep, Case arr, byte decLigne, boolean noticeMove) {
        
         Couleur col = dep.getPiece().getCouleur();
-        Direction dir = ech.getDirection(dep, arr);
+        Direction dir = dep.getDirection(arr);
 
         boolean condition0 = dir == Direction.O;
         boolean condition1 = dir == Direction.E;
-        boolean condition2 = (!(sr.isRoiMoved(col)) && (ech.verifCasesInter(ech.getCasesInter(dep, arr))));
+        boolean condition2 = (!(sr.isRoiMoved(col)) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr))));
         boolean condition3 = (decLigne == 3) && (dir == Direction.O);
         boolean condition4 = (decLigne == 2) && (dir == Direction.E);
         boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !st.isTourMoved(TypeTour.TBO)) || (condition4 && !st.isTourMoved(TypeTour.TBE))
@@ -77,6 +79,6 @@ public class VerificateurRoi implements Deplacement {
             }
             return true;
         }
-        return false;
+        return false; 
     } 
 }

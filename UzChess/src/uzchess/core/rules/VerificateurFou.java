@@ -2,6 +2,8 @@ package uzchess.core.rules;
 
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.CheckCasesInterUtility;
+import uzchess.core.model.CaseInterUtility;
 
 public class VerificateurFou implements Deplacement {
 
@@ -23,7 +25,7 @@ public class VerificateurFou implements Deplacement {
         if (decVer != decHor) {
             return false;
         }
-        return ech.verifCasesInter(ech.getCasesInter(dep, arr));
+        return CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr));
 
     }
 

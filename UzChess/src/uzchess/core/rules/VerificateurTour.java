@@ -5,6 +5,8 @@ import uzchess.constantes.TypeTour;
 import uzchess.core.StatutTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.CheckCasesInterUtility;
+import uzchess.core.model.CaseInterUtility;
 
 public class VerificateurTour implements Deplacement {
 //on arrive dans cette méthode tout est nikel il faut juste verifier que déplacement comforme
@@ -25,7 +27,7 @@ public class VerificateurTour implements Deplacement {
             return false;
         }
         
-        if(ech.verifCasesInter( ech.getCasesInter(dep, arr ))){
+        if(CheckCasesInterUtility.verifCasesInter( CaseInterUtility.getCasesInter(dep, arr ))){
             if(noticeMove){
                 Couleur c = dep.getPiece().getCouleur();
                 byte col  = dep.getColonne();

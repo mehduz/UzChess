@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import uzchess.constantes.Couleur;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.CaseInterUtility;
 import uzchess.core.model.Piece;
 import uzchess.core.rules.VerificateurCavalier;
 
@@ -49,13 +50,13 @@ public class MoteurDeJeu {
         }
         Case caseMenace = casesMenace.listIterator().next();
 
-        //On recupere les cases où on peut intercepter
+        //On recupere les cases où on peut intercepter 
         ArrayList<Case> casesInterception = new ArrayList<>();
         //le cavalier n'est pas interceptable, il faut le prendre ou on perd la partie
         if (caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier) {
             casesInterception.add(caseMenace);
         } else {
-            casesInterception = ech.getCasesInter(caseRoiAChecker, caseMenace);
+            casesInterception = CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace);
         }
         //On recupere les pieces alliés pour vérifier les interceptions possibles
         HashMap<Piece, Case> allies = ech.getPieces(c);

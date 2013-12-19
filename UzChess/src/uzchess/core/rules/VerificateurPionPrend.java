@@ -17,8 +17,6 @@ import uzchess.core.model.Echiquier;
  */
 public class VerificateurPionPrend implements Deplacement{
 
-    private Echiquier ech;
-    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
         
@@ -26,7 +24,7 @@ public class VerificateurPionPrend implements Deplacement{
         byte ligArr = arr.getLigne();
                         
         Couleur c = dep.getCouleur();
-        Direction dir = ech.getDirection(dep, arr);
+        Direction dir = dep.getDirection(arr);
         
         boolean condition1 = (c == Couleur.BLANC && ( dir == Direction.NE || dir == Direction.NO ));
         boolean condition2 = (c == Couleur.NOIR && ( dir == Direction.SE || dir == Direction.SO ));

@@ -14,7 +14,7 @@ public class VerificateurPion implements Deplacement {
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         Couleur c = dep.getCouleur();
-        Direction dir = jeu.getEchiquier().getDirection(dep, arr);
+        Direction dir = dep.getDirection(arr);
         if (arr.getPiece() != null) {
             return verifAvance(dep, arr, c, dir);
         }
