@@ -45,7 +45,7 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
         try {
             fOut = new FileOutputStream (nomFichier + ".dat");
             sOut = new ObjectOutputStream (fOut);
-            sOut.writeObject(this.partie);
+            sOut.writeObject(partie);
             sOut.flush ();
             sOut.close ();
             fOut.close ();
