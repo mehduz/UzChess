@@ -64,7 +64,7 @@ public class MoteurDeJeu {
         //On recupere les pieces alliés pour vérifier les interceptions possibles
         HashMap<Piece, Case> allies = ech.getPieces(c);
 
-        //on teste les interceptions possibles
+        //on teste les interceptions possibles 
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {
                 if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter, false)) {

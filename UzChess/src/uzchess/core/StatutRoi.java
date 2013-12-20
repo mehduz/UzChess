@@ -27,7 +27,7 @@ public class StatutRoi {
     private void setRoiBMoved(boolean roiBMoved) {
         this.roiBMoved = roiBMoved;
     }
-
+    
     private void setRoiNMoved(boolean roiNMoved) {
         this.roiNMoved = roiNMoved;
     }

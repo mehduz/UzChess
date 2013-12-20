@@ -12,4 +12,6 @@ package uzchess.core;
  */
 public class PiecesFactory {
     
+    
+    
 }

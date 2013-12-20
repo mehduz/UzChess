@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uzchess.constantes;
 
 /**
@@ -11,5 +10,9 @@ package uzchess.constantes;
  * @author mehdi
  */
 public enum TypeTour {
-    TNO, TNE, TBO, TBE
+
+    TNO, 
+    TNE, 
+    TBO, 
+    TBE
 }

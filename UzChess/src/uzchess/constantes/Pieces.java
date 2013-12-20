@@ -7,10 +7,14 @@ package uzchess.constantes;
 
 /**
  *
- * @author mehdi
+ * @author user
  */
-public enum Couleur {
+public enum Pieces {
 
-    BLANC, 
-    NOIR
+    PION,
+    TOUR,
+    FOU,
+    ROI,
+    REINE,
+    CAVALIER
 }
