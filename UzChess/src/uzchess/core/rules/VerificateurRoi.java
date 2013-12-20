@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
@@ -13,10 +8,6 @@ import uzchess.core.model.CaseInterUtility;
 import uzchess.core.model.CheckCasesInterUtility;
 import uzchess.core.model.Echiquier;
 
-/**
- *
- * @author mehdi
- */
 public class VerificateurRoi implements Deplacement {
 
     private StatutTour st;

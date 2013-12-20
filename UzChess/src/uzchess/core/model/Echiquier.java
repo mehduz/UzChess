@@ -11,11 +11,10 @@ public class Echiquier {
 
     private HashMap<Piece, Case> piecesN;
     private HashMap<Piece, Case> piecesB;
-    
+
     private Case caseRoiB;
     private Case caseRoiN;
 
-    
     public Case[][] getEchiquier() {
         return cases;
     }
@@ -54,7 +53,7 @@ public class Echiquier {
     public HashMap<Piece, Case> getPiecesB() {
         return piecesB;
     }
-    
+
     public void setPiecesN(HashMap<Piece, Case> piecesN) {
         this.piecesN = piecesN;
     }
@@ -70,7 +69,7 @@ public class Echiquier {
     public void setCaseRoiN(Case caseRoiN) {
         this.caseRoiN = caseRoiN;
     }
-    
+
     public ArrayList<Case> isMenace(Case maCase) {
 
         Collection<Case> casesAdverses;

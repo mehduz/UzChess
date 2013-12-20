@@ -6,4 +6,4 @@ public interface Deplacement {
 
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove);
 
-} 
+}

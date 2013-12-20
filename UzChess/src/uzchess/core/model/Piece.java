@@ -23,7 +23,7 @@ public class Piece {
     public void setDeplacement(Deplacement deplacement) {
         this.deplacement = deplacement;
     }
-    
+
     public Couleur getCouleur() {
         return couleur;
     }
@@ -35,24 +35,24 @@ public class Piece {
     public Deplacement getDeplacement() {
         return deplacement;
     }
-    
+
     public void deplacer(Case dep, Case arr) {
         JeuEchecs jeu = JeuEchecs.getInstance();
-        if( arr.getPiece() != null ){
+        if (arr.getPiece() != null) {
             arr.getPiece().estPrise();
-            jeu.setCompteurCoups((byte)0);
+            jeu.setCompteurCoups((byte) 0);
         }
         arr.setPiece(dep.getPiece());
         dep.setPiece(null);
-        if(dep.getPiece().getDeplacement() instanceof VerificateurPion) {
-            jeu.setCompteurCoups((byte)0);
+        if (dep.getPiece().getDeplacement() instanceof VerificateurPion) {
+            jeu.setCompteurCoups((byte) 0);
         }
         jeu.incrementerCompteurCoups();
     }
-    
-    public void estPrise(){
+
+    public void estPrise() {
         JeuEchecs jeu = JeuEchecs.getInstance();
-        Case c = (this.couleur == BLANC)? jeu.getEchiquier().getPiecesB().remove(this) : jeu.getEchiquier().getPiecesN().remove(this);
+        Case c = (this.couleur == BLANC) ? jeu.getEchiquier().getPiecesB().remove(this) : jeu.getEchiquier().getPiecesN().remove(this);
     }
 
 }

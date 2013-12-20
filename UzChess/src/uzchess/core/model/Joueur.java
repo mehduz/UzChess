@@ -13,7 +13,7 @@ public class Joueur {
         this.pseudo = pseudo;
         this.score = score;
     }
-    
+
     public Couleur getCouleur() {
         return couleur;
     }
@@ -37,5 +37,5 @@ public class Joueur {
     public void setScore(byte score) {
         this.score = score;
     }
-    
+
 }

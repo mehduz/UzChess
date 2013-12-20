@@ -13,7 +13,7 @@ import uzchess.core.rules.VerificateurCavalier;
 public class MoteurDeJeu {
 
     private boolean echec;
-    
+
     private Echiquier ech;
     private JeuEchecs jeu;
 
@@ -25,80 +25,28 @@ public class MoteurDeJeu {
         Couleur couleur;
         boolean ret;
         couleur = JeuEchecs.getInstance().getTour();
-        if( dep.getPiece() != null && (arr.getPiece() == null ||  arr.getPiece().getCouleur() != couleur )){
+        if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
             ret = dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, echec);
             return ret;
         }
         ret = detecterEchec();
-        return ret;      
+        return ret;
     }
 
     public boolean detecterEchec() {
-        
+
         Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiN() : ech.getCaseRoiB();
         echec = (ech.isMenace(caseRoiAChecker).isEmpty());
         return echec;
     }
 
-        public boolean detecterMat() {
-            
-            Couleur c = jeu.getTour();
-            Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
-            
-            //on recupere les possibilités de déplacement du Roi
-            ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
-            
-            //Si il y en a, alors on les check, et si y'en a au moins une non menacée, il n'y a pas mat et on retourne false dans ta face !
-            if (!depPossible.isEmpty()) {
-                for (Case ca : depPossible) {
-                    if (ech.isMenace(ca).isEmpty()) {
-                        return false;
-                    }
-                }
-            }
-            
-            //là le roi ne peut pas bouger, aux autres pieces d'essayer de rompre l'echecs
-            //si plusieus pieces adverses menacent notre roi, on perd car une piece à nous ne peut pas bloquer 2 directions en même temps
-            ArrayList<Case> casesMenace = ech.isMenace(caseRoiAChecker);
-            if (casesMenace.size() > 1) {
-                return true;
-            }
-            
-            Case caseMenace = casesMenace.listIterator().next();
-            
-            //On recupere les cases où on peut intercepter
-            ArrayList<Case> casesInterception = new ArrayList<>();
-            //le cavalier n'est pas interceptable, il faut le prendre ou on perd la partie
-            if (caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier) {
-                casesInterception.add(caseMenace);
-            } else {
-                casesInterception = CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace);
-            }
-            //On recupere les pieces alliés pour vérifier les interceptions possibles
-            HashMap<Piece, Case> allies = ech.getPieces(c);
-            
-            //on teste les interceptions possibles
-            for (Entry<Piece, Case> entry : allies.entrySet()) {
-                for (Case inter : casesInterception) {
-                    if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter, false)) {
-                        return false;
-                    }
-                }
-            }
-            //le roi ne peut pas se déplacer et aucune piece ne peut le sauver, donc il y'a mat
-            return true;
-        }
+    public boolean detecterMat() {
 
-    public boolean detecterPat() {
-    
         Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
 
-        //on recupere les possibilités de déplacement du Roi
         ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
-
-        //Si il y en a, alors on les check, et si y'en a au moins une non menacée, il n'y a pas pat et on retourne false dans ta face !
         if (!depPossible.isEmpty()) {
             for (Case ca : depPossible) {
                 if (ech.isMenace(ca).isEmpty()) {
@@ -106,16 +54,52 @@ public class MoteurDeJeu {
                 }
             }
         }
-        //là le roi ne peut pas bouger, aux autres pieces d'essayer de bouger
-        //On recupere les pieces alliés pour vérifier leur deplacement possible
+
+        ArrayList<Case> casesMenace = ech.isMenace(caseRoiAChecker);
+        if (casesMenace.size() > 1) {
+            return true;
+        }
+
+        Case caseMenace = casesMenace.listIterator().next();
+        ArrayList<Case> casesInterception = new ArrayList<>();
+
+        if (caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier) {
+            casesInterception.add(caseMenace);
+        } else {
+            casesInterception = CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace);
+        }
+
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
-            
-            if(!ech.deplacementPossible(entry.getKey()).isEmpty() )
-            {
+            for (Case inter : casesInterception) {
+                if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter, false)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean detecterPat() {
+
+        Couleur c = jeu.getTour();
+        Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
+
+        ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
+
+        if (!depPossible.isEmpty()) {
+            for (Case ca : depPossible) {
+                if (ech.isMenace(ca).isEmpty()) {
+                    return false;
+                }
+            }
+        }
+
+        HashMap<Piece, Case> allies = ech.getPieces(c);
+        for (Entry<Piece, Case> entry : allies.entrySet()) {
+            if (!ech.deplacementPossible(entry.getKey()).isEmpty()) {
                 return false;
             }
-            
         }
         return true;
     }
@@ -135,6 +119,5 @@ public class MoteurDeJeu {
     public void setJeuEchecs(JeuEchecs jeu) {
         this.jeu = jeu;
     }
-    
-    
+
 }

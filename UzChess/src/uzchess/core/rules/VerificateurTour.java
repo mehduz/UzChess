@@ -8,7 +8,6 @@ import uzchess.core.model.CheckCasesInterUtility;
 import uzchess.core.model.Echiquier;
 
 public class VerificateurTour implements Deplacement {
-//on arrive dans cette méthode tout est nikel il faut juste verifier que déplacement comforme
 
     Echiquier ech;
     StatutTour st;

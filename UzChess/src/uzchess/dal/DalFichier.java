@@ -50,9 +50,9 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
     @Override
     public void sauvegarder(String nomFichier) {
 
-        FileOutputStream fOut;//Flux de sortie permettant d'écrire dans un fichier
-        ObjectOutputStream sOut; //Permet d'écrire le contenu d'un objet Java de façon brut
-        Writer tOut; // Equivalent du fwrite
+        FileOutputStream fOut;
+        ObjectOutputStream sOut; 
+        Writer tOut; 
         BufferedWriter bOut;
 
         try {

@@ -19,19 +19,17 @@ public class JeuEchecs {
     private Joueur jn;
     private Joueur jb;
 
-   
-    
     private JeuEchecs() {
         compteurCoups = 0;
         tour = Couleur.BLANC;
     }
-    
+
     public void setCompteurCoups(byte compteurCoups) {
         this.compteurCoups = compteurCoups;
     }
 
     public void incrementerCompteurCoups() {
-        this.compteurCoups ++;
+        this.compteurCoups++;
     }
 
     public void initialiser() {
@@ -53,21 +51,19 @@ public class JeuEchecs {
         if (moteurDeJeu.detecterPat()) {
             return RetourJouer.ISPAT;
         }
-        if (moteurDeJeu.detecterNul ()) {
+        if (moteurDeJeu.detecterNul()) {
             return RetourJouer.ISNUL;
-        }        
+        }
         return RetourJouer.ISPOSSIBLE;
     }
 
-    public RetourJouer jouer(Case dep, Case arr) 
-    {
-        
+    public RetourJouer jouer(Case dep, Case arr) {
+
         echiquier = JeuEchecs.getInstance().getEchiquier();
         RetourJouer retour = detecterFin();
-        
-        if( retour == RetourJouer.ISPOSSIBLE)
-        {
-            if( moteurDeJeu.verifierCoup(dep, arr) ){
+
+        if (retour == RetourJouer.ISPOSSIBLE) {
+            if (moteurDeJeu.verifierCoup(dep, arr)) {
                 dep.getPiece().deplacer(dep, arr);
                 return RetourJouer.ISPOSSIBLE;
             }
@@ -75,10 +71,9 @@ public class JeuEchecs {
         return retour;
     }
 
-
     public Couleur getTour() {
         return tour;
-    } 
+    }
 
     public byte getCompteurCoups() {
         return compteurCoups;
@@ -91,7 +86,7 @@ public class JeuEchecs {
     public Echiquier getEchiquier() {
         return echiquier;
     }
-    
+
     public void setMoteurDeJeu(MoteurDeJeu moteurDeJeu) {
         this.moteurDeJeu = moteurDeJeu;
     }
@@ -115,7 +110,7 @@ public class JeuEchecs {
     public void setJb(Joueur jb) {
         this.jb = jb;
     }
-    
+
     private static class SingletonHolder {
 
         private final static JeuEchecs INSTANCE = new JeuEchecs();

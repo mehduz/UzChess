@@ -1,20 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package uzchess.core.model;
 
 import java.util.ArrayList;
 import uzchess.constantes.Direction;
 
-/**
- *
- * @author user
- */
 public class CaseInterUtility {
-    
+
     private static Case[][] cases;
 
     public static Case[][] getCases() {
@@ -24,9 +14,9 @@ public class CaseInterUtility {
     public static void setCases(Case[][] cases) {
         CaseInterUtility.cases = cases;
     }
-        
-     public static ArrayList<Case> getCasesInter(Case caseDep, Case caseArr) {
-         
+
+    public static ArrayList<Case> getCasesInter(Case caseDep, Case caseArr) {
+
         ArrayList<Case> maListInter = new ArrayList<>();
         Direction maDir;
         maDir = caseDep.getDirection(caseArr);

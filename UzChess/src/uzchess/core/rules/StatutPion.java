@@ -3,10 +3,6 @@ package uzchess.core.rules;
 import java.util.HashMap;
 import uzchess.core.model.Piece;
 
-/**
- *
- * @author duran
- */
 public class StatutPion {
 
     private HashMap<Piece, Boolean> pions;

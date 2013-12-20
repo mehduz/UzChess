@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.core.model.Case;
 
-/**
- *
- * @author user
- */
 public class VerificateurPionPrend implements Deplacement{
 
     @Override

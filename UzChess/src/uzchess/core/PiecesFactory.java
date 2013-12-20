@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uzchess.core;
 
 import uzchess.constantes.Pieces;
@@ -14,10 +9,6 @@ import uzchess.core.rules.VerificateurReine;
 import uzchess.core.rules.VerificateurRoi;
 import uzchess.core.rules.VerificateurTour;
 
-/**
- *
- * @author user
- */
 public class PiecesFactory {
 
     public static Piece createPiece(Pieces p) {
@@ -54,7 +45,7 @@ public class PiecesFactory {
             piece.setDeplacement(new VerificateurReine());
             return piece;
         }
-        
+
         return null;
     }
 }

@@ -7,9 +7,8 @@ import uzchess.core.model.Echiquier;
 
 public class VerificateurFou implements Deplacement {
 
-    
     private Echiquier ech;
-    
+
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
@@ -21,7 +20,6 @@ public class VerificateurFou implements Deplacement {
         byte decVer = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decHor = (byte) Math.abs(colCaseDep - colCaseArr);
 
-        //Si la case arrivé est sur le même ligne ou la même colonne
         if (decVer != decHor) {
             return false;
         }
