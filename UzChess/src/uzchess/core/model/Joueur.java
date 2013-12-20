@@ -8,6 +8,12 @@ public class Joueur {
     private String pseudo;
     private byte score;
 
+    public Joueur(Couleur couleur, String pseudo, byte score) {
+        this.couleur = couleur;
+        this.pseudo = pseudo;
+        this.score = score;
+    }
+    
     public Couleur getCouleur() {
         return couleur;
     }

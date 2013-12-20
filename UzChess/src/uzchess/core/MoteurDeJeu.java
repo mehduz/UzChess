@@ -77,9 +77,8 @@ public class MoteurDeJeu {
     }
 
         public boolean detecterPat() {
-
-        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
-        Couleur c = JeuEchecs.getInstance().getTour();
+            
+        Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
 
         //on recupere les possibilités de déplacement du Roi

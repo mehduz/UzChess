@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uzchess.core;
+
+package uzchess.gui;
 
 /**
  *
  * @author user
  */
-public class FrontController {
-
-    private JeuEchecs jeuEchecs;
-
-    public JeuEchecs getJeuEchecs() {
-        return jeuEchecs;
-    }
-
+public class NewClass {
+    
 }
