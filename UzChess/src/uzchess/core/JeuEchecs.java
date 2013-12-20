@@ -39,6 +39,9 @@ public class JeuEchecs {
          throw new UnsupportedOperationException();
     }
 
+      /* public boolean detecterFinNbC(){
+           if( )
+       }*/
     public void jouer() {
        throw new UnsupportedOperationException();
     }
