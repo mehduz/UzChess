@@ -149,5 +149,4 @@ public class CaseInterUtility {
         }
         return maListInter;
     }
-    
 }

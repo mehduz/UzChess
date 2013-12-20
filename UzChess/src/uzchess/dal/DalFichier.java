@@ -1,7 +1,19 @@
 package uzchess.dal;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Reader;
+import java.io.Serializable;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 import uzchess.core.JeuEchecs;
 
 public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializable {
@@ -75,11 +87,11 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
         BufferedReader bIn;
         ArrayList<String> res = new ArrayList<>();
         
-        try{
+        try{ 
         fIn = new FileReader("parties.txt");
         bIn = new BufferedReader(fIn);
         String s = bIn.readLine();
-        while(s!=null || (s != null && s.equals(""))){
+        while(s != null || (s != null && s.isEmpty())){
             res.add(s);
             s = bIn.readLine();
         }
@@ -93,5 +105,6 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
         }
         return res;
     }
+    private static final Logger LOG = Logger.getLogger(DalFichier.class.getName());
     
 }

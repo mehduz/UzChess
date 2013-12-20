@@ -4,9 +4,9 @@ import uzchess.constantes.Couleur;
 import uzchess.constantes.TypeTour;
 import uzchess.core.StatutTour;
 import uzchess.core.model.Case;
-import uzchess.core.model.Echiquier;
-import uzchess.core.model.CheckCasesInterUtility;
 import uzchess.core.model.CaseInterUtility;
+import uzchess.core.model.CheckCasesInterUtility;
+import uzchess.core.model.Echiquier;
 
 public class VerificateurTour implements Deplacement {
 //on arrive dans cette méthode tout est nikel il faut juste verifier que déplacement comforme

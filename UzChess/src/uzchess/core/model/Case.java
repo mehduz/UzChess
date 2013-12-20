@@ -8,14 +8,23 @@ public class Case {
     private Couleur couleur;
     private byte ligne;
     private byte colonne;
-    private Piece piece;
+    private Piece piece; 
 
-   
+    public Case(byte ligne, byte colonne) {
+        this.ligne = ligne;
+        this.colonne = colonne;
+    }
 
+    
+    
     public Couleur getCouleur() {
         return couleur;
     }
 
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+    
     public byte getLigne() {
         return ligne;
     }
@@ -39,10 +48,6 @@ public class Case {
     public void setPiece(Piece p) {
         piece = p;
     }
-    
-     public void setCouleur(Couleur c) {
-        couleur = c;
-    }
      
     public Direction getDirection( Case arr) {
 
@@ -65,5 +70,7 @@ public class Case {
         
         return dir;
     }
+
+    
 
 }

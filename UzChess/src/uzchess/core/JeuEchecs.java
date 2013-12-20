@@ -1,9 +1,13 @@
 package uzchess.core;
 
-import uzchess.core.model.Echiquier;
 import uzchess.constantes.Couleur;
+import uzchess.core.model.Echiquier;
 
 public class JeuEchecs {
+
+    public static JeuEchecs getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
 
     private Couleur tour;
     private byte compteurCoups;
@@ -13,37 +17,28 @@ public class JeuEchecs {
     private JeuEchecs() {
     }
 
-    private static class SingletonHolder {
-
-        private final static JeuEchecs INSTANCE = new JeuEchecs();
-    }
-
-    public static JeuEchecs getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
-
     public void initialiser() {
-          throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public void quitter() {
-          throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public void abandonner() {
-          throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
-    public void detecterFin() 
+    public void detecterFin() {
+        throw new UnsupportedOperationException();
+    }
+
+    /* public boolean detecterFinNbC(){
+    if( )
+    }*/
+    public void jouer() 
     {
-         throw new UnsupportedOperationException();
-    }
-
-      /* public boolean detecterFinNbC(){
-           if( )
-       }*/
-    public void jouer() {
-       throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public Couleur getTour() {
@@ -60,5 +55,10 @@ public class JeuEchecs {
 
     public Echiquier getEchiquier() {
         return echiquier;
+    }
+
+    private static class SingletonHolder {
+
+        private final static JeuEchecs INSTANCE = new JeuEchecs();
     }
 }

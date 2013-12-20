@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import uzchess.constantes.Couleur;
 import uzchess.core.model.Case;
-import uzchess.core.model.Echiquier;
 import uzchess.core.model.CaseInterUtility;
+import uzchess.core.model.Echiquier;
 import uzchess.core.model.Piece;
 import uzchess.core.rules.VerificateurCavalier;
 

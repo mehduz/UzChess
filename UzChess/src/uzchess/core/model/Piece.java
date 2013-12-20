@@ -9,6 +9,18 @@ public class Piece {
     private byte valeur;
     private Deplacement deplacement;
 
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setValeur(byte valeur) {
+        this.valeur = valeur;
+    }
+
+    public void setDeplacement(Deplacement deplacement) {
+        this.deplacement = deplacement;
+    }
+    
     public Couleur getCouleur() {
         return couleur;
     }
