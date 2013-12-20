@@ -16,7 +16,7 @@ public class Echiquier {
     private Case caseRoiN;
 
     
-    public Case[][] getEchiquier(Case c) {
+    public Case[][] getEchiquier() {
         return cases;
     }
 

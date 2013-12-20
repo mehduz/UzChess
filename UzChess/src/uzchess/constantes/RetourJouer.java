@@ -8,8 +8,14 @@ package uzchess.constantes;
 
 /**
  *
- * @author 20130334
+ * @author simon
  */
 public enum RetourJouer {
-    ISMAT, ISPAT, ISNOTPOSSIBLE, ISPOSSIBLE, ISNUL 
+    
+    ISMAT, 
+    ISPAT, 
+    ISNOTPOSSIBLE, 
+    ISPOSSIBLE, 
+    ISNUL 
+    
 }

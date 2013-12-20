@@ -8,8 +8,6 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.constantes.TypeTour;
-import uzchess.core.StatutRoi;
-import uzchess.core.StatutTour;
 import uzchess.core.model.Case;
 import uzchess.core.model.CaseInterUtility;
 import uzchess.core.model.CheckCasesInterUtility;

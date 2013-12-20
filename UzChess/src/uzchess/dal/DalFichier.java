@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import uzchess.core.JeuEchecs;
 
 public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializable {
+    private static final Logger LOG = Logger.getLogger(DalFichier.class.getName());
     
     private JeuEchecs partie;
     
@@ -105,6 +106,5 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
         }
         return res;
     }
-    private static final Logger LOG = Logger.getLogger(DalFichier.class.getName());
     
 }

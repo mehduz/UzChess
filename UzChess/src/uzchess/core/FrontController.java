@@ -5,13 +5,19 @@
  */
 package uzchess.core;
 
+import uzchess.gui.MenuPrincipal;
+import uzchess.gui.VueJeu;
+
 /**
  *
- * @author user
+ * @author mehdi
  */
 public class FrontController {
 
     private JeuEchecs jeuEchecs;
+    private MenuPrincipal menuPrincipal;
+    private VueJeu vueJeu;
+    
 
     public JeuEchecs getJeuEchecs() {
         return jeuEchecs;

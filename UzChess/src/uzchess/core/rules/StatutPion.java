@@ -1,5 +1,4 @@
-
-package uzchess.core;
+package uzchess.core.rules;
 
 import java.util.HashMap;
 import uzchess.core.model.Piece;
@@ -10,8 +9,9 @@ import uzchess.core.model.Piece;
  */
 public class StatutPion {
 
-        private HashMap<Piece,Boolean> pions;
-        private boolean pionMoved;
+    private HashMap<Piece, Boolean> pions;
+    private boolean pionMoved;
+
     public HashMap<Piece, Boolean> getPions() {
         return pions;
     }
@@ -27,8 +27,5 @@ public class StatutPion {
     public void setPionMoved(boolean pionMoved) {
         this.pionMoved = pionMoved;
     }
-      
-        
-        
-        
+
 }

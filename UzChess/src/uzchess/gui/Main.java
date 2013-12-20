@@ -10,6 +10,6 @@ package uzchess.gui;
  *
  * @author 20130334
  */
-public class NewClass {
+public class Main {
     
 }

@@ -44,8 +44,9 @@ public class Piece {
         }
         arr.setPiece(dep.getPiece());
         dep.setPiece(null);
-        if(dep.getPiece().getDeplacement() instanceof VerificateurPion)
+        if(dep.getPiece().getDeplacement() instanceof VerificateurPion) {
             jeu.setCompteurCoups((byte)0);
+        }
         jeu.incrementerCompteurCoups();
     }
     
