@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uzchess.constantes;
 
+package uzchess.dal;
 /**
  *
- * @author mehdi
+ * @author user
  */
-public enum Couleur {
-
-    BLANC, NOIR
+public interface IDal < T, S> {
+    
+    public T charger(String nomFichier);
+    public void sauvegarder(String nomFichier);
+    public S getListePartie();
+    
 }

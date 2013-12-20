@@ -1,13 +1,17 @@
 package uzchess.core.rules;
 
-import uzchess.core.JeuEchecs;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.CheckCasesInterUtility;
+import uzchess.core.model.CaseInterUtility;
 
 public class VerificateurFou implements Deplacement {
 
+    
+    private Echiquier ech;
+    
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr) {
+    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
         byte ligCaseDep = dep.getLigne();
         byte colCaseDep = dep.getColonne();
@@ -18,11 +22,10 @@ public class VerificateurFou implements Deplacement {
         byte decHor = (byte) Math.abs(colCaseDep - colCaseArr);
 
         //Si la case arrivé est sur le même ligne ou la même colonne
-        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
         if (decVer != decHor) {
             return false;
         }
-        return ech.verifCasesInter(ech.getCasesInter(dep, arr));
+        return CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr));
 
     }
 

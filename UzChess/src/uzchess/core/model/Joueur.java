@@ -6,6 +6,7 @@ public class Joueur {
 
     private Couleur couleur;
     private String pseudo;
+    private byte score;
 
     public Couleur getCouleur() {
         return couleur;
@@ -18,6 +19,17 @@ public class Joueur {
     public byte getScore() {
         return score;
     }
-    private byte score;
 
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public void setScore(byte score) {
+        this.score = score;
+    }
+    
 }

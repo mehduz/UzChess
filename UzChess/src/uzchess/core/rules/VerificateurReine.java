@@ -14,8 +14,8 @@ import uzchess.core.model.Case;
 public class VerificateurReine implements Deplacement {
 
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr) {
-        return new VerificateurFou().verifierDeplacement(dep, arr) || new VerificateurTour().verifierDeplacement(dep, arr);
+    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
+        return new VerificateurFou().verifierDeplacement(dep, arr, false) || new VerificateurTour().verifierDeplacement(dep, arr, false);
     }
 
 }
