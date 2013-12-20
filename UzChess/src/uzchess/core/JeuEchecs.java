@@ -1,13 +1,11 @@
 package uzchess.core;
 
-import uzchess.constantes.Couleur;
 import uzchess.core.model.Echiquier;
+import uzchess.constantes.Couleur;
+import uzchess.constantes.RetourJouer;
+import uzchess.core.model.Case;
 
 public class JeuEchecs {
-
-    public static JeuEchecs getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
 
     private Couleur tour;
     private byte compteurCoups;
@@ -16,29 +14,64 @@ public class JeuEchecs {
     
     private JeuEchecs() {
     }
+    
+    public void setCompteurCoups(byte compteurCoups) {
+        this.compteurCoups = compteurCoups;
+    }
+
+    public void incrementerCompteurCoups() {
+        this.compteurCoups ++;
+    }
+    private static class SingletonHolder {
+
+        private final static JeuEchecs INSTANCE = new JeuEchecs();
+    }
+
+    public static JeuEchecs getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
 
     public void initialiser() {
-        throw new UnsupportedOperationException();
+          throw new UnsupportedOperationException();
     }
 
     public void quitter() {
-        throw new UnsupportedOperationException();
+          throw new UnsupportedOperationException();
     }
 
     public void abandonner() {
-        throw new UnsupportedOperationException();
+          throw new UnsupportedOperationException();
     }
 
-    public void detecterFin() {
-        throw new UnsupportedOperationException();
-    }
-
-    /* public boolean detecterFinNbC(){
-    if( )
-    }*/
-    public void jouer() 
+    public RetourJouer detecterFin() 
     {
-        throw new UnsupportedOperationException();
+        
+        if ( moteurDeJeu.detecterMat() )
+            return RetourJouer.ISMAT;
+        
+        if ( moteurDeJeu.detecterPat() )
+            return RetourJouer.ISPAT;
+        
+        if ( moteurDeJeu.detecterNul () )
+            return RetourJouer.ISNUL;
+        
+        return RetourJouer.ISPOSSIBLE;
+    }
+
+
+    public RetourJouer jouer(Case dep, Case arr) {
+       
+       echiquier = JeuEchecs.getInstance().getEchiquier();
+       RetourJouer retour = detecterFin();
+       
+       if( retour == RetourJouer.ISPOSSIBLE)
+       {
+            if( moteurDeJeu.verifierCoup(dep, arr) ){
+               dep.getPiece().deplacer(dep, arr);
+               return RetourJouer.ISPOSSIBLE;
+           }   
+       }
+       return retour;
     }
 
     public Couleur getTour() {
@@ -55,10 +88,5 @@ public class JeuEchecs {
 
     public Echiquier getEchiquier() {
         return echiquier;
-    }
-
-    private static class SingletonHolder {
-
-        private final static JeuEchecs INSTANCE = new JeuEchecs();
     }
 }

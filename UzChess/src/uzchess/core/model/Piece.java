@@ -1,7 +1,10 @@
 package uzchess.core.model;
 
 import uzchess.constantes.Couleur;
+import static uzchess.constantes.Couleur.BLANC;
+import uzchess.core.JeuEchecs;
 import uzchess.core.rules.Deplacement;
+import uzchess.core.rules.VerificateurPion;
 
 public class Piece {
 
@@ -33,12 +36,22 @@ public class Piece {
         return deplacement;
     }
     
-    public void deplacer() {
-        throw new UnsupportedOperationException();
+    public void deplacer(Case dep, Case arr) {
+        JeuEchecs jeu = JeuEchecs.getInstance();
+        if( arr.getPiece() != null ){
+            arr.getPiece().estPrise();
+            jeu.setCompteurCoups((byte)0);
+        }
+        arr.setPiece(dep.getPiece());
+        dep.setPiece(null);
+        if(dep.getPiece().getDeplacement() instanceof VerificateurPion)
+            jeu.setCompteurCoups((byte)0);
+        jeu.incrementerCompteurCoups();
     }
     
     public void estPrise(){
-        throw new UnsupportedOperationException();
+        JeuEchecs jeu = JeuEchecs.getInstance();
+        Case c = (this.couleur == BLANC)? jeu.getEchiquier().getPiecesB().remove(this) : jeu.getEchiquier().getPiecesN().remove(this);
     }
 
 }

@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package uzchess.gui;
+package uzchess.constantes;
 
 /**
  *
  * @author 20130334
  */
-public class NewClass {
-    
+public enum RetourJouer {
+    ISMAT, ISPAT, ISNOTPOSSIBLE, ISPOSSIBLE, ISNUL 
 }

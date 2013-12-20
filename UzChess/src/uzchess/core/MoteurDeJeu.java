@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import uzchess.constantes.Couleur;
 import uzchess.core.model.Case;
-import uzchess.core.model.CaseInterUtility;
 import uzchess.core.model.Echiquier;
+import uzchess.core.model.CaseInterUtility;
 import uzchess.core.model.Piece;
 import uzchess.core.rules.VerificateurCavalier;
 
@@ -16,8 +16,16 @@ public class MoteurDeJeu {
     private Echiquier ech;
     private JeuEchecs jeu;
 
-    public void verifierCoup(Case dep, Case arr) {
-
+    public boolean verifierCoup(Case dep, Case arr) {
+        Couleur couleur;
+        boolean ret;
+        couleur = JeuEchecs.getInstance().getTour();
+        if( dep.getPiece() != null && (arr.getPiece() == null ||  arr.getPiece().getCouleur() != couleur )){
+            ret = dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, echec);
+            return ret;
+        }
+        ret = detecterEchec();
+        return ret;      
     }
 
     public boolean detecterEchec() {
@@ -64,7 +72,7 @@ public class MoteurDeJeu {
         //On recupere les pieces alliés pour vérifier les interceptions possibles
         HashMap<Piece, Case> allies = ech.getPieces(c);
 
-        //on teste les interceptions possibles 
+        //on teste les interceptions possibles
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {
                 if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter, false)) {
@@ -77,8 +85,9 @@ public class MoteurDeJeu {
     }
 
         public boolean detecterPat() {
-            
-        Couleur c = jeu.getTour();
+
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
+        Couleur c = JeuEchecs.getInstance().getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
 
         //on recupere les possibilités de déplacement du Roi
@@ -105,12 +114,11 @@ public class MoteurDeJeu {
          }
          return true;
      }
-        
-        
-    public boolean isThereEchec() {
-        return echec;
+
+    public boolean detecterNul() {
+        if( jeu.getCompteurCoups() >= 50 )
+            return true;
+        return false;
     }
-
-   
-
+        
 }
