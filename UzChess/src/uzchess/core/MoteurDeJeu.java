@@ -73,9 +73,38 @@ public class MoteurDeJeu {
         return true;
     }
 
-    public void detecterPat() {
-    }
+        public boolean detecterPat() {
 
+        Echiquier ech = JeuEchecs.getInstance().getEchiquier();
+        Couleur c = JeuEchecs.getInstance().getTour();
+        Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
+
+        //on recupere les possibilités de déplacement du Roi
+        ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
+
+        //Si il y en a, alors on les check, et si y'en a au moins une non menacée, il n'y a pas pat et on retourne false dans ta face !
+        if (!depPossible.isEmpty()) {
+            for (Case ca : depPossible) {
+                if (ech.isMenace(ca).isEmpty()) {
+                    return false;
+                }
+            }
+        }
+        //là le roi ne peut pas bouger, aux autres pieces d'essayer de bouger
+        //On recupere les pieces alliés pour vérifier leur deplacement possible
+        HashMap<Piece, Case> allies = ech.getPieces(c);
+        for (Entry<Piece, Case> entry : allies.entrySet()) {
+             
+             if(!ech.deplacementPossible(entry.getKey()).isEmpty() )
+             {
+                 return false;
+             }
+             
+         }
+         return true;
+     }
+        
+        
     public boolean isThereEchec() {
         return echec;
     }

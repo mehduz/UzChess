@@ -41,6 +41,9 @@ public class JeuEchecs {
         moteurDeJeu.detecterPat();
     }
 
+       public boolean detecterFinNbC(){
+           if( )
+       }
     public void jouer() {
     }
 
