@@ -11,7 +11,6 @@ public class Case {
     private Piece piece;
 
    
-
     public Couleur getCouleur() {
         return couleur;
     }

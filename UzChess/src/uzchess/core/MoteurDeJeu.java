@@ -16,8 +16,16 @@ public class MoteurDeJeu {
     private Echiquier ech;
     private JeuEchecs jeu;
 
-    public void verifierCoup(Case dep, Case arr) {
-
+    public boolean verifierCoup(Case dep, Case arr) {
+        Couleur couleur;
+        boolean ret;
+        couleur = JeuEchecs.getInstance().getTour();
+        if( dep.getPiece() != null && (arr.getPiece() == null ||  arr.getPiece().getCouleur() != couleur )){
+            ret = dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, echec);
+            return ret;
+        }
+        ret = detecterEchec();
+        return ret;      
     }
 
     public boolean detecterEchec() {
@@ -106,12 +114,11 @@ public class MoteurDeJeu {
          }
          return true;
      }
-        
-        
-    public boolean isThereEchec() {
-        return echec;
+
+    public boolean detecterNul() {
+        if( jeu.getCompteurCoups() >= 50 )
+            return true;
+        return false;
     }
-
-   
-
+        
 }
