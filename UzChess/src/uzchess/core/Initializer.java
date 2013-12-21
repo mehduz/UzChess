@@ -82,7 +82,7 @@ public class Initializer {
         piecesB.put(cases[7][7].getPiece(), cases[7][7]);
 
         for (Piece p : piecesN.keySet()) {
-            p.setCouleur(Couleur.NOIR);
+            p.setCouleur(Couleur.NOIR); 
         }
         for (Piece p : piecesN.keySet()) {
             p.setCouleur(Couleur.BLANC);
@@ -90,6 +90,8 @@ public class Initializer {
 
         ech = new Echiquier(cases, piecesN, piecesB, cases[0][4], cases[7][4]);
         mdj = new MoteurDeJeu(ech, jeu);
+        jeu.setEchiquier(ech);
+        jeu.setMoteurDeJeu(mdj);
        
     }
 }

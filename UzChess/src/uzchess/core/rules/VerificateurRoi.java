@@ -71,7 +71,7 @@ public class VerificateurRoi implements Deplacement {
                 }
                 st.setTourMoved(TypeTour.TNO, true);
             }
-            return true;
+            return true; 
         }
         return false; 
     } 

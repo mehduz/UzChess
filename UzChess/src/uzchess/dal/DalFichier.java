@@ -13,13 +13,9 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 import uzchess.core.JeuEchecs;
 
 public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializable {
-    private static final Logger LOG = Logger.getLogger(DalFichier.class.getName());
-    
-    private JeuEchecs partie;
     
     @Override
     public JeuEchecs charger(String nomFichier) {
@@ -48,10 +44,10 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
     }
     
     @Override
-    public void sauvegarder(String nomFichier) {
+    public void sauvegarder(String nomFichier, JeuEchecs partie) {
 
         FileOutputStream fOut;
-        ObjectOutputStream sOut; 
+        ObjectOutputStream sOut;
         Writer tOut; 
         BufferedWriter bOut;
 
@@ -106,5 +102,4 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
         }
         return res;
     }
-    
 }

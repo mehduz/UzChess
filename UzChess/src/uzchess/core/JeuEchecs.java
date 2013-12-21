@@ -20,41 +20,30 @@ public class JeuEchecs {
 
     public JeuEchecs() {
         
-        compteurCoups = 0;
-        tour = Couleur.BLANC;
-        mat = false;
-        echec = false;
-        pat = false;
+        this.compteurCoups = 0;
+        this.tour = Couleur.BLANC;
+        this.mat = false;
+        this.echec = false;
+        this.pat = false;
     }
-    
-    public void setCompteurCoups(byte compteurCoups) {
-        this.compteurCoups = compteurCoups;
-    }
-
-    public void incrementerCompteurCoups() {
-        this.compteurCoups++;
-    }
+ 
 
     public void initialiser() {
+        Initializer.initialiserPartie(null, null, moteurDeJeu, echiquier, this);
+    }
     
-    }
+    public void jouer(Case dep, Case arr) {
 
-    public void quitter() {
-        throw new UnsupportedOperationException();
     }
-
-    public void abandonner() {
-        throw new UnsupportedOperationException();
-    }
-
+    
     public void detecterFin() {
         
     }
 
-    public void jouer(Case dep, Case arr) {
-
+    public void quitter() {
+       
     }
-
+    
     public Couleur getTour() {
         return tour;
     }

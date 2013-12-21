@@ -112,13 +112,4 @@ public class MoteurDeJeu {
     public void setEchec(boolean echec) {
         this.echec = echec;
     }
-
-    public void setEchiquier(Echiquier ech) {
-        this.ech = ech;
-    }
-
-    public void setJeuEchecs(JeuEchecs jeu) {
-        this.jeu = jeu;
-    }
-
 }
