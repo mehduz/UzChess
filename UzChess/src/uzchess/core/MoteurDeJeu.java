@@ -17,20 +17,21 @@ public class MoteurDeJeu {
     private Echiquier ech;
     private JeuEchecs jeu;
 
-    public MoteurDeJeu() {
+    public MoteurDeJeu(Echiquier ech, JeuEchecs jeu) {
         echec = false;
+        this.ech = ech;
+        this.jeu = jeu;
     }
 
     public boolean verifierCoup(Case dep, Case arr) {
+        
         Couleur couleur;
-        boolean ret;
-        couleur = JeuEchecs.getInstance().getTour();
+        couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
-            ret = dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, echec);
-            return ret;
+            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, echec);
         }
-        ret = detecterEchec();
-        return ret;
+        return detecterEchec();
+        
     }
 
     public boolean detecterEchec() {

@@ -7,28 +7,29 @@ import uzchess.constantes.Couleur;
 
 public class Echiquier {
 
-    private Case[][] cases;
+    private final Case[][] cases;
+    private final HashMap<Piece, Case> piecesN;
+    private final HashMap<Piece, Case> piecesB;
 
-    private HashMap<Piece, Case> piecesN;
-    private HashMap<Piece, Case> piecesB;
-
+    @SuppressWarnings("FieldMayBeFinal")
     private Case caseRoiB;
+    @SuppressWarnings("FieldMayBeFinal")
     private Case caseRoiN;
+
+    public Echiquier(Case[][] cases, HashMap<Piece, Case> piecesN, HashMap<Piece, Case> piecesB, Case caseRoiN, Case caseRoiB ) {
+        this.cases = cases;
+        this.piecesN = piecesN;
+        this.piecesB = piecesB;
+        this.caseRoiB = caseRoiB;
+        this.caseRoiN = caseRoiN;
+    }
 
     public Case[][] getEchiquier() {
         return cases;
     }
 
-    public void setEchiquier(Case[][] echiquier) {
-        this.cases = echiquier;
-    }
-
     public Case[][] getCases() {
         return cases;
-    }
-
-    public void setCases(Case[][] cases) {
-        this.cases = cases;
     }
 
     public HashMap<Piece, Case> getPieces(Couleur c) {
@@ -52,15 +53,7 @@ public class Echiquier {
 
     public HashMap<Piece, Case> getPiecesB() {
         return piecesB;
-    }
-
-    public void setPiecesN(HashMap<Piece, Case> piecesN) {
-        this.piecesN = piecesN;
-    }
-
-    public void setPiecesB(HashMap<Piece, Case> piecesB) {
-        this.piecesB = piecesB;
-    }
+    }  
 
     public void setCaseRoiB(Case caseRoiB) {
         this.caseRoiB = caseRoiB;

@@ -10,10 +10,15 @@ import uzchess.core.model.Echiquier;
 
 public class VerificateurRoi implements Deplacement {
 
-    private StatutTour st;
-    private StatutRoi sr;
+    private final StatutTour st;
+    private final StatutRoi sr;
     private Echiquier ech;
-    
+
+    public VerificateurRoi(StatutTour st, StatutRoi sr) {
+        this.st = st;
+        this.sr = sr;
+    }
+   
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 

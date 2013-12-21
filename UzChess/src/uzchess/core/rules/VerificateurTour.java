@@ -11,7 +11,11 @@ public class VerificateurTour implements Deplacement {
 
     Echiquier ech;
     StatutTour st;
-    
+
+    public VerificateurTour(StatutTour st) {
+        this.st = st;
+    }
+   
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
         
@@ -35,5 +39,5 @@ public class VerificateurTour implements Deplacement {
         }
         
         return true;
-    }
+    }    
 }

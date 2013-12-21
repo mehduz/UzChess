@@ -26,7 +26,6 @@ public class VerificateurPion implements Deplacement {
         byte ligDep = dep.getLigne();
         byte ligArr = arr.getLigne();
         byte dist = (byte) Math.abs(ligArr - ligDep);
-        byte nbCoups = jeu.getCompteurCoups();
         boolean hasmoved = sp.getPions().get(dep.getPiece());
         boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
         boolean condition2 = dist == 1;

@@ -2,12 +2,7 @@ package uzchess.core;
 
 import uzchess.constantes.Pieces;
 import uzchess.core.model.Piece;
-import uzchess.core.rules.VerificateurCavalier;
-import uzchess.core.rules.VerificateurFou;
-import uzchess.core.rules.VerificateurPion;
-import uzchess.core.rules.VerificateurReine;
-import uzchess.core.rules.VerificateurRoi;
-import uzchess.core.rules.VerificateurTour;
+import uzchess.core.rules.*;
 
 public class PiecesFactory {
 
@@ -27,7 +22,7 @@ public class PiecesFactory {
 
         if (p == Pieces.TOUR) {
 
-            piece.setDeplacement(new VerificateurTour());
+            piece.setDeplacement(new VerificateurTour(new StatutTour()));
             return piece;
         }
 
@@ -37,7 +32,7 @@ public class PiecesFactory {
         }
 
         if (p == Pieces.ROI) {
-            piece.setDeplacement(new VerificateurRoi());
+            piece.setDeplacement(new VerificateurRoi( new StatutTour(), new StatutRoi()));
             return piece;
         }
 

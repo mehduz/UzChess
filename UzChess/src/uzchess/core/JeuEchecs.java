@@ -1,16 +1,11 @@
 package uzchess.core;
 
 import uzchess.constantes.Couleur;
-import uzchess.constantes.RetourJouer;
 import uzchess.core.model.Case;
 import uzchess.core.model.Echiquier;
 import uzchess.core.model.Joueur;
 
 public class JeuEchecs {
-
-    public static JeuEchecs getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
 
     private Couleur tour;
     private byte compteurCoups;
@@ -18,12 +13,20 @@ public class JeuEchecs {
     private Echiquier echiquier;
     private Joueur jn;
     private Joueur jb;
+    
+    private boolean echec;
+    private boolean mat;
+    private boolean pat;
 
-    private JeuEchecs() {
+    public JeuEchecs() {
+        
         compteurCoups = 0;
         tour = Couleur.BLANC;
+        mat = false;
+        echec = false;
+        pat = false;
     }
-
+    
     public void setCompteurCoups(byte compteurCoups) {
         this.compteurCoups = compteurCoups;
     }
@@ -33,7 +36,7 @@ public class JeuEchecs {
     }
 
     public void initialiser() {
-        throw new UnsupportedOperationException();
+    
     }
 
     public void quitter() {
@@ -44,31 +47,12 @@ public class JeuEchecs {
         throw new UnsupportedOperationException();
     }
 
-    public RetourJouer detecterFin() {
-        if (moteurDeJeu.detecterMat()) {
-            return RetourJouer.ISMAT;
-        }
-        if (moteurDeJeu.detecterPat()) {
-            return RetourJouer.ISPAT;
-        }
-        if (moteurDeJeu.detecterNul()) {
-            return RetourJouer.ISNUL;
-        }
-        return RetourJouer.ISPOSSIBLE;
+    public void detecterFin() {
+        
     }
 
-    public RetourJouer jouer(Case dep, Case arr) {
+    public void jouer(Case dep, Case arr) {
 
-        echiquier = JeuEchecs.getInstance().getEchiquier();
-        RetourJouer retour = detecterFin();
-
-        if (retour == RetourJouer.ISPOSSIBLE) {
-            if (moteurDeJeu.verifierCoup(dep, arr)) {
-                dep.getPiece().deplacer(dep, arr);
-                return RetourJouer.ISPOSSIBLE;
-            }
-        }
-        return retour;
     }
 
     public Couleur getTour() {
@@ -109,10 +93,5 @@ public class JeuEchecs {
 
     public void setJb(Joueur jb) {
         this.jb = jb;
-    }
-
-    private static class SingletonHolder {
-
-        private final static JeuEchecs INSTANCE = new JeuEchecs();
     }
 }

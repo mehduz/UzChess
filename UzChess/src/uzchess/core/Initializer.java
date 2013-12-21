@@ -10,17 +10,10 @@ import uzchess.core.model.Piece;
 
 public class Initializer {
 
-    public static void initialiserPartie(String njb, String njn) {
-
-        JeuEchecs jeu = JeuEchecs.getInstance();
-        MoteurDeJeu mdj = new MoteurDeJeu();
-        Echiquier ech = new Echiquier();
+    public static void initialiserPartie(String njb, String njn, MoteurDeJeu mdj, Echiquier ech, JeuEchecs jeu) {
 
         Joueur jb = new Joueur(Couleur.BLANC, njb, (byte) 0);
         Joueur jn = new Joueur(Couleur.NOIR, njn, (byte) 0);
-
-        jeu.setJn(jn);
-        jeu.setJb(jb);
 
         Case[][] cases = new Case[8][8];
         for (byte i = 0; i < 8; i++) {
@@ -95,17 +88,8 @@ public class Initializer {
             p.setCouleur(Couleur.BLANC);
         }
 
-        ech.setEchiquier(cases);
-        ech.setPiecesB(piecesB);
-        ech.setPiecesN(piecesN);
-        ech.setCaseRoiN(ech.getEchiquier()[7][4]);
-        ech.setCaseRoiB(ech.getEchiquier()[0][4]);
-
-        jeu.setEchiquier(ech);
-        jeu.setMoteurDeJeu(mdj);
-
-        mdj.setEchiquier(ech);
-        mdj.setJeuEchecs(jeu);
-
+        ech = new Echiquier(cases, piecesN, piecesB, cases[0][4], cases[7][4]);
+        mdj = new MoteurDeJeu(ech, jeu);
+       
     }
 }

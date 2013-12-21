@@ -3,11 +3,8 @@ package uzchess.core.rules;
 import uzchess.core.model.Case;
 import uzchess.core.model.CaseInterUtility;
 import uzchess.core.model.CheckCasesInterUtility;
-import uzchess.core.model.Echiquier;
 
 public class VerificateurFou implements Deplacement {
-
-    private Echiquier ech;
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
