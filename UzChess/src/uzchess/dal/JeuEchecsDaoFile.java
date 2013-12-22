@@ -22,7 +22,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
         sOut.flush ();
         sOut.close ();
         fOut.close ();
-      
+        
     }
     
     @Override
