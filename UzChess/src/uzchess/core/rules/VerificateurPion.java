@@ -2,12 +2,10 @@ package uzchess.core.rules;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
-import uzchess.core.JeuEchecs;
 import uzchess.core.domain.Case;
 
 public class VerificateurPion implements Deplacement {
 
-    private JeuEchecs jeu;
     private StatutPion sp;
 
     @Override
@@ -29,7 +27,7 @@ public class VerificateurPion implements Deplacement {
         boolean hasmoved = sp.getPions().get(dep.getPiece());
         boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
         boolean condition2 = dist == 1;
-        boolean condition3 = (dist == 2 && !hasmoved);
+        boolean condition3 = dist == 2 && !hasmoved;
 
         if (condition1 && (condition2 || condition3)) {
             sp.getPions().put(dep.getPiece(), hasmoved);

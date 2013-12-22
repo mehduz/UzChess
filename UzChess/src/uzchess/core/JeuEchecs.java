@@ -49,7 +49,7 @@ public class JeuEchecs {
             hm.put(dep.getPiece(), arr);
 
             if (arr != null) {
-                jb.setScore((byte) (jb.getScore() + arr.getPiece().getValeur()));
+                j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
                 hm.remove(arr.getPiece());
             }
             

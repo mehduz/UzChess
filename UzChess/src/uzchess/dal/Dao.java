@@ -14,8 +14,8 @@ package uzchess.dal;
 
 public abstract class Dao <T>{
     
-    public abstract void save( T game ) throws Exception; 
-    public abstract T load(Object... criterias) throws Exception;
-    public abstract void delete(Object... criterias) throws Exception;
+    public abstract void save( T game ) throws DaoException; 
+    public abstract T load(Object... criterias) throws DaoException;
+    public abstract void delete(Object... criterias) throws DaoException; 
     
 }

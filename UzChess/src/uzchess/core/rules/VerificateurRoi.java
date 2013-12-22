@@ -18,7 +18,7 @@ public class VerificateurRoi implements Deplacement {
         this.st = st;
         this.sr = sr;
     }
-   
+
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
@@ -43,7 +43,7 @@ public class VerificateurRoi implements Deplacement {
     }
 
     private boolean verifierRoque(Case dep, Case arr, byte decLigne, boolean noticeMove) {
-       
+
         Couleur col = dep.getPiece().getCouleur();
         Direction dir = dep.getDirection(arr);
 
@@ -52,27 +52,32 @@ public class VerificateurRoi implements Deplacement {
         boolean condition2 = !(sr.isRoiMoved(col)) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
         boolean condition3 = (decLigne == 3) && (dir == Direction.O);
         boolean condition4 = (decLigne == 2) && (dir == Direction.E);
-        boolean condition5 = (col == Couleur.BLANC) ? (condition3 && !st.isTourMoved(TypeTour.TBO)) || (condition4 && !st.isTourMoved(TypeTour.TBE))
-                : (condition3 && !st.isTourMoved(TypeTour.TNO)) || (condition4 && !st.isTourMoved(TypeTour.TNE));
+        boolean condition5 = (condition3 && !st.isTourMoved(TypeTour.TBO)) || (condition4 && !st.isTourMoved(TypeTour.TBE));
+        boolean condition6 = (condition3 && !st.isTourMoved(TypeTour.TNO)) || (condition4 && !st.isTourMoved(TypeTour.TNE));
+        boolean condition7 = (col == Couleur.BLANC) ? condition5 : condition6;
 
-     
-        if ((condition0 || condition1) && condition2 && condition5) {
+        if ((condition0 || condition1) && condition2 && condition7) {
             if (noticeMove) {
-                if (dep.getPiece().getCouleur() == Couleur.BLANC) {
-                    if (dir == Direction.O) {
-                        st.setTourMoved(TypeTour.TBO, true);
-                    } else {
-                        st.setTourMoved(TypeTour.TBE, true);
-                    }
-                } else if (dir == Direction.O) {
-                    st.setTourMoved(TypeTour.TNO, true);
-                } else {
+                if (dep.getPiece().getCouleur() == Couleur.BLANC && dir == Direction.O) {
+
+                    st.setTourMoved(TypeTour.TBO, true);
+
+                } else if (dep.getPiece().getCouleur() == Couleur.BLANC && dir == Direction.E) {
+
                     st.setTourMoved(TypeTour.TBE, true);
+
+                } else if (dep.getPiece().getCouleur() == Couleur.NOIR && dir == Direction.O) {
+
+                    st.setTourMoved(TypeTour.TNO, true);
+
+                } else {
+
+                    st.setTourMoved(TypeTour.TNE, true);
                 }
-                st.setTourMoved(TypeTour.TNO, true);
             }
-            return true; 
+            return true;
         }
-        return false; 
-    } 
+
+        return false;
+    }
 }

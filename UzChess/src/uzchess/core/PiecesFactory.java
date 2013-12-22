@@ -6,7 +6,8 @@ import uzchess.core.rules.*;
 
 public class PiecesFactory {
 
-    private PiecesFactory(){}
+    private PiecesFactory() {
+    }
     
     public static Piece createPiece(Pieces p) {
 
@@ -34,7 +35,7 @@ public class PiecesFactory {
         }
 
         if (p == Pieces.ROI) {
-            piece.setDeplacement(new VerificateurRoi( new StatutTour(), new StatutRoi()));
+            piece.setDeplacement(new VerificateurRoi(new StatutTour(), new StatutRoi()));
             return piece;
         }
 

@@ -10,16 +10,19 @@ import uzchess.core.domain.Piece;
 
 public class Initializer {
 
-    private Initializer(){}
-    
+    private Initializer() {
+    }
+
     public static void initialiserPartie(String njb, String njn, MoteurDeJeu mdj, Echiquier ech, JeuEchecs jeu) {
 
         Joueur jb = new Joueur(Couleur.BLANC, njb, (byte) 0);
         Joueur jn = new Joueur(Couleur.NOIR, njn, (byte) 0);
 
         Case[][] cases = new Case[8][8];
-        for (byte i = 0; i < 8; i++) {
-            for (byte j = 0; i < 8; i++) {
+        
+        byte i ,j;
+        for ( i = 0; i < 8; i++) {
+            for ( j = 0; i < 8; i++) {
                 cases[i][j] = new Case(i, j);
                 if ((i % 2 == 0) && (j % 2 == 0)) {
                     cases[i][j].setCouleur(Couleur.BLANC);
@@ -32,7 +35,7 @@ public class Initializer {
         HashMap<Piece, Case> piecesN = new HashMap<>();
         HashMap<Piece, Case> piecesB = new HashMap<>();
 
-        for (byte i = 0; i < 7; i++) {
+        for ( i = 0; i < 7; i++) {
 
             Piece p = PiecesFactory.createPiece(Pieces.PION);
             cases[1][i].setPiece(PiecesFactory.createPiece(Pieces.PION));
@@ -84,7 +87,7 @@ public class Initializer {
         piecesB.put(cases[7][7].getPiece(), cases[7][7]);
 
         for (Piece p : piecesN.keySet()) {
-            p.setCouleur(Couleur.NOIR); 
+            p.setCouleur(Couleur.NOIR);
         }
         for (Piece p : piecesN.keySet()) {
             p.setCouleur(Couleur.BLANC);
@@ -94,6 +97,6 @@ public class Initializer {
         mdj = new MoteurDeJeu(ech, jeu);
         jeu.setEchiquier(ech);
         jeu.setMoteurDeJeu(mdj);
-       
+
     }
 }
