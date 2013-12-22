@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
 import uzchess.core.JeuEchecs; 
 
 public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
@@ -42,8 +41,8 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
         return p;
     }
    
-    /*@Override
+    @Override
     public void delete(Object... criterias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+    } 
 }

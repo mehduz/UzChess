@@ -16,6 +16,6 @@ public abstract class Dao <T>{
     
     public abstract void save( T game ) throws Exception; 
     public abstract T load(Object... criterias) throws Exception;
-    //public abstract void delete(Object... criterias) throws Exception;
+    public abstract void delete(Object... criterias) throws Exception;
     
 }
