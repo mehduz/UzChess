@@ -16,6 +16,7 @@ public class JeuEchecs {
     private Echiquier echiquier;
     private Joueur jn;
     private Joueur jb;
+    private String nomPartie;
 
     private boolean echec;
     private boolean mat;
@@ -30,6 +31,7 @@ public class JeuEchecs {
         this.echec = false;
         this.pat = false;
         this.nul = false;
+        this.nomPartie = "";
     }
 
     public void initialiser(String j1, String j2) {
@@ -125,4 +127,9 @@ public class JeuEchecs {
     public void setJb(Joueur jb) {
         this.jb = jb;
     }
+
+    public String getNomPartie() {
+        return nomPartie;
+    }
+    
 }
