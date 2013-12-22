@@ -1,4 +1,4 @@
-package uzchess.core.model;
+package uzchess.core.domain;
 
 import java.util.ArrayList;
 

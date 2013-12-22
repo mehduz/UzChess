@@ -3,7 +3,7 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.core.JeuEchecs;
-import uzchess.core.model.Case;
+import uzchess.core.domain.Case;
 
 public class VerificateurPion implements Deplacement {
 

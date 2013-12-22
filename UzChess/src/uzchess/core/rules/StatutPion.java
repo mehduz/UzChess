@@ -1,7 +1,7 @@
 package uzchess.core.rules;
 
 import java.util.HashMap;
-import uzchess.core.model.Piece;
+import uzchess.core.domain.Piece;
 
 public class StatutPion {
 

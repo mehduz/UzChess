@@ -1,4 +1,4 @@
-package uzchess.core.model;
+package uzchess.core.domain;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;

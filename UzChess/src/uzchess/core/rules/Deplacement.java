@@ -1,6 +1,6 @@
 package uzchess.core.rules;
 
-import uzchess.core.model.Case;
+import uzchess.core.domain.Case;
 
 public interface Deplacement {
 

@@ -3,10 +3,10 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.constantes.TypeTour;
-import uzchess.core.model.Case;
-import uzchess.core.model.CaseInterUtility;
-import uzchess.core.model.CheckCasesInterUtility;
-import uzchess.core.model.Echiquier;
+import uzchess.core.domain.Case;
+import uzchess.core.domain.CaseInterUtility;
+import uzchess.core.domain.CheckCasesInterUtility;
+import uzchess.core.domain.Echiquier;
 
 public class VerificateurRoi implements Deplacement {
 

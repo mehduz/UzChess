@@ -1,8 +1,8 @@
 package uzchess.core.rules;
 
-import uzchess.core.model.Case;
-import uzchess.core.model.CaseInterUtility;
-import uzchess.core.model.CheckCasesInterUtility;
+import uzchess.core.domain.Case;
+import uzchess.core.domain.CaseInterUtility;
+import uzchess.core.domain.CheckCasesInterUtility;
 
 public class VerificateurFou implements Deplacement {
 

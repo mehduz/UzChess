@@ -1,7 +1,7 @@
 package uzchess.core;
 
 import uzchess.constantes.Pieces;
-import uzchess.core.model.Piece;
+import uzchess.core.domain.Piece;
 import uzchess.core.rules.*;
 
 public class PiecesFactory {

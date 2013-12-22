@@ -3,10 +3,10 @@ package uzchess.core;
 import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Pieces;
-import uzchess.core.model.Case;
-import uzchess.core.model.Echiquier;
-import uzchess.core.model.Joueur;
-import uzchess.core.model.Piece;
+import uzchess.core.domain.Case;
+import uzchess.core.domain.Echiquier;
+import uzchess.core.domain.Joueur;
+import uzchess.core.domain.Piece;
 
 public class Initializer {
 
