@@ -11,6 +11,8 @@ public class CaseInterUtility {
         return cases;
     }
 
+    private CaseInterUtility(){}
+    
     public static void setCases(Case[][] cases) {
         CaseInterUtility.cases = cases;
     }

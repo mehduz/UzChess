@@ -10,6 +10,8 @@ import uzchess.core.domain.Piece;
 
 public class Initializer {
 
+    private Initializer(){}
+    
     public static void initialiserPartie(String njb, String njn, MoteurDeJeu mdj, Echiquier ech, JeuEchecs jeu) {
 
         Joueur jb = new Joueur(Couleur.BLANC, njb, (byte) 0);

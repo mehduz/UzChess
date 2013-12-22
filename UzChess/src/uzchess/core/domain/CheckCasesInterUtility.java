@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class CheckCasesInterUtility {
 
+    private CheckCasesInterUtility(){};
+    
     public static boolean verifCasesInter(ArrayList<Case> aVerif) {
 
         for (Case c : aVerif) {

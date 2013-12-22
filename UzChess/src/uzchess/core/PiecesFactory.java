@@ -6,6 +6,8 @@ import uzchess.core.rules.*;
 
 public class PiecesFactory {
 
+    private PiecesFactory(){}
+    
     public static Piece createPiece(Pieces p) {
 
         Piece piece = new Piece();
