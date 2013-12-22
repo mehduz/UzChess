@@ -28,10 +28,9 @@ public class MoteurDeJeu {
         Couleur couleur;
         couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
-            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, echec);
+            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, true);
         }
-        return detecterEchec();
-        
+        return false;
     }
 
     public boolean detecterEchec() {

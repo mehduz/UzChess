@@ -34,12 +34,17 @@ public class JeuEchecs {
     
     public void jouer(Case dep, Case arr) {
         
+        if(moteurDeJeu.verifierCoup(dep , arr)){
+            
+        }
         
     }
     
     public void detecterFin() {
         
-        moteurDeJeu.detecterMat();
+        if(echec){
+            moteurDeJeu.detecterMat();
+        }
         moteurDeJeu.detecterPat();
         moteurDeJeu.detecterNul();
     }
