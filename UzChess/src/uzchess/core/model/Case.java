@@ -6,7 +6,7 @@ import uzchess.constantes.Direction;
 public class Case {
 
     private Couleur couleur;
-    private byte ligne;
+    private byte ligne; 
     private byte colonne;
     private Piece piece;
 

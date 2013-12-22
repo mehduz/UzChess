@@ -35,10 +35,10 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
-                      <Component id="Titre" min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="Titre" min="-2" pref="93" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="146" max="32767" attributes="0"/>
+              <EmptySpace pref="156" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,7 +53,7 @@
               <Component id="Charger" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="Quitter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="111" max="32767" attributes="0"/>
+              <EmptySpace pref="137" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,7 +61,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="Titre">
       <Properties>
-        <Property name="text" type="java.lang.String" value="UZ CHESS"/>
+        <Property name="text" type="java.lang.String" value="UZ CHESS v1.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Jouer">

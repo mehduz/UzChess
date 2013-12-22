@@ -35,7 +35,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Titre.setText("UZ CHESS");
+        Titre.setText("UZ CHESS v1.0");
 
         Jouer.setText("Nouvelle partie");
         Jouer.addActionListener(new java.awt.event.ActionListener() {
@@ -72,8 +72,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(Quitter, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(202, 202, 202)
-                        .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addComponent(Titre, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +86,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(Charger)
                 .addGap(15, 15, 15)
                 .addComponent(Quitter)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();

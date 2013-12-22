@@ -103,11 +103,7 @@ public class MoteurDeJeu {
         }
         return true;
     }
-
-    public boolean detecterNul() {
-        return jeu.getCompteurCoups() >= 50;
-    }
-
+    
     public void setEchec(boolean echec) {
         this.echec = echec;
     }
