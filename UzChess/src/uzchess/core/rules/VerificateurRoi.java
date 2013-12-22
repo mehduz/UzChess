@@ -58,7 +58,7 @@ public class VerificateurRoi implements Deplacement {
 
         if ((condition0 || condition1) && condition2 && condition7) {
             if (noticeMove) {
-                if (dep.getPiece().getCouleur() == Couleur.BLANC && dir == Direction.O) {
+                if (dep.getPiece().getCouleur() == Couleur.BLANC && dir == Direction.O) { 
 
                     st.setTourMoved(TypeTour.TBO, true);
 

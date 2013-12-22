@@ -24,7 +24,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
             sOut.close();
             fOut.close();
         } catch (IOException e) {
-            throw new DaoException("Erreur lors de la sauvegarde" + e.getMessage());
+            throw new DaoException("Erreur lors de la sauvegarde : " , e);
         }
 
     }
@@ -43,7 +43,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
             sIn.close();
             fIn.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DaoException(e.getMessage()); 
+            throw new DaoException("Erreur lors du  chargement : " , e); 
         }
         return p;
     }
