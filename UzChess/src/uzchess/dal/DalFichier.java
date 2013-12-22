@@ -13,78 +13,57 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
-import uzchess.core.JeuEchecs;
+import uzchess.core.JeuEchecs; 
 
 public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializable {
     
     @Override
-    public JeuEchecs charger(String nomFichier) {
+    public JeuEchecs charger(String nomFichier) throws IOException, ClassNotFoundException{
         
         FileInputStream fIn; 
         ObjectInputStream sIn;
         JeuEchecs p = null;
-        
-        try {
-            fIn = new FileInputStream (nomFichier);
-            sIn = new ObjectInputStream (fIn);
-            p = (JeuEchecs) sIn.readObject ();
-            sIn.close ();
-            fIn.close ();
-        } 
-        catch (IOException  | ClassNotFoundException e) {
-            System.out.println (e);
-        } 
-        finally {
-            sIn =  null;
-            fIn = null;
-        }
-        
+      
+        fIn = new FileInputStream (nomFichier);
+        sIn = new ObjectInputStream (fIn);
+        p = (JeuEchecs) sIn.readObject ();
+        sIn.close ();
+        fIn.close ();
+      
         return p;
 
     }
     
     @Override
-    public void sauvegarder(String nomFichier, JeuEchecs partie) {
+    public void sauvegarder(String nomFichier, JeuEchecs partie) throws IOException{
 
         FileOutputStream fOut;
         ObjectOutputStream sOut;
         Writer tOut; 
         BufferedWriter bOut;
-
-        try {
-            fOut = new FileOutputStream (nomFichier + ".dat");
-            sOut = new ObjectOutputStream (fOut);
-            sOut.writeObject(partie);
-            sOut.flush ();
-            sOut.close ();
-            fOut.close ();
-        } catch (IOException e) {
-            System.out.println (e);
-            sOut = null;
-            fOut = null;
-        }
         
-        try {
-            tOut = new FileWriter ("parties.txt", true);
-            bOut = new BufferedWriter (tOut);
-            bOut.write (nomFichier);
-            bOut.newLine ();
-            bOut.close ();
-        } catch (IOException e) {
-            System.out.println (e);
-            bOut = null;
-            tOut = null;
-        }
+        fOut = new FileOutputStream (nomFichier + ".dat");
+        sOut = new ObjectOutputStream (fOut);
+        sOut.writeObject(partie);
+        sOut.flush ();
+        sOut.close ();
+        fOut.close ();
+       
+        tOut = new FileWriter ("parties.txt", true);
+        bOut = new BufferedWriter (tOut);
+        bOut.write (nomFichier);
+        bOut.newLine ();
+        bOut.close ();
+       
     }
 
     @Override
-    public ArrayList<String> getListePartie() {
+    public ArrayList<String> getListePartie() throws IOException{
         
         Reader fIn;
         BufferedReader bIn;
         ArrayList<String> res = new ArrayList<>();
         
-        try{ 
         fIn = new FileReader("parties.txt");
         bIn = new BufferedReader(fIn);
         String s = bIn.readLine();
@@ -94,12 +73,7 @@ public class DalFichier implements IDal<JeuEchecs, ArrayList<String> >, Serializ
         }
         bIn.close();
         fIn.close();
-        
-        }catch (IOException e) {
-            System.out.println (e);
-            bIn = null;
-            fIn = null;
-        }
+     
         return res;
     }
 }

@@ -28,20 +28,20 @@ public class JeuEchecs {
     }
  
 
-    public void initialiser() {
-        Initializer.initialiserPartie(null, null, moteurDeJeu, echiquier, this);
+    public void initialiser(String j1, String j2) {
+        Initializer.initialiserPartie( j1, j2, moteurDeJeu, echiquier, this );
     }
     
     public void jouer(Case dep, Case arr) {
-
+        
+        
     }
     
     public void detecterFin() {
         
-    }
-
-    public void quitter() {
-       
+        moteurDeJeu.detecterMat();
+        moteurDeJeu.detecterPat();
+        moteurDeJeu.detecterNul();
     }
     
     public Couleur getTour() {
