@@ -1,12 +1,14 @@
 package uzchess.main;
 
+import uzchess.gui.VueJeu;
+
 public class UzChess {
 
     private UzChess(){
     }
     
     public static void main(String[] args) {
-        throw new UnsupportedOperationException(); 
+        new VueJeu("UzChess");
     }
 
 }
