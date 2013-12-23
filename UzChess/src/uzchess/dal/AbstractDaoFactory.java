@@ -16,10 +16,10 @@ public abstract class AbstractDaoFactory {
     public abstract Dao getJeuEchecsDao();
 
     public static AbstractDaoFactory getFactory(DaoType type) {
+
         if (type.equals(type.DAO_FILE)) {
             return new DaoFileFactory();
         }
         return null;
     }
 }
- 
