@@ -14,8 +14,10 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -110,14 +112,39 @@ public class VueJeu extends JFrame{
         infoScore.add(new JButton(LABEL_BUTTON_3));
         infoScore.add(new JButton(LABEL_BUTTON_4));
         
-        JPanel infoPartie = new JPanel(new GridLayout(2 , 1));
+        JPanel infoPartie = new JPanel(); 
         infoScore.setBorder(BorderFactory.createEmptyBorder(2, 2, 0, 2));
         infoScore.setPreferredSize(new Dimension(INFO_SCORE_WIDTH, FRAME_HEIGHT /6 ) );
-        infoPartie.add(new JTextField("Score Joueur 1  : "));
-        infoPartie.add(new JTextField("Score Joueur 2 : "));
-        info.add(infoScore, "North");
-        info.add(infoPartie, "South");
-        infoPartie.setPreferredSize(new Dimension(INFO_SCORE_WIDTH, 200)); 
+        
+        JLabel jlb1 = new JLabel("Score Joueur 1 : " );
+        JLabel jlb2 = new JLabel("Score Joueur 2 : " );
+        
+        JTextField jtf1 = new JTextField("0");
+        JTextField jtf2 = new JTextField("0");
+        jtf1.setBorder(null);
+        jtf2.setBorder(null);
+                
+        infoPartie.add( jlb1 );
+        infoPartie.add( jtf1 );
+        infoPartie.add( jlb2 );
+        infoPartie.add( jtf2 );
+        
+        jtf1.setEditable( false );
+        jtf2.setEditable( false );
+        
+        JPanel panelListe = new JPanel(new GridLayout(1,1));
+        JTextArea jListCoups = new JTextArea("\nListe des coups joués : ");
+        jListCoups.setEditable(false);
+        final JScrollPane jsp = new JScrollPane(jListCoups);
+        panelListe.add(jListCoups);
+        panelListe.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        
+        info.add( infoScore, "North" );
+        info.add( panelListe, "Center" );
+        info.add( infoPartie, "South" );
+        
+                
+        infoPartie.setPreferredSize(new Dimension(INFO_SCORE_WIDTH, FRAME_HEIGHT /14 )); 
         return info;
     }
    
