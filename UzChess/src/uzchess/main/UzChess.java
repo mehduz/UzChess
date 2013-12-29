@@ -8,7 +8,7 @@ public class UzChess {
     }
     
     public static void main(String[] args) {
-        new VueJeu("UzChess");
+        new VueJeu(null, null);
     }
 
 }
