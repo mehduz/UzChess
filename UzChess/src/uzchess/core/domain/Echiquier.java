@@ -16,12 +16,14 @@ public class Echiquier {
     @SuppressWarnings("FieldMayBeFinal")
     private Case caseRoiN;
 
-    public Echiquier(Case[][] cases, HashMap<Piece, Case> piecesN, HashMap<Piece, Case> piecesB, Case caseRoiN, Case caseRoiB ) {
+    public Echiquier(Case[][] cases, HashMap<Piece, Case> piecesN, HashMap<Piece, Case> piecesB, Case caseRoiN, Case caseRoiB) {
+
         this.cases = cases;
         this.piecesN = piecesN;
         this.piecesB = piecesB;
         this.caseRoiB = caseRoiB;
         this.caseRoiN = caseRoiN;
+
     }
 
     public Case[][] getEchiquier() {
@@ -53,7 +55,7 @@ public class Echiquier {
 
     public HashMap<Piece, Case> getPiecesB() {
         return piecesB;
-    }  
+    }
 
     public void setCaseRoiB(Case caseRoiB) {
         this.caseRoiB = caseRoiB;

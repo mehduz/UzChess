@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import uzchess.controllers.CoreControler;
 import uzchess.controllers.DalControler;
+import uzchess.core.domain.Case;
 import uzchess.events.EchecsChangedEvent;
 
 /**
@@ -35,7 +36,7 @@ public class VueJeu extends EchecsView {
     private PanelInfoSide panelInfoSide;
     private PanelInfoTexte panelInfoTexte;
     
-    public VueJeu(CoreControler cctrl, DalControler dctrl) {
+    public VueJeu(CoreControler cctrl, DalControler dctrl, Case[][] cases) {
         
         super(cctrl, dctrl);
         this.setTitle(TITRE);
@@ -44,7 +45,7 @@ public class VueJeu extends EchecsView {
         this.setUndecorated(false);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.panelBoard = new PanelBoard();
+        this.panelBoard = new PanelBoard(cases);
         this.panelInfoSide = new PanelInfoSide();
         this.panelInfoTexte = new PanelInfoTexte();
         this.initialise();
@@ -68,7 +69,8 @@ public class VueJeu extends EchecsView {
     
     @Override
     public void echecsChanged(EchecsChangedEvent event) {
-        this.panelBoard.setEch( event.getEch() );
+        this.panelBoard.setCases( event.getCases() );
+        this.repaint();
     }
     
     @Override

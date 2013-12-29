@@ -32,7 +32,7 @@ public class JeuEchecsModel extends JeuEchecs{
         EchecsListener[] listenerList = ( EchecsListener[] )this.listeners.getListeners(EchecsListener.class);
         
         for(EchecsListener el : listenerList){ 
-            el.echecsChanged(new EchecsChangedEvent(this, this.getEchiquier())); 
+            el.echecsChanged( new EchecsChangedEvent(this, this.getEchiquier().getCases()) );
         } 
     }
 }

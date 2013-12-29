@@ -35,7 +35,7 @@ public class JeuEchecs {
     }
 
     public void initialiser(String j1, String j2) {
-        Initializer.initialiserPartie(j1, j2, moteurDeJeu, echiquier, this);
+        Initializer.initialiserPartie(j1, j2, this);
     }
 
     public boolean jouer(Case dep, Case arr) {

@@ -13,30 +13,25 @@ public class Initializer {
     private Initializer() {
     }
 
-    public static void initialiserPartie(String njb, String njn, MoteurDeJeu mdj, Echiquier ech, JeuEchecs jeu) {
+    public static void initialiserPartie(String njb, String njn, JeuEchecs jeu) {
 
         Joueur jb = new Joueur(Couleur.BLANC, njb, (byte) 0);
         Joueur jn = new Joueur(Couleur.NOIR, njn, (byte) 0);
 
         Case[][] cases = new Case[8][8];
-        
-        byte i ,j;
-        for ( i = 0; i < 8; i++) {
-            for ( j = 0; i < 8; i++) {
+
+        byte i, j;
+        for (i = 0; i < 8; i++) {
+            for (j = 0; j < 8; j++) {
                 cases[i][j] = new Case(i, j);
-                if ((i % 2 == 0) && (j % 2 == 0)) {
-                    cases[i][j].setCouleur(Couleur.BLANC);
-                } else {
-                    cases[i][j].setCouleur(Couleur.NOIR);
-                }
+                cases[i][j].setCouleur((i % 2 == 0) ? (j % 2 == 0) ? Couleur.BLANC : Couleur.NOIR : (j % 2 == 0) ? Couleur.NOIR : Couleur.BLANC);
             }
         }
 
         HashMap<Piece, Case> piecesN = new HashMap<>();
         HashMap<Piece, Case> piecesB = new HashMap<>();
 
-        for ( i = 0; i < 7; i++) {
-
+        for (i = 0; i < 8; i++) {
             Piece p = PiecesFactory.createPiece(Pieces.PION);
             cases[1][i].setPiece(PiecesFactory.createPiece(Pieces.PION));
             cases[6][i].setPiece(PiecesFactory.createPiece(Pieces.PION));
@@ -93,8 +88,8 @@ public class Initializer {
             p.setCouleur(Couleur.BLANC);
         }
 
-        ech = new Echiquier(cases, piecesN, piecesB, cases[0][4], cases[7][4]);
-        mdj = new MoteurDeJeu(ech, jeu);
+        Echiquier ech = new Echiquier(cases, piecesN, piecesB, cases[0][4], cases[7][4]);
+        MoteurDeJeu mdj = new MoteurDeJeu(ech, jeu);
         jeu.setEchiquier(ech);
         jeu.setMoteurDeJeu(mdj);
 
