@@ -8,6 +8,7 @@ package uzchess.gui;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
@@ -24,6 +25,7 @@ public class PanelInfoTexte extends JPanel{
         jta = new JTextArea("\nBienvenue à UzChess ! ");
         this.add(jta, "Center");
         jta.setEditable(false);
+        this.add(new JScrollPane(jta));
     }
 
     public static JTextArea getJta() {

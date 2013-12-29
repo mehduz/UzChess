@@ -34,9 +34,9 @@ public class PanelBoard extends JPanel {
         for (int i = 0; i < 64; i++) {
             
             JPanel square = new JPanel( new BorderLayout() );
-            JLabel piece = new JLabel("\u2654", SwingConstants.CENTER);
+            /*JLabel piece = new JLabel("\u2654", SwingConstants.CENTER);
             square.add( piece , BorderLayout.CENTER );
-            piece.setFont(PIECE_FONT);
+            piece.setFont(PIECE_FONT);*/
             this.add( square );
             int row = (i / 8) % 2;
             if (row == 0)

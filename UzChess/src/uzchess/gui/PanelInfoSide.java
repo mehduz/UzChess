@@ -67,6 +67,7 @@ public class PanelInfoSide extends JPanel{
         jListCoups.setEditable(false);
         final JScrollPane jsp = new JScrollPane(jListCoups);
         listeCoups.add(jListCoups);
+        listeCoups.add(new JScrollPane(jListCoups));
     
         this.add( menu, "North" );
         this.add( listeCoups, "Center" );
