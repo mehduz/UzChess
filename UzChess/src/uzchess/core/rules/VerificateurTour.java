@@ -32,9 +32,10 @@ public class VerificateurTour implements Deplacement {
             TypeTour typeTour;
             typeTour = (c == Couleur.BLANC)?( col == 0)? TypeTour.TBO : TypeTour.TBE : ( col == 0)? TypeTour.TNO : TypeTour.TNE ;
             st.setTourMoved(typeTour, noticeMove);
+            return true;
         }
         
-        return true;
+        return false;
     }
 
     public void setEch(Echiquier ech) {

@@ -23,11 +23,11 @@ public class MoteurDeJeu {
         this.jeu = jeu;
     }
 
-    public boolean verifierCoup(Case dep, Case arr, boolean notify) {
+    public boolean verifierCoup(Case dep, Case arr, boolean noticeMove) {
         
         Couleur couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
-            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, notify);
+            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, noticeMove);
         }
         return false;
     }

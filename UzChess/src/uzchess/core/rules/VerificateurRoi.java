@@ -25,11 +25,10 @@ public class VerificateurRoi implements Deplacement {
 
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
-
-        boolean condition1 = ech.isMenace(arr).isEmpty();
+        
         boolean condition2 = ((new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1)) || verifierRoque(dep, arr, decLigne, noticeMove);
 
-        if (condition1 && condition2) {
+        if (condition2 ) {
             if (noticeMove) {
                 sr.setRoiMoved(dep.getPiece().getCouleur());
             }

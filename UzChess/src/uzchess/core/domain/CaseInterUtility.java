@@ -7,7 +7,7 @@ public class CaseInterUtility {
 
     private static Case[][] cases;
 
-    private CaseInterUtility(){
+    private CaseInterUtility() {
     }
 
     public static void setCases(Case[][] cases) {
@@ -53,8 +53,8 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getO(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iCol = caseDep.getColonne();
-        while (cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne()) {
+        byte iCol = (byte) (caseDep.getColonne() - 1);
+        while (iCol != caseArr.getColonne()) {
             maListInter.add(cases[caseDep.getLigne()][iCol]);
             iCol--;
         }
@@ -63,9 +63,9 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getNO(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+        byte iCol = (byte) (caseDep.getColonne() - 1);
+        byte iLig = (byte) (caseDep.getLigne() - 1);
+        while (iCol != caseArr.getColonne() && iLig != caseArr.getLigne()) {
             maListInter.add(cases[iLig][iCol]);
             iLig--;
             iCol--;
@@ -75,8 +75,8 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getN(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iLig = caseDep.getLigne();
-        while (cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne()) {
+        byte iLig = (byte) (caseDep.getLigne() - 1);
+        while (iLig != caseArr.getLigne()) {
             maListInter.add(cases[iLig][caseDep.getColonne()]);
             iLig--;
         }
@@ -85,9 +85,9 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getNE(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+        byte iCol = (byte) (caseDep.getColonne() + 1);
+        byte iLig = (byte) (caseDep.getLigne() - 1);
+        while (iCol != caseArr.getColonne() && iLig != caseArr.getLigne()) {
             maListInter.add(cases[iLig][iCol]);
             iLig--;
             iCol++;
@@ -97,8 +97,8 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getE(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iCol = caseDep.getColonne();
-        while (cases[caseDep.getLigne()][iCol] != null && iCol < caseArr.getColonne()) {
+        byte iCol = (byte) (caseDep.getColonne() + 1);
+        while (iCol != caseArr.getColonne()) {
             maListInter.add(cases[caseDep.getLigne()][iCol]);
             iCol++;
         }
@@ -107,9 +107,9 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getSE(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+        byte iCol = (byte) (caseDep.getColonne() + 1);
+        byte iLig = (byte) (caseDep.getLigne() + 1);
+        while (iCol != caseArr.getColonne() && iLig != caseArr.getLigne()) {
             maListInter.add(cases[iLig][iCol]);
             iLig++;
             iCol++;
@@ -119,9 +119,9 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getSO(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iCol = caseDep.getColonne();
-        byte iLig = caseDep.getLigne();
-        while (cases[iLig][iCol] != null && iCol < caseArr.getColonne() && iLig < caseArr.getLigne()) {
+        byte iCol = (byte) (caseDep.getColonne() - 1);
+        byte iLig = (byte) (caseDep.getLigne() + 1);
+        while (iCol != caseArr.getColonne() && iLig != caseArr.getLigne()) {
             maListInter.add(cases[iLig][iCol]);
             iLig++;
             iCol--;
@@ -131,8 +131,8 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getS(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
-        byte iLig = caseDep.getLigne();
-        while (cases[iLig][caseDep.getColonne()] != null && iLig < caseArr.getColonne()) {
+        byte iLig = (byte) (caseDep.getLigne() + 1);
+        while (iLig != caseArr.getLigne()) {
             maListInter.add(cases[iLig][caseDep.getColonne()]);
             iLig++;
         }

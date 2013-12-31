@@ -25,8 +25,8 @@ public class PiecesFactory {
         if (p == Pieces.FOU) {
 
             piece.setDeplacement(new VerificateurFou());
+            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.FOU_B : PiecesUnicode.FOU_N));  
             piece.setCouleur(c);
-            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.FOU_B : PiecesUnicode.FOU_N));   
             return piece;
         }
 
