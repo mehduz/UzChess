@@ -47,12 +47,13 @@ public class JeuEchecs {
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
 
             HashMap<Piece, Case> hm = (tour == Couleur.BLANC) ? echiquier.getPiecesB() : echiquier.getPiecesN();
+            HashMap<Piece, Case> hmAdv = (tour == Couleur.BLANC) ? echiquier.getPiecesN() : echiquier.getPiecesB();
             Joueur j = (tour == Couleur.BLANC) ? jb : jn;
             hm.put(dep.getPiece(), arr);
 
             if (arr.getPiece() != null) {
                 j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
-                hm.remove(arr.getPiece());
+                hmAdv.remove(arr.getPiece());
             }
             
             dep.getPiece().deplacer(dep, arr);

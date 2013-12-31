@@ -46,14 +46,16 @@ public class EchecsControler {
                 selected = c;
             }
         } else {
+            
+            if (c.getPiece() == null) {
+                model.setCasesValides(new ArrayList<Case>());
+            }
+            
             if (selected != null) {
                 model.jouer(selected, c);
                 selected = null;
             }
-            if (c.getPiece() == null) {
-                model.setCasesValides(new ArrayList<Case>());
-            }
-
+            
         }
     }
 
