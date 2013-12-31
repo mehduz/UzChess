@@ -18,7 +18,11 @@ import uzchess.events.EchecsListener;
 public class JeuEchecsModel extends JeuEchecs{
     
     private EventListenerList listeners;
-    
+  
+    public JeuEchecsModel(){
+        super();
+        this.listeners = new EventListenerList();
+    }
     
     public void addEchecsListener(EchecsListener l ){
         this.listeners.add(EchecsListener.class, l);
