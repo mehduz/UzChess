@@ -7,10 +7,6 @@ public class CaseInterUtility {
 
     private static Case[][] cases;
 
-    public static Case[][] getCases() {
-        return cases;
-    }
-
     private CaseInterUtility(){
     }
 

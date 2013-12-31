@@ -8,17 +8,13 @@ import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.CheckCasesInterUtility;
 import uzchess.core.domain.Echiquier;
 
-public class VerificateurRoi implements Deplacement {
+public class VerificateurRoi implements Deplacement { 
 
-    private final StatutTour st;
-    private final StatutRoi sr;
+    private StatutTour st;
+    private StatutRoi sr;
     private Echiquier ech;
 
-    public VerificateurRoi(StatutTour st, StatutRoi sr) {
-        this.st = st;
-        this.sr = sr;
-    }
-
+   
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
@@ -80,4 +76,19 @@ public class VerificateurRoi implements Deplacement {
 
         return false;
     }
+
+    public void setEch(Echiquier ech) {
+        this.ech = ech;
+    }
+
+    public void setSt(StatutTour st) {
+        this.st = st;
+    }
+
+    public void setSr(StatutRoi sr) {
+        this.sr = sr;
+    }
+    
+    
+    
 }

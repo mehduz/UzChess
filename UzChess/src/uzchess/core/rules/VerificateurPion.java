@@ -11,9 +11,9 @@ public class VerificateurPion implements Deplacement {
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
-        Couleur c = dep.getCouleur();
+        Couleur c = dep.getPiece().getCouleur();
         Direction dir = dep.getDirection(arr);
-        if (arr.getPiece() != null) {
+        if (arr.getPiece() == null) {
             return verifAvance(dep, arr, c, dir);
         }
         return new VerificateurPionPrend().verifierDeplacement(dep, arr, noticeMove);

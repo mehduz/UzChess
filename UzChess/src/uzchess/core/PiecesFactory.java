@@ -32,7 +32,7 @@ public class PiecesFactory {
 
         if (p == Pieces.TOUR) {
 
-            piece.setDeplacement(new VerificateurTour(new StatutTour()));
+            piece.setDeplacement(new VerificateurTour());
             piece.setCouleur(c);
             piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.TOUR_B : PiecesUnicode.TOUR_N));   
             return piece;
@@ -47,7 +47,7 @@ public class PiecesFactory {
         }
 
         if (p == Pieces.ROI) {
-            piece.setDeplacement(new VerificateurRoi(new StatutTour(), new StatutRoi()));
+            piece.setDeplacement(new VerificateurRoi());
             piece.setCouleur(c);
             piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.ROI_B : PiecesUnicode.ROI_N));   
             return piece;

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Pieces;
 import uzchess.core.domain.Case;
+import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Joueur;
 import uzchess.core.domain.Piece;
@@ -11,6 +12,8 @@ import uzchess.core.rules.StatutPion;
 import uzchess.core.rules.StatutRoi;
 import uzchess.core.rules.StatutTour;
 import uzchess.core.rules.VerificateurPion;
+import uzchess.core.rules.VerificateurRoi;
+import uzchess.core.rules.VerificateurTour;
 
 public class Initializer {
 
@@ -36,6 +39,8 @@ public class Initializer {
         HashMap<Piece, Case> piecesB = new HashMap<>();
 
         StatutPion sp = new StatutPion();
+        StatutRoi sr = new StatutRoi();
+        StatutTour st = new StatutTour();
 
         for (i = 0; i < 8; i++) {
             cases[1][i].setPiece(PiecesFactory.createPiece(Pieces.PION, Couleur.NOIR));
@@ -50,7 +55,10 @@ public class Initializer {
 
         cases[0][4].setPiece(PiecesFactory.createPiece(Pieces.ROI, Couleur.NOIR));
         cases[7][4].setPiece(PiecesFactory.createPiece(Pieces.ROI, Couleur.BLANC));
-
+        
+        ((VerificateurRoi)cases[0][4].getPiece().getDeplacement()).setSr(sr);
+        ((VerificateurRoi)cases[7][4].getPiece().getDeplacement()).setSr(sr);
+       
         piecesN.put(cases[0][4].getPiece(), cases[0][4]);
         piecesB.put(cases[7][4].getPiece(), cases[7][4]);
 
@@ -84,6 +92,11 @@ public class Initializer {
         cases[7][0].setPiece(PiecesFactory.createPiece(Pieces.TOUR, Couleur.BLANC));
         cases[0][7].setPiece(PiecesFactory.createPiece(Pieces.TOUR, Couleur.NOIR));
         cases[7][7].setPiece(PiecesFactory.createPiece(Pieces.TOUR, Couleur.BLANC));
+        
+        ((VerificateurTour)cases[0][0].getPiece().getDeplacement()).setSt(st);
+        ((VerificateurTour)cases[7][0].getPiece().getDeplacement()).setSt(st);
+        ((VerificateurTour)cases[0][7].getPiece().getDeplacement()).setSt(st);
+        ((VerificateurTour)cases[7][7].getPiece().getDeplacement()).setSt(st);
 
         piecesN.put(cases[0][0].getPiece(), cases[0][0]);
         piecesN.put(cases[0][7].getPiece(), cases[0][7]);
@@ -91,6 +104,17 @@ public class Initializer {
         piecesB.put(cases[7][7].getPiece(), cases[7][7]);
 
         Echiquier ech = new Echiquier(cases, piecesN, piecesB, cases[0][4], cases[7][4]);
+        
+        ((VerificateurRoi)cases[0][4].getPiece().getDeplacement()).setEch(ech);
+        ((VerificateurRoi)cases[7][4].getPiece().getDeplacement()).setEch(ech);
+        
+        ((VerificateurTour)cases[0][0].getPiece().getDeplacement()).setEch(ech);
+        ((VerificateurTour)cases[7][0].getPiece().getDeplacement()).setEch(ech);
+        ((VerificateurTour)cases[0][7].getPiece().getDeplacement()).setEch(ech);
+        ((VerificateurTour)cases[7][7].getPiece().getDeplacement()).setEch(ech);
+        
+        CaseInterUtility.setCases(ech.getCases());
+        
         MoteurDeJeu mdj = new MoteurDeJeu(ech, jeu);
         jeu.setEchiquier(ech);
         jeu.setMoteurDeJeu(mdj);
