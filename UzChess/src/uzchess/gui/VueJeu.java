@@ -11,8 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
-import uzchess.controllers.CoreControler;
-import uzchess.controllers.DalControler;
+import uzchess.controllers.EchecsControler;
 import uzchess.core.domain.Case;
 import uzchess.events.EchecsChangedEvent;
 
@@ -36,9 +35,9 @@ public class VueJeu extends EchecsView {
     private PanelInfoSide panelInfoSide;
     private PanelInfoTexte panelInfoTexte;
     
-    public VueJeu(CoreControler cctrl, DalControler dctrl, Case[][] cases) {
+    public VueJeu(EchecsControler cctrl, Case[][] cases) {
         
-        super(cctrl, dctrl);
+        super(cctrl);
         this.setTitle(TITRE);
         this.setLocation((SCREEN_WIDTH - FRAME_WIDTH) / 2, (SCREEN_HEIGHT - FRAME_HEIGHT) / 4);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -49,8 +48,6 @@ public class VueJeu extends EchecsView {
         this.panelInfoSide = new PanelInfoSide();
         this.panelInfoTexte = new PanelInfoTexte();
         this.initialise();
-        this.setVisible(true);
-        
     }
     
     private void initialise() {

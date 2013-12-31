@@ -7,8 +7,7 @@
 package uzchess.gui;
 
 import javax.swing.JFrame;
-import uzchess.controllers.CoreControler;
-import uzchess.controllers.DalControler;
+import uzchess.controllers.EchecsControler;
 import uzchess.events.EchecsListener;
 /**
  *
@@ -16,30 +15,19 @@ import uzchess.events.EchecsListener;
  */
 public abstract class EchecsView extends JFrame implements EchecsListener{
     
-    private CoreControler CoreCtrl;
-    private DalControler DalCtrl;
+    private EchecsControler CoreCtrl;
 
-    public EchecsView(CoreControler CoreCtrl, DalControler DalCtrl) {
+    public EchecsView(EchecsControler CoreCtrl) {
         
         this.CoreCtrl = CoreCtrl;
-        this.DalCtrl = DalCtrl;
-        
     }
 
-    public CoreControler getCoreCtrl() {
+    public EchecsControler getCoreCtrl() {
         return CoreCtrl;
     }
 
-    public void setCoreCtrl(CoreControler CoreCtrl) {
+    public void setCoreCtrl(EchecsControler CoreCtrl) {
         this.CoreCtrl = CoreCtrl;
-    }
-
-    public DalControler getDalCtrl() {
-        return DalCtrl;
-    }
-
-    public void setDalCtrl(DalControler DalCtrl) {
-        this.DalCtrl = DalCtrl;
     }
     
     public abstract void display();

@@ -102,7 +102,5 @@ public class PanelInfoSide extends JPanel{
     public JPanel getListeCoups() {
         return listeCoups;
     }
-     
-     
     
 }
