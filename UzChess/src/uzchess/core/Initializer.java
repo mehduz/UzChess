@@ -47,7 +47,7 @@ public class Initializer {
         for (i = 0; i < 8; i++) {
             cases[1][i].setPiece(PiecesFactory.createPiece(Pieces.PION, Couleur.NOIR));
             cases[6][i].setPiece(PiecesFactory.createPiece(Pieces.PION, Couleur.BLANC));
-            piecesN.put(cases[1][i].getPiece(), cases[6][i]);
+            piecesN.put(cases[1][i].getPiece(), cases[1][i]);
             piecesB.put(cases[6][i].getPiece(), cases[6][i]);
             sp.getPions().put(cases[6][i].getPiece(), Boolean.FALSE);
             sp.getPions().put(cases[1][i].getPiece(), Boolean.FALSE);

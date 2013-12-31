@@ -5,6 +5,7 @@
  */
 package uzchess.controllers;
 
+import java.util.ArrayList;
 import uzchess.core.domain.Case;
 import uzchess.gui.EchecsView;
 import uzchess.model.JeuEchecsModel;
@@ -17,7 +18,7 @@ public class EchecsControler {
 
     private EchecsView view;
     private JeuEchecsModel model = null;
-    private Case selected;
+    private Case selected = null;
 
     public void displayView() {
         view.display();
@@ -38,16 +39,21 @@ public class EchecsControler {
     public void notifyCaseSelect(Case c) {
 
         model.setCasesToClean(model.getCasesValides());
-        
+
         if (c.getPiece() != null && c.getPiece().getCouleur() == model.getTour()) {
             model.setCasesValides(model.getMoteurDeJeu().deplacementPossible(c.getPiece()));
-        }
-
-        if (selected == null) {
-            selected = c;
+            if (selected == null) {
+                selected = c;
+            }
         } else {
-            model.jouer(selected, c);
-            selected = null;
+            if (selected != null) {
+                model.jouer(selected, c);
+                selected = null;
+            }
+            if (c.getPiece() == null) {
+                model.setCasesValides(new ArrayList<Case>());
+            }
+
         }
     }
 
