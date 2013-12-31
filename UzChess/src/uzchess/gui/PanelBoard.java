@@ -19,7 +19,6 @@ import javax.swing.SwingConstants;
 import uzchess.constantes.Couleur;
 import uzchess.core.domain.Case;
 import uzchess.core.domain.Piece;
-
 /**
  *
  * @author user

@@ -49,8 +49,8 @@ public class Initializer {
             cases[6][i].setPiece(PiecesFactory.createPiece(Pieces.PION, Couleur.BLANC));
             piecesN.put(cases[1][i].getPiece(), cases[1][i]);
             piecesB.put(cases[6][i].getPiece(), cases[6][i]);
-            sp.getPions().put(cases[6][i].getPiece(), Boolean.FALSE);
-            sp.getPions().put(cases[1][i].getPiece(), Boolean.FALSE);
+            sp.getPions().put(cases[6][i].getPiece(), false);
+            sp.getPions().put(cases[1][i].getPiece(), false);
             ((VerificateurPion) cases[6][i].getPiece().getDeplacement()).setSp(sp);
             ((VerificateurPion) cases[1][i].getPiece().getDeplacement()).setSp(sp);
         }

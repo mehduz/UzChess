@@ -18,18 +18,19 @@ import javax.swing.JTextArea;
  */
 public class PanelInfoTexte extends JPanel{
     
-    private static JTextArea jta;
+    private JTextArea jta;
+    private static final String DEFAULT_MSG = "\nBienvenue à UzChess !";
     
     public PanelInfoTexte(){
         super();
         this.setLayout(new BorderLayout());
-        jta = new JTextArea("\nBienvenue à UzChess ! ");
+        jta = new JTextArea(DEFAULT_MSG);
         this.add(jta, "Center");
         jta.setEditable(false);
         this.add(new JScrollPane(jta));
     }
 
-    public static JTextArea getJta() {
+    public JTextArea getJta() {
         return jta;
     }
    

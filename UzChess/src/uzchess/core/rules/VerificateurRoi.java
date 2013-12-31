@@ -13,7 +13,7 @@ public class VerificateurRoi implements Deplacement {
     private StatutTour st;
     private StatutRoi sr;
     private Echiquier ech;
-
+    private static VerificateurReine vr = new  VerificateurReine();
    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
@@ -26,7 +26,7 @@ public class VerificateurRoi implements Deplacement {
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
         
-        boolean condition2 = ((new VerificateurReine().verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1)) || verifierRoque(dep, arr, decLigne, noticeMove);
+        boolean condition2 = ((vr.verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1)) || verifierRoque(dep, arr, decLigne, noticeMove);
 
         if (condition2 ) {
             if (noticeMove) {

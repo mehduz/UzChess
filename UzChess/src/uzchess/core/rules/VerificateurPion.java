@@ -13,24 +13,34 @@ public class VerificateurPion implements Deplacement {
 
         Couleur c = dep.getPiece().getCouleur();
         Direction dir = dep.getDirection(arr);
-        if (arr.getPiece() == null) {
-            return verifAvance(dep, arr, c, dir);
-        }
-        return new VerificateurPionPrend().verifierDeplacement(dep, arr, noticeMove);
-    }
-
-    private boolean verifAvance(Case dep, Case arr, Couleur c, Direction dir) {
-
         byte ligDep = dep.getLigne();
         byte ligArr = arr.getLigne();
         byte dist = (byte) Math.abs(ligArr - ligDep);
-        boolean hasmoved = sp.getPions().get(dep.getPiece());
-        boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
-        boolean condition2 = dist == 1;
-        boolean condition3 = dist == 2 && !hasmoved;
 
-        if (condition1 && (condition2 || condition3)) {
-            sp.getPions().put(dep.getPiece(), hasmoved);
+        if (arr.getPiece() == null) {
+
+            boolean hasmoved = sp.getPions().get(dep.getPiece());
+            boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
+            boolean condition2 = dist == 1;
+            boolean condition3 = dist == 2 && !hasmoved;
+
+            if (condition1 && (condition2 || condition3)) {
+                if (noticeMove) {
+                    sp.getPions().put(dep.getPiece(), true);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        boolean condition1 = c == Couleur.BLANC && (dir == Direction.NE || dir == Direction.NO);
+        boolean condition2 = c == Couleur.NOIR && (dir == Direction.SE || dir == Direction.SO);
+        boolean condition3 = dist == 1;
+
+        if ((condition1 || condition2) && condition3) {
+            if (noticeMove) {
+                sp.getPions().put(dep.getPiece(), true);
+            }
             return true;
         }
         return false;
@@ -39,6 +49,5 @@ public class VerificateurPion implements Deplacement {
     public void setSp(StatutPion sp) {
         this.sp = sp;
     }
-    
-    
+
 }
