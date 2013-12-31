@@ -7,6 +7,7 @@ public class UzChess {
 
     private static String DEF_NAME1 = "Joueur 1 ";
     private static String DEF_NAME2 = "Joueur 2 ";
+    private static String DEF_MESSAGE = "Bienvenue à Uzchess";
 
     private UzChess() {
     }

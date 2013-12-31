@@ -29,7 +29,7 @@ public class VueJeu extends EchecsView {
     
     private static final int FRAME_WIDTH = 840;
     private static final int FRAME_HEIGHT = 840;
-    private static final int INFO_TEXT_HEIGHT = FRAME_HEIGHT / 7;
+    private static final int INFO_TEXT_HEIGHT = FRAME_HEIGHT / 9;
     private static final int INFO_SCORE_WIDTH = FRAME_WIDTH / 6;
     
     private PanelBoard panelBoard;

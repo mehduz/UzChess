@@ -12,8 +12,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import uzchess.constantes.Couleur;
 import uzchess.core.domain.Case;
+import uzchess.core.domain.Piece;
 
 /**
  *
@@ -24,7 +26,7 @@ public class PanelBoard extends JPanel {
     
      private static final Color SQUARES_COLOR_BLACK = new Color(200, 173, 127);
      private static final Color SQUARES_COLOR_WHITE = new Color(245, 245, 220);
-     private static final Font PIECE_FONT = new Font("" , Font.BOLD, 40);
+     private static final Font PIECE_FONT = new Font("" , Font.BOLD, 50);
      
      private Case[][] cases;
      
@@ -36,9 +38,11 @@ public class PanelBoard extends JPanel {
         for (byte i = 0; i < 8; i ++){
             for ( byte j = 0; j < 8; j ++){
                 JPanel square = new JPanel(new BorderLayout());
-                JLabel piece = new JLabel();
+                Piece p = cases[i][j].getPiece();
+                JLabel piece = new JLabel( (p != null && p.getRep() != null )?(String)p.getRep().dessinerPiece(): null );
+                piece.setHorizontalAlignment(SwingConstants.CENTER);
                 piece.setFont( PIECE_FONT );
-                piece.add(square);
+                square.add(piece);
                 this.add(square);
                 square.setBackground(( cases[i][j].getCouleur() == Couleur.NOIR ) ? SQUARES_COLOR_BLACK : SQUARES_COLOR_WHITE );
             }

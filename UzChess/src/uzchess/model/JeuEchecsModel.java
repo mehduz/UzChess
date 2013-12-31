@@ -19,6 +19,15 @@ public class JeuEchecsModel extends JeuEchecs{
     
     private EventListenerList listeners;
     
+    public static final String PION_G_N = "u+265F";
+    
+    /*public static final char FOU_G_N = '' ;
+    public static final char DAME_G_N ='' ;
+    public static final char ROI_G_N = '' ;
+    public static final char CAVALIER_G_N = '' ;
+    public static final char TOUR_G_N = '' ;*/
+    
+    
     public void addEchecsListener(EchecsListener l ){
         this.listeners.add(EchecsListener.class, l);
     }
