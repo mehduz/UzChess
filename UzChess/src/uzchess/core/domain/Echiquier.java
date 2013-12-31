@@ -81,21 +81,4 @@ public class Echiquier {
         return maListMenace;
     }
 
-    public ArrayList<Case> deplacementPossible(Piece piece) {
-
-        ArrayList<Case> casesP = new ArrayList<>();
-
-        Case caseV, dep;
-        dep = getPieces(piece.getCouleur()).get(piece);
-
-        for (byte i = 0; i < 8; i++) {
-            for (byte j = 0; j < 8; j++) {
-                caseV = getCases()[i][j];
-                if (piece.getDeplacement().verifierDeplacement(dep, caseV, false)) {
-                    casesP.add(caseV);
-                }
-            }
-        }
-        return casesP;
-    }
 }

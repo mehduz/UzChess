@@ -7,6 +7,10 @@ import uzchess.core.domain.Case;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Joueur;
 import uzchess.core.domain.Piece;
+import uzchess.core.rules.StatutPion;
+import uzchess.core.rules.StatutRoi;
+import uzchess.core.rules.StatutTour;
+import uzchess.core.rules.VerificateurPion;
 
 public class Initializer {
 
@@ -31,11 +35,17 @@ public class Initializer {
         HashMap<Piece, Case> piecesN = new HashMap<>();
         HashMap<Piece, Case> piecesB = new HashMap<>();
 
+        StatutPion sp = new StatutPion();
+
         for (i = 0; i < 8; i++) {
             cases[1][i].setPiece(PiecesFactory.createPiece(Pieces.PION, Couleur.NOIR));
             cases[6][i].setPiece(PiecesFactory.createPiece(Pieces.PION, Couleur.BLANC));
             piecesN.put(cases[1][i].getPiece(), cases[6][i]);
             piecesB.put(cases[6][i].getPiece(), cases[6][i]);
+            sp.getPions().put(cases[6][i].getPiece(), Boolean.FALSE);
+            sp.getPions().put(cases[1][i].getPiece(), Boolean.FALSE);
+            ((VerificateurPion) cases[6][i].getPiece().getDeplacement()).setSp(sp);
+            ((VerificateurPion) cases[1][i].getPiece().getDeplacement()).setSp(sp);
         }
 
         cases[0][4].setPiece(PiecesFactory.createPiece(Pieces.ROI, Couleur.NOIR));

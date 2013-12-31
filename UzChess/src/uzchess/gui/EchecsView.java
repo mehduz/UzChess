@@ -15,19 +15,19 @@ import uzchess.events.EchecsListener;
  */
 public abstract class EchecsView extends JFrame implements EchecsListener{
     
-    private EchecsControler CoreCtrl;
+    private EchecsControler ctrl;
 
     public EchecsView(EchecsControler CoreCtrl) {
         
-        this.CoreCtrl = CoreCtrl;
+        this.ctrl = CoreCtrl;
     }
 
-    public EchecsControler getCoreCtrl() {
-        return CoreCtrl;
+    public EchecsControler getCtrl() {
+        return ctrl;
     }
 
-    public void setCoreCtrl(EchecsControler CoreCtrl) {
-        this.CoreCtrl = CoreCtrl;
+    public void setCoreCtrl(EchecsControler ctrl) {
+        this.ctrl = ctrl; 
     }
     
     public abstract void display();

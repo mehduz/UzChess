@@ -15,7 +15,7 @@ public class VerificateurCavalier implements Deplacement {
         byte depVer = (byte) Math.abs(ligCaseArr - ligCaseDep);
         byte depHor = (byte) Math.abs(colCaseArr - colCaseDep);
 
-        return (depVer <= 2) && (depHor <= 2) && (depHor != depVer);
+        return (depVer == 2) && (depHor == 1) || (depHor == 2 ) && (depVer == 1);
     }
 
 }

@@ -6,6 +6,7 @@
 
 package uzchess.controllers;
 
+import uzchess.core.domain.Case;
 import uzchess.gui.EchecsView;
 import uzchess.model.JeuEchecsModel;
 
@@ -33,5 +34,12 @@ public class EchecsControler {
     public void setModel(JeuEchecsModel model) {
         this.model = model;
     }
+
+    public void notifyCaseSelect(Case c) {
+        
+        if( c.getPiece()!= null && c.getPiece().getCouleur() == model.getTour()){
+            model.setCasesValides(model.getMoteurDeJeu().deplacementPossible(c.getPiece()));
+        }
+    } 
     
 }

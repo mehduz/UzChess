@@ -40,7 +40,7 @@ public class JeuEchecs {
 
     public boolean jouer(Case dep, Case arr) {
 
-        if (moteurDeJeu.verifierCoup(dep, arr)) {
+        if (moteurDeJeu.verifierCoup(dep, arr, true)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr != null) ? 0 : (byte) (compteurCoups + 1);
 

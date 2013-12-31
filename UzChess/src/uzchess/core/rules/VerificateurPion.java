@@ -35,4 +35,10 @@ public class VerificateurPion implements Deplacement {
         }
         return false;
     }
+
+    public void setSp(StatutPion sp) {
+        this.sp = sp;
+    }
+    
+    
 }

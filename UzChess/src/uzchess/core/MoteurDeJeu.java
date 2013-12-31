@@ -23,16 +23,35 @@ public class MoteurDeJeu {
         this.jeu = jeu;
     }
 
-    public boolean verifierCoup(Case dep, Case arr) {
+    public boolean verifierCoup(Case dep, Case arr, boolean notify) {
         
-        Couleur couleur;
-        couleur = jeu.getTour();
+        Couleur couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
-            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, true);
+            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, notify);
         }
         return false;
     }
 
+    
+    public ArrayList<Case> deplacementPossible(Piece piece) {
+
+        ArrayList<Case> casesP = new ArrayList<>();
+
+        Case caseV, dep;
+        dep = ech.getPieces(piece.getCouleur()).get(piece);
+
+        for (byte i = 0; i < 8; i++) {
+            for (byte j = 0; j < 8; j++) {
+                caseV = ech.getCases()[i][j];
+                if ( verifierCoup(dep, caseV, false)) {
+                    casesP.add(caseV);
+                }
+            }
+        }
+        return casesP;
+    }
+    
+    
     public boolean detecterEchec() {
 
         Couleur c = jeu.getTour();
@@ -46,7 +65,7 @@ public class MoteurDeJeu {
         Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
 
-        ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
+        ArrayList<Case> depPossible = deplacementPossible(caseRoiAChecker.getPiece());
         if (!depPossible.isEmpty()) {
             for (Case ca : depPossible) {
                 if (ech.isMenace(ca).isEmpty()) {
@@ -85,7 +104,7 @@ public class MoteurDeJeu {
         Couleur c = jeu.getTour();
         Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
 
-        ArrayList<Case> depPossible = ech.deplacementPossible(caseRoiAChecker.getPiece());
+        ArrayList<Case> depPossible = deplacementPossible(caseRoiAChecker.getPiece());
 
         if (!depPossible.isEmpty()) {
             for (Case ca : depPossible) {
@@ -97,7 +116,7 @@ public class MoteurDeJeu {
 
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
-            if (!ech.deplacementPossible(entry.getKey()).isEmpty()) {
+            if (!deplacementPossible(entry.getKey()).isEmpty()) {
                 return false;
             }
         }

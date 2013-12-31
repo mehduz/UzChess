@@ -7,7 +7,6 @@
 package uzchess.events;
 
 import java.util.EventObject;
-import uzchess.core.domain.Case;
 
 /**
  *
@@ -15,15 +14,7 @@ import uzchess.core.domain.Case;
  */
 public class EchecsChangedEvent extends EventObject{
     
-    private Case[][] cases;
-    
-    public EchecsChangedEvent(Object source, Case[][] cases){
-        super(source);
-        this.cases = cases;    
+    public EchecsChangedEvent(Object source ){
+        super(source);  
     }
-
-    public Case[][] getCases() {
-        return this.cases;
-    }
-   
 }
