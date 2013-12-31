@@ -22,6 +22,7 @@ public class JeuEchecs {
     private boolean mat;
     private boolean pat;
     private boolean nul;
+    private boolean invalide;
 
     public JeuEchecs() {
 
@@ -32,6 +33,7 @@ public class JeuEchecs {
         this.pat = false;
         this.nul = false;
         this.nomPartie = "";
+        this.invalide = false;
     }
 
     public void initialiser(String j1, String j2) {
@@ -57,7 +59,6 @@ public class JeuEchecs {
             echec = moteurDeJeu.detecterEchec();
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             this.detecterFin();
-
             return true;
         }
         return false;
@@ -122,6 +123,14 @@ public class JeuEchecs {
 
     public Joueur getJb() {
         return jb;
+    }
+
+    public boolean isInvalide() {
+        return invalide;
+    }
+
+    public void setInvalide(boolean invalide) {
+        this.invalide = invalide;
     }
 
     public void setJb(Joueur jb) {

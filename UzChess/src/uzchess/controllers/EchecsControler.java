@@ -18,6 +18,7 @@ public class EchecsControler {
     
     private EchecsView view;
     private JeuEchecsModel model = null;
+    private Case selected;
     
     public void displayView(){
         view.display();
@@ -37,8 +38,15 @@ public class EchecsControler {
 
     public void notifyCaseSelect(Case c) {
         
+        model.setCasesToClean(model.getCasesValides());
         if( c.getPiece()!= null && c.getPiece().getCouleur() == model.getTour()){
             model.setCasesValides(model.getMoteurDeJeu().deplacementPossible(c.getPiece()));
+            if (selected == null){
+                selected = c;
+            }else{
+                model.jouer(selected, c);
+                selected = null;
+            }
         }
     } 
     

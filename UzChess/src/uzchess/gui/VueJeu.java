@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
@@ -24,7 +26,7 @@ import uzchess.model.JeuEchecsModel;
  *
  * @author mehduz
  */
-public class VueJeu extends EchecsView implements MouseListener{
+public class VueJeu extends EchecsView implements MouseListener, ActionListener {
 
     private static final String TITRE = "UzChess";
 
@@ -71,14 +73,24 @@ public class VueJeu extends EchecsView implements MouseListener{
 
     @Override
     public void echecsChanged(EchecsChangedEvent event) {
-        JeuEchecsModel jeu = (JeuEchecsModel)event.getSource();
+        
+        JeuEchecsModel jeu = (JeuEchecsModel) event.getSource();
         this.panelBoard.setCases(jeu.getEchiquier().getCases());
-        for(Case c : jeu.getCasesValides()){
+        
+        for (Case c : jeu.getCasesToClean()) {
+            byte lig = c.getLigne();
+            byte col = c.getColonne();
+            panelBoard.getSquares()[lig][col].setBorder(null);
+        }
+        
+        for (Case c : jeu.getCasesValides()) {
             byte lig = c.getLigne();
             byte col = c.getColonne();
             panelBoard.getSquares()[lig][col].setBorder(BorderFactory.createLineBorder(Color.green, 3));
         }
+        
         this.repaint();
+        
     }
 
     @Override
@@ -90,32 +102,40 @@ public class VueJeu extends EchecsView implements MouseListener{
     public void close() {
         this.dispose();
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
-      
-        if (((HashMap)panelBoard.getMapPieces()).containsKey(e.getSource())) {
+
+        if (((HashMap) panelBoard.getMapPieces()).containsKey(e.getSource())) {
             this.getCtrl().notifyCaseSelect(panelBoard.getMapPieces().get(e.getSource()));
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-       
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-       
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
         
-    } 
+        if (e.getSource() == panelInfoSide.getButtonExit()) {
+            this.close();
+        }
+    }
 }

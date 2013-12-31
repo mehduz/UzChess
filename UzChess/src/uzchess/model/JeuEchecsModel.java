@@ -21,11 +21,13 @@ public class JeuEchecsModel extends JeuEchecs{
     
     private EventListenerList listeners;
     private ArrayList<Case> casesValides;
+    private ArrayList<Case> casesToClean;
   
     public JeuEchecsModel(){
         super();
         this.listeners = new EventListenerList();
         this.casesValides = new ArrayList<>();
+        this.casesToClean = new ArrayList<>();
     }
     
     public void addEchecsListener(EchecsListener l ){
@@ -50,8 +52,19 @@ public class JeuEchecsModel extends JeuEchecs{
         fireEchecsChanged();
     }
 
+    public void setCasesToClean(ArrayList<Case> casesToClean){
+        this.casesToClean = casesToClean;
+        fireEchecsChanged();
+    }
+    
     public ArrayList<Case> getCasesValides() {
         return this.casesValides; 
     }
+
+    public ArrayList<Case> getCasesToClean() {
+        return casesToClean;
+    }
+    
+    
     
 }
