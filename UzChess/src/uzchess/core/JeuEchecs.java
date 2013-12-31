@@ -40,17 +40,17 @@ public class JeuEchecs {
         Initializer.initialiserPartie(j1, j2, this);
     }
 
-    public boolean jouer(Case dep, Case arr) {
+    public void jouer(Case dep, Case arr) {
 
         if (moteurDeJeu.verifierCoup(dep, arr, true)) {
 
-            compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr != null) ? 0 : (byte) (compteurCoups + 1);
+            compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
 
             HashMap<Piece, Case> hm = (tour == Couleur.BLANC) ? echiquier.getPiecesB() : echiquier.getPiecesN();
             Joueur j = (tour == Couleur.BLANC) ? jb : jn;
             hm.put(dep.getPiece(), arr);
 
-            if (arr != null) {
+            if (arr.getPiece() != null) {
                 j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
                 hm.remove(arr.getPiece());
             }
@@ -59,9 +59,9 @@ public class JeuEchecs {
             echec = moteurDeJeu.detecterEchec();
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             this.detecterFin();
-            return true;
+            this.invalide = false;
         }
-        return false;
+        this.invalide = true;
     }
 
     public void detecterFin() {

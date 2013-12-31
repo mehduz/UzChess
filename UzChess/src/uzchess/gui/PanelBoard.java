@@ -9,6 +9,7 @@ package uzchess.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -40,26 +41,40 @@ public class PanelBoard extends JPanel {
         super();
         mapPieces = new HashMap<>();
         this.cases = cases;
-        this.squares = new JPanel[8][8];
         this.vue = vue;
+        this.squares = new JPanel[8][8];
         this.setLayout( new GridLayout(8, 8) );
         
-        for (byte i = 0; i < 8; i ++){
+         for (byte i = 0; i < 8; i ++){
             for ( byte j = 0; j < 8; j ++){
                 squares[i][j] = new JPanel(new BorderLayout());
-                Piece p = cases[i][j].getPiece();
-                JLabel piece = new JLabel( (p != null  )?(String)p.getRep().dessinerPiece(): null );
+                this.add(squares[i][j]);
+                squares[i][j].setBackground(( cases[i][j].getCouleur() == Couleur.NOIR ) ? SQUARES_COLOR_BLACK : SQUARES_COLOR_WHITE );
+                JLabel piece = new JLabel();
                 piece.setHorizontalAlignment(SwingConstants.CENTER);
                 piece.setFont( PIECE_FONT );
                 squares[i][j].add(piece);
-                this.add(squares[i][j]);
-                squares[i][j].setBackground(( cases[i][j].getCouleur() == Couleur.NOIR ) ? SQUARES_COLOR_BLACK : SQUARES_COLOR_WHITE );
-                mapPieces.put(squares[i][j], cases[i][j]);
                 squares[i][j].addMouseListener(this.vue);
             }
-        } 
+         }
+         
+         this.repaint();
      } 
-
+         
+    
+    @Override
+    protected void paintComponent(Graphics g){
+        
+        this.mapPieces = new HashMap<>();
+        for (byte i = 0; i < 8; i ++){
+            for ( byte j = 0; j < 8; j ++){
+                Piece p = cases[i][j].getPiece();
+                ((JLabel)squares[i][j].getComponent(0)).setText((p != null  )?(String)p.getRep().dessinerPiece(): null);
+                mapPieces.put(squares[i][j], cases[i][j]);
+            }
+        } 
+    } 
+    
     public AbstractMap<JPanel, Case> getMapPieces() {
         return mapPieces; 
     }

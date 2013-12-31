@@ -63,8 +63,11 @@ public class JeuEchecsModel extends JeuEchecs{
 
     public ArrayList<Case> getCasesToClean() {
         return casesToClean;
+    } 
+    
+    public void jouer(Case dep, Case arr){
+        super.jouer(dep, arr);
+        fireEchecsChanged();
     }
-    
-    
     
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uzchess.controllers;
 
 import uzchess.core.domain.Case;
@@ -15,12 +14,12 @@ import uzchess.model.JeuEchecsModel;
  * @author user
  */
 public class EchecsControler {
-    
+
     private EchecsView view;
     private JeuEchecsModel model = null;
     private Case selected;
-    
-    public void displayView(){
+
+    public void displayView() {
         view.display();
     }
 
@@ -37,17 +36,19 @@ public class EchecsControler {
     }
 
     public void notifyCaseSelect(Case c) {
-        
+
         model.setCasesToClean(model.getCasesValides());
-        if( c.getPiece()!= null && c.getPiece().getCouleur() == model.getTour()){
+        
+        if (c.getPiece() != null && c.getPiece().getCouleur() == model.getTour()) {
             model.setCasesValides(model.getMoteurDeJeu().deplacementPossible(c.getPiece()));
-            if (selected == null){
-                selected = c;
-            }else{
-                model.jouer(selected, c);
-                selected = null;
-            }
         }
-    } 
-    
+
+        if (selected == null) {
+            selected = c;
+        } else {
+            model.jouer(selected, c);
+            selected = null;
+        }
+    }
+
 }

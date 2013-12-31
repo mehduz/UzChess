@@ -24,7 +24,9 @@ public class Initializer {
 
         Joueur jb = new Joueur(Couleur.BLANC, njb, (byte) 0);
         Joueur jn = new Joueur(Couleur.NOIR, njn, (byte) 0);
-
+        jeu.setJb(jb);
+        jeu.setJn(jn);
+        
         Case[][] cases = new Case[8][8];
 
         byte i, j;

@@ -52,7 +52,7 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.panelBoard = new PanelBoard(cases, this);
-        this.panelInfoSide = new PanelInfoSide();
+        this.panelInfoSide = new PanelInfoSide( this );
         this.panelInfoTexte = new PanelInfoTexte();
         this.initialise();
     }
@@ -76,21 +76,20 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         
         JeuEchecsModel jeu = (JeuEchecsModel) event.getSource();
         this.panelBoard.setCases(jeu.getEchiquier().getCases());
-        
+         
         for (Case c : jeu.getCasesToClean()) {
             byte lig = c.getLigne();
             byte col = c.getColonne();
             panelBoard.getSquares()[lig][col].setBorder(null);
         }
-        
+         
         for (Case c : jeu.getCasesValides()) {
             byte lig = c.getLigne();
             byte col = c.getColonne();
             panelBoard.getSquares()[lig][col].setBorder(BorderFactory.createLineBorder(Color.green, 3));
         }
-        
-        this.repaint();
-        
+       
+        this.panelBoard.repaint();
     }
 
     @Override

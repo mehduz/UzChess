@@ -36,10 +36,12 @@ public class PanelInfoSide extends JPanel {
     private JButton buttonLoad;
     private JButton buttonSave;
     private JButton buttonExit;
+    private VueJeu vue;
 
-    public PanelInfoSide() {
+    public PanelInfoSide(VueJeu vue) {
 
         super(new BorderLayout());
+        this.vue = vue;
         menu = new JPanel();
         menu.setLayout(new GridLayout(4, 1, 0, 10));
 
@@ -80,6 +82,8 @@ public class PanelInfoSide extends JPanel {
         this.add(menu, "North");
         this.add(listeCoups, "Center");
         this.add(infoScore, "South");
+        
+        buttonExit.addActionListener(vue);
 
     }
 

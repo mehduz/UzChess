@@ -78,7 +78,9 @@ public class MoteurDeJeu {
         if (casesMenace.size() > 1) {
             return true;
         }
-
+        if(casesMenace.isEmpty() ){
+            return false;
+        }
         Case caseMenace = casesMenace.listIterator().next();
         ArrayList<Case> casesInterception = new ArrayList<>();
 
