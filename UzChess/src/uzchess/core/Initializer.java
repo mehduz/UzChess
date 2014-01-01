@@ -17,9 +17,6 @@ import uzchess.core.rules.VerificateurTour;
 
 public class Initializer {
 
-    private Initializer() {
-    }
-
     public static void initialiserPartie(String njb, String njn, JeuEchecs jeu) {
 
         Joueur jb = new Joueur(Couleur.BLANC, njb, (byte) 0);

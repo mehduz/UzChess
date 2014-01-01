@@ -9,9 +9,6 @@ import uzchess.gui.RepPieceUnicode;
 
 public class PiecesFactory {
 
-    private PiecesFactory() {
-    }
-    
     public static Piece createPiece(Pieces p, Couleur c) {
 
         Piece piece = new Piece();

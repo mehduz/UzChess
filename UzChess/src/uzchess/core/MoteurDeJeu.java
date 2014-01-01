@@ -13,7 +13,6 @@ import uzchess.core.rules.VerificateurCavalier;
 public class MoteurDeJeu {
 
     private boolean echec;
-
     private Echiquier ech;
     private JeuEchecs jeu;
 
