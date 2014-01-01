@@ -85,5 +85,4 @@ public class VerificateurRoi implements Deplacement {
     public void setSr(StatutRoi sr) {
         this.sr = sr;
     }
-
 }

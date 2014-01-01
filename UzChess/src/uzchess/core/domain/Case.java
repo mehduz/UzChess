@@ -54,7 +54,7 @@ public class Case {
         int lArr = arr.getLigne();
         int cArr = arr.getColonne();
 
-        Direction dir = null;
+        Direction dir;
 
         if (lArr == lDep && cArr > cDep ) {
             dir = Direction.E ;
