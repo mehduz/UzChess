@@ -79,6 +79,29 @@ public class Echiquier {
             }
         }
         return maListMenace;
-    }
+    } 
 
+     public void deplacer(Case dep, Case arr) {
+         
+        HashMap<Piece, Case> hm ; 
+        HashMap<Piece, Case> hmAdv; 
+        Piece p = dep.getPiece();
+        if(p.getCouleur() == Couleur.BLANC){
+            hm = piecesB;
+            hmAdv = piecesN;
+        }
+        else
+        {
+           hm = piecesN;
+           hmAdv = piecesB;
+        }
+      
+        hm.put(p, arr);
+        if (arr.getPiece() != null) {
+            hmAdv.remove(arr.getPiece());
+        }
+        arr.setPiece( p ); 
+        dep.setPiece( null );
+    }
+    
 }

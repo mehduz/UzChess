@@ -1,11 +1,9 @@
 package uzchess.core;
 
-import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.core.domain.Case;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Joueur;
-import uzchess.core.domain.Piece;
 import uzchess.core.rules.VerificateurPion;
 
 public class JeuEchecs {
@@ -45,18 +43,11 @@ public class JeuEchecs {
         if (moteurDeJeu.verifierCoup(dep, arr, true)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
-
-            HashMap<Piece, Case> hm = (tour == Couleur.BLANC) ? echiquier.getPiecesB() : echiquier.getPiecesN();
-            HashMap<Piece, Case> hmAdv = (tour == Couleur.BLANC) ? echiquier.getPiecesN() : echiquier.getPiecesB();
             Joueur j = (tour == Couleur.BLANC) ? jb : jn;
-            hm.put(dep.getPiece(), arr);
-
-            if (arr.getPiece() != null) {
-                j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
-                hmAdv.remove(arr.getPiece());
+            if(arr.getPiece() != null){
+               j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
-            
-            dep.getPiece().deplacer(dep, arr);
+            echiquier.deplacer(dep, arr);
             echec = moteurDeJeu.detecterEchec();
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             this.detecterFin();
