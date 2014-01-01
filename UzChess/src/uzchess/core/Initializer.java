@@ -99,6 +99,11 @@ public class Initializer {
         ((VerificateurTour) cases[7][0].getPiece().getDeplacement()).setSt(st);
         ((VerificateurTour) cases[0][7].getPiece().getDeplacement()).setSt(st);
         ((VerificateurTour) cases[7][7].getPiece().getDeplacement()).setSt(st);
+        
+        st.getTours().put(cases[0][0].getPiece(), false);
+        st.getTours().put(cases[7][0].getPiece(), false);
+        st.getTours().put(cases[0][7].getPiece(), false);
+        st.getTours().put(cases[7][7].getPiece(), false);
 
         piecesN.put(cases[0][0].getPiece(), cases[0][0]);
         piecesN.put(cases[0][7].getPiece(), cases[0][7]);

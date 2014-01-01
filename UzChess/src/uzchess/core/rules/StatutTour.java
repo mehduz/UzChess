@@ -1,84 +1,22 @@
 package uzchess.core.rules;
 
-import uzchess.constantes.TypeTour;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import uzchess.core.domain.Piece;
 
 public class StatutTour {
 
-    private boolean tourBOMoved;
-    private boolean tourBEMoved;
-    private boolean tourNEMoved;
-    private boolean tourNOMoved;
-
-    public void setTourMoved(TypeTour t, boolean val) {
-        switch (t) {
-            case TBE:
-                setTourBEMoved(val);
-                break;
-            case TBO:
-                setTourBOMoved(val);
-                break;
-            case TNE:
-                setTourNEMoved(val);
-                break;
-            case TNO:
-                setTourNOMoved(val);
-                break;
-            default:
-                break;
-        }
+   private AbstractMap<Piece, Boolean> tours;
+  
+    public StatutTour() {
+        this.tours = new HashMap<>();
     }
 
-    private boolean isTourBOMoved() {
-        return tourBOMoved;
+    public AbstractMap<Piece, Boolean> getTours() {
+        return tours;
     }
 
-    private boolean isTourBEMoved() {
-        return tourBEMoved;
-    }
-
-    private boolean isTourNEMoved() {
-        return tourNEMoved;
-    }
-
-    private boolean isTourNOMoved() {
-        return tourNOMoved;
-    }
-
-    private void setTourBOMoved(boolean tourBOMoved) {
-        this.tourBOMoved = tourBOMoved;
-    }
-
-    private void setTourBEMoved(boolean tourBEMoved) {
-        this.tourBEMoved = tourBEMoved;
-    }
-
-    private void setTourNEMoved(boolean tourNEMoved) {
-        this.tourNEMoved = tourNEMoved;
-    }
-
-    private void setTourNOMoved(boolean tourNOMoved) {
-        this.tourNOMoved = tourNOMoved;
-    }
-
-    public boolean isTourMoved(TypeTour t) {
-        boolean ret = false;
-        switch (t) {
-            case TBE:
-                ret = isTourBEMoved();
-                break;
-            case TBO:
-                ret = isTourBOMoved();
-                break;
-            case TNE:
-                ret = isTourNEMoved();
-                break;
-            case TNO:
-                ret = isTourNOMoved();
-                break;
-            default:
-                break;
-        }
-        return ret;
-    }
-
+    public void setTours(AbstractMap<Piece, Boolean> tours) {
+        this.tours = tours;
+    } 
 }
