@@ -6,14 +6,15 @@ import uzchess.core.domain.Case;
 import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.CheckCasesInterUtility;
 import uzchess.core.domain.Echiquier;
+import uzchess.core.domain.Piece;
 
-public class VerificateurRoi implements Deplacement { 
+public class VerificateurRoi implements Deplacement {
 
     private StatutTour st;
     private StatutRoi sr;
     private Echiquier ech;
-    private static VerificateurReine vr = new  VerificateurReine();
-   
+    private static VerificateurReine vr = new VerificateurReine();
+
     @Override
     public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
 
@@ -24,25 +25,29 @@ public class VerificateurRoi implements Deplacement {
 
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
-        
+
         boolean condition = ((vr.verifierDeplacement(dep, arr, false)) && (decLigne <= 1 && decColonne <= 1));
-        boolean condition2 = verifierRoque(dep, arr, decColonne);
+        boolean condition2 = verifierRoque(dep, arr, decColonne, ligCaseDep, colCaseDep);
 
         if (condition || condition2) {
             if (noticeMove) {
                 sr.setRoiMoved(dep.getPiece().getCouleur());
-                if(condition2){
+                if (dep.getPiece().getCouleur() == Couleur.BLANC) {
+                    ech.setCaseRoiB(arr);
+                } else {
+                    ech.setCaseRoiN(arr);
+                }
+                if (condition2) {
                     Case rDep, rArr;
-                    if(decColonne == 3){
+                    if (decColonne == 3) {
                         rDep = ech.getCases()[ligCaseDep][colCaseDep - 4];
                         rArr = ech.getCases()[ligCaseDep][colCaseDep - 2];
-                    }
-                    else
-                    {
+                    } else {
                         rDep = ech.getCases()[ligCaseDep][colCaseDep + 3];
                         rArr = ech.getCases()[ligCaseDep][colCaseDep + 1];
                     }
                     ech.deplacer(rDep, rArr);
+                    st.getTours().put(rDep.getPiece(), true);
                 }
             }
             return true;
@@ -50,16 +55,22 @@ public class VerificateurRoi implements Deplacement {
         return false;
     }
 
-    private boolean verifierRoque(Case dep, Case arr, byte decColonne) {
+    private boolean verifierRoque(Case dep, Case arr, byte decColonne, byte ligCaseDep, byte colCaseDep) {
 
-        Couleur col = dep.getPiece().getCouleur();
         Direction dir = dep.getDirection(arr);
+        Piece p1, p2;
+        Case c1, c2;
 
-        boolean condition1 = !(sr.isRoiMoved(col)) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
+        boolean condition1 = !(sr.isRoiMoved(dep.getPiece().getCouleur())) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
         boolean condition2 = (decColonne == 3) && (dir == Direction.O);
         boolean condition3 = (decColonne == 2) && (dir == Direction.E);
-      
-        return condition1 && ( condition2 || condition3 );
+        if (!condition1) {
+            return false;
+        }
+        boolean condition4 = (c1 = ech.getCases()[ligCaseDep][colCaseDep - 4]) != null && (p1 = c1.getPiece()) != null && !st.getTours().get(p1);
+        boolean condition5 = (c2 = ech.getCases()[ligCaseDep][colCaseDep + 3]) != null && (p2 = c2.getPiece()) != null && !st.getTours().get(p2);
+
+        return (condition2 && condition4) || (condition3 && condition5);
 
     }
 
@@ -74,5 +85,5 @@ public class VerificateurRoi implements Deplacement {
     public void setSr(StatutRoi sr) {
         this.sr = sr;
     }
-    
+
 }

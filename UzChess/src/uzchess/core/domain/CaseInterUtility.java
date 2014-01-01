@@ -53,6 +53,9 @@ public class CaseInterUtility {
 
     private static ArrayList<Case> getO(Case caseDep, Case caseArr) {
         ArrayList<Case> maListInter = new ArrayList<>();
+        if (caseDep == caseArr) {
+            return maListInter;
+        }
         byte iCol = (byte) (caseDep.getColonne() - 1);
         while (iCol != caseArr.getColonne()) {
             maListInter.add(cases[caseDep.getLigne()][iCol]);

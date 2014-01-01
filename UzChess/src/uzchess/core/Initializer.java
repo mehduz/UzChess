@@ -57,6 +57,8 @@ public class Initializer {
 
         ((VerificateurRoi) cases[0][4].getPiece().getDeplacement()).setSr(sr);
         ((VerificateurRoi) cases[7][4].getPiece().getDeplacement()).setSr(sr);
+        ((VerificateurRoi) cases[0][4].getPiece().getDeplacement()).setSt(st);
+        ((VerificateurRoi) cases[7][4].getPiece().getDeplacement()).setSt(st);
 
         piecesN.put(cases[0][4].getPiece(), cases[0][4]);
         piecesB.put(cases[7][4].getPiece(), cases[7][4]);
