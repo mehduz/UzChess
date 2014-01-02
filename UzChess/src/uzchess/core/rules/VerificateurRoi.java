@@ -10,8 +10,14 @@ import uzchess.core.domain.Piece;
 public class VerificateurRoi implements Deplacement {
     
     private Echiquier ech;
-    private static VerificateurReine vr = new VerificateurReine();
+    private static VerificateurReine vr;
 
+     public VerificateurRoi(){
+        vr = new VerificateurReine();
+        ech = null;
+     }
+    
+    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
 
@@ -41,15 +47,17 @@ public class VerificateurRoi implements Deplacement {
         if (!condition1) {
             return false;
         }
-        boolean condition4 = (c1 = ech.getCases()[ligCaseDep][colCaseDep - 4]) != null && (p1 = c1.getPiece()) != null && !ech.getSt().getTours().get(p1);
-        boolean condition5 = (c2 = ech.getCases()[ligCaseDep][colCaseDep + 3]) != null && (p2 = c2.getPiece()) != null && !ech.getSt().getTours().get(p2);
+        c1 = ech.getCases()[ligCaseDep][colCaseDep - 4];
+        c2 = ech.getCases()[ligCaseDep][colCaseDep + 3];
+        boolean condition4 = (p1 = c1.getPiece()) != null && !ech.getSt().getTours().get(p1);
+        boolean condition5 = (p2 = c2.getPiece()) != null && !ech.getSt().getTours().get(p2);
 
-        return (condition2 && condition4) || (condition3 && condition5);
+        return (condition2 && condition4) || (condition3 && condition5); 
 
     }
 
     public void setEch(Echiquier ech) {
         this.ech = ech;
-    }
- 
+    } 
+    
 }

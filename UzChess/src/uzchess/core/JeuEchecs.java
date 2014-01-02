@@ -24,14 +24,14 @@ public class JeuEchecs {
 
     public JeuEchecs() {
 
-        this.compteurCoups = 0;
-        this.tour = Couleur.BLANC;
-        this.mat = false;
-        this.echec = false;
-        this.pat = false;
-        this.nul = false;
-        this.nomPartie = "";
-        this.invalide = false;
+        compteurCoups = 0;
+        tour = Couleur.BLANC;
+        mat = false;
+        echec = false;
+        pat = false;
+        nul = false;
+        nomPartie = "";
+        invalide = false;
     }
 
     public void initialiser(String j1, String j2) {
@@ -51,9 +51,9 @@ public class JeuEchecs {
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             echec = moteurDeJeu.detecterEchec(tour);
             this.detecterFin();
-            this.invalide = false;
+            invalide = false;
         }
-        this.invalide = true;
+        invalide = true;
     }
 
     public void detecterFin() {
@@ -81,12 +81,12 @@ public class JeuEchecs {
         return echiquier;
     }
 
-    public void setMoteurDeJeu(MoteurDeJeu moteurDeJeu) {
-        this.moteurDeJeu = moteurDeJeu;
+    public void setMoteurDeJeu(MoteurDeJeu mdj) {
+        moteurDeJeu = mdj;
     }
 
-    public void setEchiquier(Echiquier echiquier) {
-        this.echiquier = echiquier;
+    public void setEchiquier(Echiquier ech) {
+        echiquier = ech;
     }
 
     public Joueur getJn() {
@@ -121,8 +121,8 @@ public class JeuEchecs {
         return invalide;
     }
 
-    public void setInvalide(boolean invalide) {
-        this.invalide = invalide;
+    public void setInvalide(boolean inv) {
+        invalide = inv;
     }
 
     public void setJb(Joueur jb) {

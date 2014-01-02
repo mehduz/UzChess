@@ -26,8 +26,7 @@ public class Initializer {
         byte i, j;
         for (i = 0; i < 8; i++) {
             for (j = 0; j < 8; j++) {
-                cases[i][j] = new Case(i, j);
-                cases[i][j].setCouleur((i % 2 == 0) ? (j % 2 == 0) ? Couleur.BLANC : Couleur.NOIR : (j % 2 == 0) ? Couleur.NOIR : Couleur.BLANC);
+                cases[i][j] = new Case(i, j, (i % 2 == 0) ? (j % 2 == 0) ? Couleur.BLANC : Couleur.NOIR : (j % 2 == 0) ? Couleur.NOIR : Couleur.BLANC);
             }
         }
 

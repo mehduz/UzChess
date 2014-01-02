@@ -9,7 +9,7 @@ public class StatutTour {
    private AbstractMap<Piece, Boolean> tours;
   
     public StatutTour() {
-        this.tours = new HashMap<>();
+        tours = new HashMap<>();
     }
 
     public AbstractMap<Piece, Boolean> getTours() {

@@ -10,17 +10,20 @@ public class Case {
     private byte colonne;
     private Piece piece;
 
-    public Case(byte ligne, byte colonne) {
-        this.ligne = ligne;
-        this.colonne = colonne;
-    }
+    public Case(byte l, byte col, Couleur c) {
+        
+        ligne = l;
+        colonne = col; 
+        couleur = c;
+        piece = null;
+    } 
 
     public Couleur getCouleur() {
         return couleur;
     }
 
-    public void setCouleur(Couleur couleur) {
-        this.couleur = couleur;
+    public void setCouleur(Couleur c) {
+        couleur = c;
     }
 
     public byte getLigne() {
@@ -49,8 +52,8 @@ public class Case {
 
     public Direction getDirection(Case arr) {
 
-        int lDep = this.getLigne();
-        int cDep = this.getColonne();
+        int lDep = ligne;
+        int cDep = colonne;
         int lArr = arr.getLigne();
         int cArr = arr.getColonne();
 

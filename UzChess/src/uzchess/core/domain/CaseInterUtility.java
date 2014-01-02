@@ -7,9 +7,6 @@ public class CaseInterUtility {
 
     private static Case[][] cases;
 
-    private CaseInterUtility() {
-    }
-
     public static void setCases(Case[][] cases) {
         CaseInterUtility.cases = cases;
     }

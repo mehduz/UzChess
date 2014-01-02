@@ -35,13 +35,13 @@ public class MoteurDeJeu {
 
         Piece a = arr.getPiece();
         ech.deplacer(dep, arr);
-        boolean echec = detecterEchec(jeu.getTour());
+        boolean isEchec = detecterEchec(jeu.getTour());
         ech.deplacer(arr, dep);
         if (a != null) {
             arr.setPiece(a);
             ech.getPieces(a.getCouleur()).put(a, arr);
         }
-        return !echec;
+        return !isEchec;
     }
 
     public ArrayList<Case> deplacementPossible(Piece piece) {
