@@ -7,7 +7,7 @@ import uzchess.core.domain.CheckCasesInterUtility;
 public class VerificateurFou implements Deplacement {
 
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
+    public boolean verifierDeplacement(Case dep, Case arr ) {
 
         byte ligCaseDep = dep.getLigne();
         byte colCaseDep = dep.getColonne();

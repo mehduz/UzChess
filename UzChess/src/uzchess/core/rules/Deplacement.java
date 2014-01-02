@@ -4,7 +4,7 @@ import uzchess.core.domain.Case;
 
 public interface Deplacement {
 
-    boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove);
+    boolean verifierDeplacement(Case dep, Case arr );
 
 }
  

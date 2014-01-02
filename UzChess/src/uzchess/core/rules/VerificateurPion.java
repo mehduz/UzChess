@@ -6,10 +6,8 @@ import uzchess.core.domain.Case;
 
 public class VerificateurPion implements Deplacement {
 
-    private StatutPion sp;
-
     @Override
-    public boolean verifierDeplacement(Case dep, Case arr, boolean noticeMove) {
+    public boolean verifierDeplacement(Case dep, Case arr ) {
 
         Couleur c = dep.getPiece().getCouleur();
         Direction dir = dep.getDirection(arr);
@@ -19,35 +17,21 @@ public class VerificateurPion implements Deplacement {
 
         if (arr.getPiece() == null) {
 
-            boolean hasmoved = sp.getPions().get(dep.getPiece());
+            boolean hasmoved = (ligDep != 6 && ligDep != 1);
             boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
             boolean condition2 = dist == 1;
             boolean condition3 = dist == 2 && !hasmoved;
 
-            if (condition1 && (condition2 || condition3)) {
-                if (noticeMove) {
-                    sp.getPions().put(dep.getPiece(), true);
-                }
-                return true;
-            }
-            return false;
+            return (condition1 && (condition2 || condition3));
         }
 
         boolean condition1 = c == Couleur.BLANC && (dir == Direction.NE || dir == Direction.NO);
         boolean condition2 = c == Couleur.NOIR && (dir == Direction.SE || dir == Direction.SO);
         boolean condition3 = dist == 1;
 
-        if ((condition1 || condition2) && condition3) {
-            if (noticeMove) {
-                sp.getPions().put(dep.getPiece(), true);
-            }
-            return true;
-        }
-        return false;
+        return ( ( condition1 || condition2) && condition3);
     }
 
-    public void setSp(StatutPion sp) {
-        this.sp = sp;
-    }
+  
 
 }

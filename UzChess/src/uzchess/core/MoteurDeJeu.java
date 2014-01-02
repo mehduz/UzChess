@@ -22,16 +22,28 @@ public class MoteurDeJeu {
         this.jeu = jeu;
     }
 
-    public boolean verifierCoup(Case dep, Case arr, boolean noticeMove) {
-        
+    public boolean verifierCoup(Case dep, Case arr) {
+
         Couleur couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
-            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr, noticeMove);
+            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr ) && simulerNotEchec(dep, arr);
         }
         return false;
     }
 
-    
+    private boolean simulerNotEchec(Case dep, Case arr) {
+
+        Piece a = arr.getPiece();
+        ech.deplacer(dep, arr);
+        boolean echec = detecterEchec(jeu.getTour());
+        ech.deplacer(arr, dep);
+        if (a != null) {
+            arr.setPiece(a);
+            ech.getPieces(a.getCouleur()).put(a, arr);
+        }
+        return !echec;
+    }
+
     public ArrayList<Case> deplacementPossible(Piece piece) {
 
         ArrayList<Case> casesP = new ArrayList<>();
@@ -42,27 +54,24 @@ public class MoteurDeJeu {
         for (byte i = 0; i < 8; i++) {
             for (byte j = 0; j < 8; j++) {
                 caseV = ech.getCases()[i][j];
-                if ( verifierCoup(dep, caseV, false)) {
+                if (verifierCoup(dep, caseV)) { 
                     casesP.add(caseV);
                 }
             }
         }
         return casesP;
     }
-    
-    
-    public boolean detecterEchec() {
 
-        Couleur c = jeu.getTour();
-        Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiN() : ech.getCaseRoiB();
-        echec = (ech.isMenace(caseRoiAChecker).isEmpty());
-        return echec;
+    public boolean detecterEchec(Couleur c) {
+        
+        Case caseRoiAChecker = ech.getCaseRoi(c);
+        return !ech.isMenace(caseRoiAChecker).isEmpty();
     }
 
     public boolean detecterMat() {
 
         Couleur c = jeu.getTour();
-        Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
+        Case caseRoiAChecker = ech.getCaseRoi(c);
 
         ArrayList<Case> depPossible = deplacementPossible(caseRoiAChecker.getPiece());
         if (!depPossible.isEmpty()) {
@@ -77,7 +86,7 @@ public class MoteurDeJeu {
         if (casesMenace.size() > 1) {
             return true;
         }
-        if(casesMenace.isEmpty() ){
+        if (casesMenace.isEmpty()) {
             return false;
         }
         Case caseMenace = casesMenace.listIterator().next();
@@ -92,7 +101,7 @@ public class MoteurDeJeu {
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {
-                if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter, false)) {
+                if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter)) {
                     return false;
                 }
             }
@@ -103,7 +112,7 @@ public class MoteurDeJeu {
     public boolean detecterPat() {
 
         Couleur c = jeu.getTour();
-        Case caseRoiAChecker = (c == Couleur.BLANC) ? ech.getCaseRoiB() : ech.getCaseRoiN();
+        Case caseRoiAChecker = ech.getCaseRoi(c);
 
         ArrayList<Case> depPossible = deplacementPossible(caseRoiAChecker.getPiece());
 
@@ -123,7 +132,7 @@ public class MoteurDeJeu {
         }
         return true;
     }
-    
+
     public void setEchec(boolean echec) {
         this.echec = echec;
     }

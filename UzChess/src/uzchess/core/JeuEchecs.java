@@ -40,7 +40,7 @@ public class JeuEchecs {
 
     public void jouer(Case dep, Case arr) {
 
-        if (moteurDeJeu.verifierCoup(dep, arr, true)) {
+        if (moteurDeJeu.verifierCoup(dep, arr)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
             Joueur j = (tour == Couleur.BLANC) ? jb : jn;
@@ -48,8 +48,8 @@ public class JeuEchecs {
                j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
             echiquier.deplacer(dep, arr);
-            echec = moteurDeJeu.detecterEchec();
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
+            echec = moteurDeJeu.detecterEchec(tour);
             this.detecterFin();
             this.invalide = false;
         }

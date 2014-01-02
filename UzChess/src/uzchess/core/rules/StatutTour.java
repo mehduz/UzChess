@@ -15,8 +15,4 @@ public class StatutTour {
     public AbstractMap<Piece, Boolean> getTours() {
         return tours;
     }
-
-    public void setTours(AbstractMap<Piece, Boolean> tours) {
-        this.tours = tours;
-    } 
 }
