@@ -17,6 +17,7 @@ public class VerificateurTour implements Deplacement {
         if (ligCaseDep != ligCaseArr && colCaseDep != colCaseArr) {
             return false;
         }
+        
         return CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr));
     }
 }

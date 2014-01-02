@@ -29,10 +29,10 @@ public class VerificateurRoi implements Deplacement {
         byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
         byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
 
-        boolean condition = ((vr.verifierDeplacement(dep, arr)) && (decLigne <= 1 && decColonne <= 1));
+        boolean condition1 = ((vr.verifierDeplacement(dep, arr)) && (decLigne <= 1 && decColonne <= 1));
         boolean condition2 = verifierRoque(dep, arr, decColonne, ligCaseDep, colCaseDep);
 
-        return (condition || condition2);
+        return (condition1 || condition2);
     }
 
     private boolean verifierRoque(Case dep, Case arr, byte decColonne, byte ligCaseDep, byte colCaseDep) {
@@ -41,7 +41,7 @@ public class VerificateurRoi implements Deplacement {
         Piece p1, p2;
         Case c1, c2;
 
-        boolean condition1 = !(ech.getSr().getRois().get(ech.getCaseRoi(dep.getCouleur()).getPiece())) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
+        boolean condition1 = !(ech.getSr().getRois().get(dep.getPiece())) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
         boolean condition2 = (decColonne == 3) && (dir == Direction.O);
         boolean condition3 = (decColonne == 2) && (dir == Direction.E);
         if (!condition1) {

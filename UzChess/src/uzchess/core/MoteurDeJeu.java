@@ -9,15 +9,15 @@ import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Piece;
 import uzchess.core.rules.VerificateurCavalier;
+import uzchess.core.rules.VerificateurRoi;
+import uzchess.core.rules.VerificateurTour;
 
 public class MoteurDeJeu {
 
-    private boolean echec;
     private Echiquier ech;
     private JeuEchecs jeu;
 
-    public MoteurDeJeu(Echiquier ech, JeuEchecs jeu) {
-        echec = false;
+    public MoteurDeJeu(Echiquier ech, JeuEchecs jeu) { 
         this.ech = ech;
         this.jeu = jeu;
     }
@@ -34,12 +34,22 @@ public class MoteurDeJeu {
     private boolean simulerNotEchec(Case dep, Case arr) {
 
         Piece a = arr.getPiece();
+        Piece d = dep.getPiece();
+        boolean isRoi = d.getDeplacement() instanceof VerificateurRoi;
+        boolean isTour = d.getDeplacement() instanceof VerificateurTour;
+        boolean moved = (isRoi)? ech.getSr().getRois().get(d) : (isTour) ? ech.getSt().getTours().get(d) : false;
+        
         ech.deplacer(dep, arr);
         boolean isEchec = detecterEchec(jeu.getTour());
         ech.deplacer(arr, dep);
         if (a != null) {
             arr.setPiece(a);
             ech.getPieces(a.getCouleur()).put(a, arr);
+        }
+        if(isRoi){
+            ech.getSr().getRois().put(d , moved);
+        }else if(isTour){
+            ech.getSt().getTours().put(d, moved);
         }
         return !isEchec;
     }
@@ -65,7 +75,7 @@ public class MoteurDeJeu {
     public boolean detecterEchec(Couleur c) {
         
         Case caseRoiAChecker = ech.getCaseRoi(c);
-        return !ech.isMenace(caseRoiAChecker).isEmpty();
+        return !(ech.isMenace(caseRoiAChecker).isEmpty());
     }
 
     public boolean detecterMat() {
@@ -90,14 +100,9 @@ public class MoteurDeJeu {
             return false;
         }
         Case caseMenace = casesMenace.listIterator().next();
-        ArrayList<Case> casesInterception = new ArrayList<>();
-
-        if (caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier) {
-            casesInterception.add(caseMenace);
-        } else {
-            casesInterception = CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace);
-        }
-
+        ArrayList<Case> casesInterception  = (!(caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier))? CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace) : new ArrayList<Case>();
+        casesInterception.add(caseMenace);
+        
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {
@@ -112,18 +117,6 @@ public class MoteurDeJeu {
     public boolean detecterPat() {
 
         Couleur c = jeu.getTour();
-        Case caseRoiAChecker = ech.getCaseRoi(c);
-
-        ArrayList<Case> depPossible = deplacementPossible(caseRoiAChecker.getPiece());
-
-        if (!depPossible.isEmpty()) {
-            for (Case ca : depPossible) {
-                if (ech.isMenace(ca).isEmpty()) {
-                    return false;
-                }
-            }
-        }
-
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             if (!deplacementPossible(entry.getKey()).isEmpty()) {
@@ -131,9 +124,5 @@ public class MoteurDeJeu {
             }
         }
         return true;
-    }
-
-    public void setEchec(boolean echec) {
-        this.echec = echec;
     }
 }

@@ -6,7 +6,7 @@ import uzchess.core.domain.Piece;
 
 public class StatutRoi {
 
-    private AbstractMap<Piece, Boolean> rois;;
+    private AbstractMap<Piece, Boolean> rois;
 
     public StatutRoi(){
         rois = new HashMap<>();

@@ -76,7 +76,7 @@ public class Echiquier {
     public ArrayList<Case> isMenace(Case maCase) {
 
         Collection<Case> casesAdverses;
-        casesAdverses = (maCase.getCouleur() == Couleur.BLANC) ? piecesB.values() : piecesN.values();
+        casesAdverses = (maCase.getPiece().getCouleur() == Couleur.BLANC) ? piecesN.values() : piecesB.values();
 
         ArrayList<Case> maListMenace = new ArrayList<>();
 
@@ -109,7 +109,7 @@ public class Echiquier {
             caseRoiB = arr;
             sr.getRois().put(p, true);
         }
-        if (dep == caseRoiN) {
+        else if (dep == caseRoiN) {
             caseRoiN = arr;
             sr.getRois().put(p, true);
         }
