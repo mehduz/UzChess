@@ -50,20 +50,4 @@ public class Piece implements Cloneable{
     public RepPieceGraphique<Object> getRep() {
         return rep;
     }
-    
-    @Override
-    public Piece clone(){
-        Piece p = null;
-        try{
-           p = (Piece)super.clone();
-           p.valeur = this.valeur;
-           p.couleur = this.couleur;
-           p.rep = this.rep;
-           p.deplacement = this.deplacement;
-        }
-        catch(CloneNotSupportedException cnse){
-            cnse.printStackTrace(System.err);
-        } 
-        return p;
-    }
 }

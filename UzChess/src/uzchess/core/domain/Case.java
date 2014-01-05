@@ -79,20 +79,5 @@ public class Case implements Cloneable {
             dir = Direction.O;
         }
         return dir;
-    }
-
-    @Override
-    public Case clone() {
-        Case c = null;
-        try {
-            c = (Case) super.clone();
-            c.ligne = this.ligne;
-            c.colonne = this.colonne;
-            c.piece = (this.piece != null)?(Piece)this.piece.clone() : null;
-        } catch (CloneNotSupportedException cnse) {
-            cnse.printStackTrace(System.err);
-        }
-        return c;
-    }
-
+    } 
 }

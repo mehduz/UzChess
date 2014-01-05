@@ -9,17 +9,17 @@ import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Piece;
 import uzchess.core.rules.VerificateurCavalier;
+import uzchess.core.rules.VerificateurRoi;
+import uzchess.core.rules.VerificateurTour;
 
 public class MoteurDeJeu {
 
     private Echiquier ech;
-    private Echiquier echSimu;
     private JeuEchecs jeu;
 
     public MoteurDeJeu(Echiquier ech, JeuEchecs jeu) {
         this.ech = ech;
         this.jeu = jeu;
-        this.echSimu = null;
     }
 
     public boolean verifierCoup(Case dep, Case arr) {
@@ -27,18 +27,42 @@ public class MoteurDeJeu {
         Couleur couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
             if (dep.getPiece().getDeplacement().verifierDeplacement(dep, arr)) {
-                simulerCoup(dep, arr);
-                return echSimu.detecterEchec(couleur);
-                
+                return simulerCoup(dep, arr);
             }
             return false;
         }
         return false;
     }
 
-    private void simulerCoup(Case dep, Case arr) {
-        echSimu = ech.clone();
-        echSimu.deplacer(dep, arr);
+    private boolean simulerCoup(Case dep, Case arr) {
+
+        boolean ret;
+        Piece parr = arr.getPiece();
+        Piece pdep = dep.getPiece();
+        boolean moved;
+        boolean king = pdep.getDeplacement() instanceof VerificateurRoi;
+        boolean tower = pdep.getDeplacement() instanceof VerificateurTour;
+        moved = (king) ? ech.getSr().getRois().get(dep.getPiece()) : (tower) ? ech.getSt().getTours().get(dep.getPiece()) : false;
+        ech.deplacer(dep, arr);
+        ret = ech.detecterEchec(arr.getPiece().getCouleur());
+        ech.deplacer(arr, dep);
+        arr.setPiece((parr != null) ? parr : null);
+        if (king) {
+            byte decal = (byte) (arr.getColonne() - dep.getColonne());
+            if (decal == 2 && pdep.getCouleur() == Couleur.BLANC) {
+                ech.deplacer(ech.getCases()[7][5], ech.getCases()[7][7]);
+            } else if (decal == -2 && pdep.getCouleur() == Couleur.BLANC) {
+                ech.deplacer(ech.getCases()[7][3], ech.getCases()[7][0]);
+            }else if (decal == 2 && pdep.getCouleur() == Couleur.NOIR) {
+                ech.deplacer(ech.getCases()[0][5], ech.getCases()[0][7]);
+            }else if (decal == -2 && pdep.getCouleur() == Couleur.NOIR) {
+                ech.deplacer(ech.getCases()[0][3], ech.getCases()[0][0]); 
+            }
+            ech.getSr().getRois().put(pdep, moved);
+        } else if (tower) {
+            ech.getSt().getTours().put(pdep, moved);
+        }
+        return !ret;
     }
 
     public ArrayList<Case> deplacementPossible(Piece piece) {

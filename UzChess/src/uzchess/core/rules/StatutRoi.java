@@ -16,20 +16,4 @@ public class StatutRoi implements Cloneable{
     public AbstractMap<Piece, Boolean> getRois() {
         return rois;
     }
-    
-    @Override
-     public StatutRoi clone(){
-        StatutRoi sr = null;
-        try{
-            sr = (StatutRoi)super.clone();
-            sr.rois = new HashMap<>();
-            for(Entry entry : this.rois.entrySet()){
-                sr.rois.put((Piece)entry.getKey(), (Boolean)entry.getValue());
-            }
-        }
-        catch(CloneNotSupportedException cnse){
-            cnse.printStackTrace(System.err);
-        }
-        return sr;
-    }
 }

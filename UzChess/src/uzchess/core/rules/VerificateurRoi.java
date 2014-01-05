@@ -42,7 +42,7 @@ public class VerificateurRoi implements Deplacement {
         Case c1, c2;
 
         boolean condition1 = !(ech.getSr().getRois().get(dep.getPiece())) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
-        boolean condition2 = (decColonne == 3) && (dir == Direction.O);
+        boolean condition2 = (decColonne == 2) && (dir == Direction.O);
         boolean condition3 = (decColonne == 2) && (dir == Direction.E);
         if (!condition1) {
             return false;

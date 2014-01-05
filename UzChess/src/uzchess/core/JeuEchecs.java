@@ -8,19 +8,19 @@ import uzchess.core.rules.VerificateurPion;
 
 public class JeuEchecs {
 
-    private Couleur tour;
-    private byte compteurCoups;
-    private MoteurDeJeu moteurDeJeu;
-    private Echiquier echiquier;
-    private Joueur jn;
-    private Joueur jb;
-    private String nomPartie;
+    protected Couleur tour;
+    protected byte compteurCoups;
+    protected MoteurDeJeu moteurDeJeu;
+    protected Echiquier echiquier;
+    protected Joueur jn;
+    protected Joueur jb;
+    protected String nomPartie;
 
-    private boolean echec;
+    protected boolean echec;
     private boolean mat;
     private boolean pat;
     private boolean nul;
-    private boolean invalide;
+    protected boolean invalide;
 
     public JeuEchecs() {
 

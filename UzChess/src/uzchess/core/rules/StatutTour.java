@@ -16,20 +16,4 @@ public class StatutTour implements Cloneable{
     public AbstractMap<Piece, Boolean> getTours() {
         return tours;
     }
-    
-   @Override
-    public StatutTour clone(){
-        StatutTour st = null;
-        try{
-            st = (StatutTour)super.clone();
-            st.tours = new HashMap<>();
-            for(Map.Entry entry : this.tours.entrySet()){
-                st.tours.put((Piece)entry.getKey(), (Boolean)entry.getValue());
-            }
-        }
-        catch(CloneNotSupportedException cnse){
-            cnse.printStackTrace(System.err);
-        }
-        return st;
-    }
 }
