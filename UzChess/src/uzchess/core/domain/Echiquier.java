@@ -6,13 +6,14 @@ import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.core.rules.StatutRoi;
 import uzchess.core.rules.StatutTour;
+import uzchess.core.rules.VerificateurRoi;
 import uzchess.core.rules.VerificateurTour;
 
-public class Echiquier {
+public class Echiquier implements Cloneable {
 
-    private final Case[][] cases;
-    private final HashMap<Piece, Case> piecesN;
-    private final HashMap<Piece, Case> piecesB;
+    private Case[][] cases;
+    private HashMap<Piece, Case> piecesN;
+    private HashMap<Piece, Case> piecesB;
 
     @SuppressWarnings("FieldMayBeFinal")
     private Case caseRoiB;
@@ -31,7 +32,6 @@ public class Echiquier {
         this.caseRoiN = caseRoiN;
         this.st = st;
         this.sr = sr;
-
     }
 
     public Case[][] getEchiquier() {
@@ -73,6 +73,12 @@ public class Echiquier {
         return sr;
     }
 
+    public boolean detecterEchec(Couleur c) {
+
+        Case caseRoiAChecker = getCaseRoi(c);
+        return !(isMenace(caseRoiAChecker).isEmpty());
+    }
+
     public ArrayList<Case> isMenace(Case maCase) {
 
         Collection<Case> casesAdverses;
@@ -105,19 +111,52 @@ public class Echiquier {
         if (arr.getPiece() != null) {
             hmAdv.remove(arr.getPiece());
         }
-        if (dep == caseRoiB ) {
+        if (dep == caseRoiB) {
             caseRoiB = arr;
             sr.getRois().put(p, true);
         }
-        else if (dep == caseRoiN) {
+        if (dep == caseRoiN) {
             caseRoiN = arr;
             sr.getRois().put(p, true);
         }
-        if( p.getDeplacement() instanceof VerificateurTour){
+        if (p.getDeplacement() instanceof VerificateurTour) {
             st.getTours().put(p, true);
         }
         arr.setPiece(p);
         dep.setPiece(null);
+    }
+
+    @Override
+    public Echiquier clone() {
+        Echiquier e = null;
+        try {
+            e = (Echiquier) super.clone();
+            e.cases = new Case[8][8];
+            e.piecesN = new HashMap<>();
+            e.piecesB = new HashMap<>();
+            e.st = new StatutTour();
+            e.sr = new StatutRoi();
+            for (byte i = 0; i < 8; i++) {
+                for (byte j = 0; j < 8; j++) {
+                    e.cases[i][j] = this.cases[i][j].clone();
+                    Piece p = e.cases[i][j].getPiece();
+                    if (p != null) {
+                        e.getPieces(p.getCouleur()).put(p, e.cases[i][j]);
+                        if (p.getDeplacement() instanceof VerificateurRoi) {
+                            e.sr.getRois().put(p, this.sr.getRois().get(this.cases[i][j].getPiece()));
+                            ((VerificateurRoi)p.getDeplacement()).setEch(e);
+                        } else if (p.getDeplacement() instanceof VerificateurTour) {
+                            e.st.getTours().put(p, this.st.getTours().get(this.cases[i][j].getPiece()));
+                        }
+                    }
+                }
+            }
+            e.caseRoiB = e.cases[this.caseRoiB.getLigne()][this.caseRoiB.getColonne()];
+            e.caseRoiN = e.cases[this.caseRoiN.getLigne()][this.caseRoiN.getColonne()];
+        } catch (CloneNotSupportedException cnse) {
+            cnse.printStackTrace(System.err);
+        }
+        return e;
     }
 
 }

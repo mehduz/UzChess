@@ -27,7 +27,7 @@ public class VerificateurPion implements Deplacement {
 
         boolean condition1 = c == Couleur.BLANC && (dir == Direction.NE || dir == Direction.NO);
         boolean condition2 = c == Couleur.NOIR && (dir == Direction.SE || dir == Direction.SO);
-        boolean condition3 = dist == 1;
+        boolean condition3 = dist == 1 && Math.abs(arr.getColonne() - dep.getColonne()) == 1;
 
         return ( ( condition1 || condition2) && condition3);
     }

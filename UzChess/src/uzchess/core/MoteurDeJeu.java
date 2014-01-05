@@ -9,49 +9,36 @@ import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Piece;
 import uzchess.core.rules.VerificateurCavalier;
-import uzchess.core.rules.VerificateurRoi;
-import uzchess.core.rules.VerificateurTour;
 
 public class MoteurDeJeu {
 
     private Echiquier ech;
+    private Echiquier echSimu;
     private JeuEchecs jeu;
 
-    public MoteurDeJeu(Echiquier ech, JeuEchecs jeu) { 
+    public MoteurDeJeu(Echiquier ech, JeuEchecs jeu) {
         this.ech = ech;
         this.jeu = jeu;
+        this.echSimu = null;
     }
 
     public boolean verifierCoup(Case dep, Case arr) {
 
         Couleur couleur = jeu.getTour();
         if (dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
-            return dep.getPiece().getDeplacement().verifierDeplacement(dep, arr ) && simulerNotEchec(dep, arr);
+            if (dep.getPiece().getDeplacement().verifierDeplacement(dep, arr)) {
+                simulerCoup(dep, arr);
+                return echSimu.detecterEchec(couleur);
+                
+            }
+            return false;
         }
         return false;
     }
 
-    private boolean simulerNotEchec(Case dep, Case arr) {
-
-        Piece a = arr.getPiece();
-        Piece d = dep.getPiece();
-        boolean isRoi = d.getDeplacement() instanceof VerificateurRoi;
-        boolean isTour = d.getDeplacement() instanceof VerificateurTour;
-        boolean moved = (isRoi)? ech.getSr().getRois().get(d) : (isTour) ? ech.getSt().getTours().get(d) : false;
-        
-        ech.deplacer(dep, arr);
-        boolean isEchec = detecterEchec(jeu.getTour());
-        ech.deplacer(arr, dep);
-        if (a != null) {
-            arr.setPiece(a);
-            ech.getPieces(a.getCouleur()).put(a, arr);
-        }
-        if(isRoi){
-            ech.getSr().getRois().put(d , moved);
-        }else if(isTour){
-            ech.getSt().getTours().put(d, moved);
-        }
-        return !isEchec;
+    private void simulerCoup(Case dep, Case arr) {
+        echSimu = ech.clone();
+        echSimu.deplacer(dep, arr);
     }
 
     public ArrayList<Case> deplacementPossible(Piece piece) {
@@ -64,18 +51,12 @@ public class MoteurDeJeu {
         for (byte i = 0; i < 8; i++) {
             for (byte j = 0; j < 8; j++) {
                 caseV = ech.getCases()[i][j];
-                if (verifierCoup(dep, caseV)) { 
+                if (verifierCoup(dep, caseV)) {
                     casesP.add(caseV);
                 }
             }
         }
         return casesP;
-    }
-
-    public boolean detecterEchec(Couleur c) {
-        
-        Case caseRoiAChecker = ech.getCaseRoi(c);
-        return !(ech.isMenace(caseRoiAChecker).isEmpty());
     }
 
     public boolean detecterMat() {
@@ -100,9 +81,9 @@ public class MoteurDeJeu {
             return false;
         }
         Case caseMenace = casesMenace.listIterator().next();
-        ArrayList<Case> casesInterception  = (!(caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier))? CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace) : new ArrayList<Case>();
+        ArrayList<Case> casesInterception = (!(caseMenace.getPiece().getDeplacement() instanceof VerificateurCavalier)) ? CaseInterUtility.getCasesInter(caseRoiAChecker, caseMenace) : new ArrayList<Case>();
         casesInterception.add(caseMenace);
-        
+
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {

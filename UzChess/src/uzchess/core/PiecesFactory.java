@@ -15,7 +15,7 @@ public class PiecesFactory {
         if (p == Pieces.PION) {
             piece.setDeplacement(new VerificateurPion());
             piece.setCouleur(c);
-            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.PION_B : PiecesUnicode.PION_N));   
+            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.PION_B : PiecesUnicode.PION_N));    
             return piece;
         }
 

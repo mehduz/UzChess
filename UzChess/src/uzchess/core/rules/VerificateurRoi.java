@@ -52,8 +52,7 @@ public class VerificateurRoi implements Deplacement {
         boolean condition4 = (p1 = c1.getPiece()) != null && !ech.getSt().getTours().get(p1);
         boolean condition5 = (p2 = c2.getPiece()) != null && !ech.getSt().getTours().get(p2);
 
-        return (condition2 && condition4) || (condition3 && condition5); 
-
+        return(condition2 && condition4) ||(condition3 && condition5); 
     }
 
     public void setEch(Echiquier ech) {

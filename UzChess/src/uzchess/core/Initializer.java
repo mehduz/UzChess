@@ -11,7 +11,7 @@ import uzchess.core.domain.Piece;
 import uzchess.core.rules.StatutRoi;
 import uzchess.core.rules.StatutTour;
 import uzchess.core.rules.VerificateurRoi;
-
+ 
 public class Initializer {
 
     public static void initialiserPartie(String njb, String njn, JeuEchecs jeu) {
