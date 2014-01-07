@@ -3,8 +3,6 @@ package uzchess.core.rules;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.core.domain.Case;
-import uzchess.core.domain.CaseInterUtility;
-import uzchess.core.domain.CheckCasesInterUtility;
 
 public class VerificateurPion implements Deplacement {
 
@@ -21,9 +19,10 @@ public class VerificateurPion implements Deplacement {
 
             boolean hasmoved = (ligDep != 6 && ligDep != 1);
             boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);
-            boolean condition2 = dist == 2 && !hasmoved;
+            boolean condition2 = dist == 1;
+            boolean condition3 = dist == 2 && !hasmoved;
 
-            return (condition1 && (dist == 1 || condition2)) && CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr));
+            return (condition1 && (condition2 || condition3));
         }
 
         boolean condition1 = c == Couleur.BLANC && (dir == Direction.NE || dir == Direction.NO);
