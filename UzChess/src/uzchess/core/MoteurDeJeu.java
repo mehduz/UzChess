@@ -48,14 +48,29 @@ public class MoteurDeJeu {
         ech.deplacer(arr, dep);
         arr.setPiece((parr != null) ? parr : null);
         if (king) {
-            ech.roque(dep, arr);
+            cancelRoque(dep, arr);
             ech.getSr().getRois().put(pdep, moved);
         } else if (tower) {
             ech.getSt().getTours().put(pdep, moved);
         }
         return !ret;
     }
-
+ 
+    private void cancelRoque(Case dep, Case arr){
+        
+        byte decal = (byte) (arr.getColonne() - dep.getColonne());
+        Piece pdep = dep.getPiece();
+            if (decal == 2 && pdep.getCouleur() == Couleur.BLANC) {
+                ech.deplacer(ech.getCases()[7][5], ech.getCases()[7][7]);
+            } else if (decal == -2 && pdep.getCouleur() == Couleur.BLANC) {
+               ech.deplacer(ech.getCases()[7][3], ech.getCases()[7][0]);
+            } else if (decal == 2 && pdep.getCouleur() == Couleur.NOIR) {
+                ech.deplacer(ech.getCases()[0][5], ech.getCases()[0][7]);
+            } else if (decal == -2 && pdep.getCouleur() == Couleur.NOIR) {
+                ech.deplacer(ech.getCases()[0][3], ech.getCases()[0][0]);
+            }
+    }
+    
     public ArrayList<Case> deplacementPossible(Piece piece) {
 
         ArrayList<Case> casesP = new ArrayList<>();
