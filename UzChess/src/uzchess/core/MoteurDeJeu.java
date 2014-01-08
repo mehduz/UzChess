@@ -47,7 +47,7 @@ public class MoteurDeJeu {
         ech.deplacer(dep, arr);
         ret = detecterEchec(pdep.getCouleur());
         ech.deplacer(arr, dep);
-        if(parr != null){
+        if (parr != null) {
             arr.setPiece(parr);
             ech.getPieces(parr.getCouleur()).put(parr, arr);
         }
@@ -134,11 +134,12 @@ public class MoteurDeJeu {
         }
         return true;
     }
-    
-     public ArrayList<Case> isMenace(Case maCase) {
+
+    public ArrayList<Case> isMenace(Case maCase) {
 
         Collection<Case> casesAdverses;
-        casesAdverses = ech.getPieces(jeu.getTour()).values();
+        Couleur couleur = (jeu.getTour() == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
+        casesAdverses = ech.getPieces(couleur).values();
 
         ArrayList<Case> maListMenace = new ArrayList<>();
 
@@ -150,8 +151,8 @@ public class MoteurDeJeu {
         }
         return maListMenace;
     }
-     
-      public boolean detecterEchec(Couleur c) {
+
+    public boolean detecterEchec(Couleur c) {
 
         Case caseRoiAChecker = ech.getCaseRoi(c);
         return !(isMenace(caseRoiAChecker).isEmpty());
