@@ -2,7 +2,6 @@ package uzchess.core.rules;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
-import java.util.Map;
 import uzchess.core.domain.Piece;
 
 public class StatutTour implements Cloneable{

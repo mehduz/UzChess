@@ -46,7 +46,10 @@ public class MoteurDeJeu {
         ech.deplacer(dep, arr);
         ret = ech.detecterEchec(pdep.getCouleur());
         ech.deplacer(arr, dep);
-        arr.setPiece((parr != null) ? parr : null);
+        if(parr != null){
+            arr.setPiece(parr);
+            ech.getPieces(parr.getCouleur()).put(parr, arr);
+        }
         if (king) {
             byte decal = (byte) (arr.getColonne() - dep.getColonne());
             if (decal == 2 && pdep.getCouleur() == Couleur.BLANC) {
