@@ -42,16 +42,14 @@ public class EchecsControler {
 
         if (c.getPiece() != null && c.getPiece().getCouleur() == model.getTour()) {
             model.setCasesValides(model.getMoteurDeJeu().deplacementPossible(c.getPiece()));
-            if (selected == null) {
-                selected = c;
-            }
+            selected = c;
         } else {
             
             if (c.getPiece() == null) {
                 model.setCasesValides(new ArrayList<Case>());
             }
             
-            if (selected != null) {
+            if (selected != null && selected != c) {
                 model.jouer(selected, c);
                 selected = null;
             }

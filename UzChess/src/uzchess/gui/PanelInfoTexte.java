@@ -20,6 +20,7 @@ public class PanelInfoTexte extends JPanel{
     
     private JTextArea jta;
     private static final String DEFAULT_MSG = "\nBienvenue à UzChess !";
+    private String text = "";
     
     public PanelInfoTexte(){
         super();
@@ -33,5 +34,5 @@ public class PanelInfoTexte extends JPanel{
     public JTextArea getJta() {
         return jta;
     }
-   
+    
 }

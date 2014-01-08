@@ -38,8 +38,8 @@ public class JeuEchecs {
         Initializer.initialiserPartie(j1, j2, this);
     }
 
-    public void jouer(Case dep, Case arr) {
-
+    protected void jouer(Case dep, Case arr) {
+        invalide = true;
         if (moteurDeJeu.verifierCoup(dep, arr)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
@@ -53,7 +53,6 @@ public class JeuEchecs {
             this.detecterFin();
             invalide = false;
         }
-        invalide = true;
     }
 
     public void detecterFin() {
@@ -89,10 +88,6 @@ public class JeuEchecs {
         echiquier = ech;
     }
 
-    public Joueur getJn() {
-        return jn;
-    }
-
     public boolean isEchec() {
         return echec;
     }
@@ -109,14 +104,16 @@ public class JeuEchecs {
         return nul;
     }
 
+    public Joueur getJoueur(Couleur c){
+        if(c == Couleur.BLANC)
+            return jb;
+        return jn;
+    }
+    
     public void setJn(Joueur jn) {
         this.jn = jn;
     }
-
-    public Joueur getJb() {
-        return jb;
-    }
-
+    
     public boolean isInvalide() {
         return invalide;
     }

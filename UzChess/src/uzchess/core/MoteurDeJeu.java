@@ -25,7 +25,7 @@ public class MoteurDeJeu {
     public boolean verifierCoup(Case dep, Case arr) {
 
         Couleur couleur = jeu.getTour();
-        if (dep != null && arr!= null && dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
+        if (dep != null && arr != null && dep.getPiece() != null && (arr.getPiece() == null || arr.getPiece().getCouleur() != couleur)) {
             if (dep.getPiece().getDeplacement().verifierDeplacement(dep, arr)) {
                 return simulerCoup(dep, arr);
             }
@@ -44,11 +44,20 @@ public class MoteurDeJeu {
         boolean tower = pdep.getDeplacement() instanceof VerificateurTour;
         moved = (king) ? ech.getSr().getRois().get(dep.getPiece()) : (tower) ? ech.getSt().getTours().get(dep.getPiece()) : false;
         ech.deplacer(dep, arr);
-        ret = ech.detecterEchec(arr.getPiece().getCouleur());
+        ret = ech.detecterEchec(pdep.getCouleur());
         ech.deplacer(arr, dep);
         arr.setPiece((parr != null) ? parr : null);
         if (king) {
-            ech.roque(dep, arr);
+            byte decal = (byte) (arr.getColonne() - dep.getColonne());
+            if (decal == 2 && pdep.getCouleur() == Couleur.BLANC) {
+                ech.deplacer(ech.getCases()[7][5], ech.getCases()[7][7]);
+            } else if (decal == -2 && pdep.getCouleur() == Couleur.BLANC) {
+                ech.deplacer(ech.getCases()[7][3], ech.getCases()[7][0]);
+            } else if (decal == 2 && pdep.getCouleur() == Couleur.NOIR) {
+                ech.deplacer(ech.getCases()[0][5], ech.getCases()[0][7]);
+            } else if (decal == -2 && pdep.getCouleur() == Couleur.NOIR) {
+                ech.deplacer(ech.getCases()[0][3], ech.getCases()[0][0]);
+            }
             ech.getSr().getRois().put(pdep, moved);
         } else if (tower) {
             ech.getSt().getTours().put(pdep, moved);

@@ -26,8 +26,8 @@ public class VerificateurRoi implements Deplacement {
         byte ligCaseArr = arr.getLigne();
         byte colCaseArr = arr.getColonne();
 
-        byte decLigne = (byte) Math.abs(ligCaseDep - ligCaseArr);
-        byte decColonne = (byte) Math.abs(colCaseDep - colCaseArr);
+        byte decLigne = (byte) Math.abs(ligCaseArr - ligCaseDep);
+        byte decColonne = (byte) Math.abs(colCaseArr - colCaseDep);
 
         boolean condition1 = ((vr.verifierDeplacement(dep, arr)) && (decLigne <= 1 && decColonne <= 1));
         boolean condition2 = verifierRoque(dep, arr, decColonne, ligCaseDep, colCaseDep);
@@ -42,8 +42,6 @@ public class VerificateurRoi implements Deplacement {
         Case c1, c2;
 
         boolean condition1 = !(ech.getSr().getRois().get(dep.getPiece())) && (CheckCasesInterUtility.verifCasesInter(CaseInterUtility.getCasesInter(dep, arr)));
-        boolean condition2 = (decColonne == 2) && (dir == Direction.O);
-        boolean condition3 = (decColonne == 2) && (dir == Direction.E);
         if (!condition1) {
             return false;
         }
@@ -52,7 +50,7 @@ public class VerificateurRoi implements Deplacement {
         boolean condition4 = (p1 = c1.getPiece()) != null && !ech.getSt().getTours().get(p1);
         boolean condition5 = (p2 = c2.getPiece()) != null && !ech.getSt().getTours().get(p2);
 
-        return(condition2 && condition4) ||(condition3 && condition5); 
+        return decColonne == 2 && ( dir == Direction.O && condition4 ||  dir == Direction.E  && condition5);
     }
 
     public void setEch(Echiquier ech) {

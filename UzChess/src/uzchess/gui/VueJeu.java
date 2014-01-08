@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import uzchess.controllers.EchecsControler;
 import uzchess.core.domain.Case;
 import uzchess.events.EchecsChangedEvent;
@@ -88,8 +89,26 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
             byte col = c.getColonne();
             panelBoard.getSquares()[lig][col].setBorder(BorderFactory.createLineBorder(Color.green, 3));
         }
-       
-        this.panelBoard.repaint();
+        
+        if(jeu.getCasesValides().isEmpty()){
+            panelInfoTexte.getJta().setText("\nLe joueur " + jeu.getJoueur(jeu.getTour()).getPseudo() + "a le trait : ");
+            if(jeu.isEchec()){
+                  panelInfoTexte.getJta().append("\nEchec !");
+            }
+            else if(jeu.isMat()){
+                 panelInfoTexte.getJta().append("\nEchec et Mat!");
+            } 
+            else if(jeu.isPat()){
+                 panelInfoTexte.getJta().append("\nPat!");
+            }
+            else if(jeu.isInvalide()){
+                 panelInfoTexte.getJta().append("\nCoup invalide ! Veuillez rejouer");
+            }
+        }
+        
+        panelInfoTexte.repaint();
+        panelBoard.repaint(); 
+        panelInfoSide.repaint();
     }
 
     @Override
@@ -105,8 +124,8 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (((HashMap) panelBoard.getMapPieces()).containsKey(e.getSource())) {
-            this.getCtrl().notifyCaseSelect(panelBoard.getMapPieces().get(e.getSource()));
+        if (((HashMap) panelBoard.getMapPieces()).containsKey((JPanel)e.getSource())) {
+            this.getCtrl().notifyCaseSelect(panelBoard.getMapPieces().get((JPanel)e.getSource()));
         }
     }
 

@@ -56,7 +56,6 @@ public class JeuEchecsModel extends JeuEchecs {
 
     public void setCasesToClean(ArrayList<Case> casesToClean) {
         this.casesToClean = casesToClean;
-        fireEchecsChanged();
     }
 
     public ArrayList<Case> getCasesValides() {
@@ -67,9 +66,10 @@ public class JeuEchecsModel extends JeuEchecs {
         return casesToClean;
     }
 
+    /*we can't use super.jouer() here : it won't works*/
     @Override
     public void jouer(Case dep, Case arr) {
-
+        
         if (casesToClean.contains(arr)) {
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
             Joueur j = (super.tour == Couleur.BLANC) ? jb : jn;
@@ -78,11 +78,10 @@ public class JeuEchecsModel extends JeuEchecs {
             }
             echiquier.deplacer(dep, arr);
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
-            echec = echiquier.detecterEchec(tour);
+            //echec = echiquier.detecterEchec(tour);
             this.detecterFin();
             super.invalide = false;
-        }
-        super.invalide = true;
+        } 
         fireEchecsChanged();
     }
 

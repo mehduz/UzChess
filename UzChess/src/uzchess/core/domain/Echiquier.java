@@ -99,7 +99,7 @@ public class Echiquier implements Cloneable {
         HashMap<Piece, Case> hm;
         HashMap<Piece, Case> hmAdv;
         Piece p = dep.getPiece();
-        
+
         if (p.getCouleur() == Couleur.BLANC) {
             hm = piecesB;
             hmAdv = piecesN;
@@ -113,26 +113,25 @@ public class Echiquier implements Cloneable {
         }
         if (dep == caseRoiB) {
             sr.getRois().put(p, true);
-            byte decal = (byte)(arr.getColonne()- dep.getColonne());
-            if(decal == 2 && caseRoiB.getColonne() == 4){
+            byte decal = (byte) (arr.getColonne() - dep.getColonne());
+            if (decal == 2 && caseRoiB.getColonne() == 4) {
                 deplacer(cases[7][7], cases[7][5]);
-            }
-            else if(decal == -2 && caseRoiB.getColonne() == 4 ){
+            } else if (decal == -2 && caseRoiB.getColonne() == 4) {
                 deplacer(cases[7][0], cases[7][3]);
             }
             caseRoiB = arr;
         }
         if (dep == caseRoiN) {
             sr.getRois().put(p, true);
-            byte decal = (byte)(arr.getColonne()- dep.getColonne());
-            if(decal == 2 && caseRoiN.getColonne() == 4){
+            byte decal = (byte) (arr.getColonne() - dep.getColonne());
+            if (decal == 2 && caseRoiN.getColonne() == 4) {
                 deplacer(cases[0][7], cases[0][5]);
-            }
-            else if(decal == -2 && caseRoiN.getColonne() == 4){
+            } else if (decal == -2 && caseRoiN.getColonne() == 4) {
                 deplacer(cases[0][0], cases[0][3]);
             }
             caseRoiN = arr;
         }
+        
         if (p.getDeplacement() instanceof VerificateurTour) {
             st.getTours().put(p, true);
         }
