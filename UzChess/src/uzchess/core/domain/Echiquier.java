@@ -1,7 +1,5 @@
 package uzchess.core.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.core.rules.StatutRoi;
@@ -70,28 +68,6 @@ public class Echiquier implements Cloneable {
 
     public StatutRoi getSr() {
         return sr;
-    }
-
-    public boolean detecterEchec(Couleur c) {
-
-        Case caseRoiAChecker = getCaseRoi(c);
-        return !(isMenace(caseRoiAChecker).isEmpty());
-    }
-
-    public ArrayList<Case> isMenace(Case maCase) {
-
-        Collection<Case> casesAdverses;
-        casesAdverses = (maCase.getPiece().getCouleur() == Couleur.BLANC) ? piecesN.values() : piecesB.values();
-
-        ArrayList<Case> maListMenace = new ArrayList<>();
-
-        for (Case c : casesAdverses) {
-            Piece p = c.getPiece();
-            if (p.getDeplacement().verifierDeplacement(c, maCase)) {
-                maListMenace.add(c);
-            }
-        }
-        return maListMenace;
     }
 
     public void deplacer(Case dep, Case arr) {

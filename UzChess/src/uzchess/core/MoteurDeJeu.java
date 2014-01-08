@@ -1,6 +1,7 @@
 package uzchess.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import uzchess.constantes.Couleur;
@@ -44,7 +45,7 @@ public class MoteurDeJeu {
         boolean tower = pdep.getDeplacement() instanceof VerificateurTour;
         moved = (king) ? ech.getSr().getRois().get(dep.getPiece()) : (tower) ? ech.getSt().getTours().get(dep.getPiece()) : false;
         ech.deplacer(dep, arr);
-        ret = ech.detecterEchec(pdep.getCouleur());
+        ret = detecterEchec(pdep.getCouleur());
         ech.deplacer(arr, dep);
         if(parr != null){
             arr.setPiece(parr);
@@ -94,13 +95,13 @@ public class MoteurDeJeu {
         ArrayList<Case> depPossible = deplacementPossible(caseRoiAChecker.getPiece());
         if (!depPossible.isEmpty()) {
             for (Case ca : depPossible) {
-                if (ech.isMenace(ca).isEmpty()) {
+                if (isMenace(ca).isEmpty()) {
                     return false;
                 }
             }
         }
 
-        ArrayList<Case> casesMenace = ech.isMenace(caseRoiAChecker);
+        ArrayList<Case> casesMenace = isMenace(caseRoiAChecker);
         if (casesMenace.size() > 1) {
             return true;
         }
@@ -132,5 +133,27 @@ public class MoteurDeJeu {
             }
         }
         return true;
+    }
+    
+     public ArrayList<Case> isMenace(Case maCase) {
+
+        Collection<Case> casesAdverses;
+        casesAdverses = ech.getPieces(jeu.getTour()).values();
+
+        ArrayList<Case> maListMenace = new ArrayList<>();
+
+        for (Case c : casesAdverses) {
+            Piece p = c.getPiece();
+            if (p.getDeplacement().verifierDeplacement(c, maCase)) {
+                maListMenace.add(c);
+            }
+        }
+        return maListMenace;
+    }
+     
+      public boolean detecterEchec(Couleur c) {
+
+        Case caseRoiAChecker = ech.getCaseRoi(c);
+        return !(isMenace(caseRoiAChecker).isEmpty());
     }
 }

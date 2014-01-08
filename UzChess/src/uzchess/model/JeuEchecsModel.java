@@ -78,7 +78,7 @@ public class JeuEchecsModel extends JeuEchecs {
             }
             echiquier.deplacer(dep, arr);
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
-            echec = echiquier.detecterEchec(tour);
+            echec = moteurDeJeu.detecterEchec(tour);
             this.detecterFin();
             super.invalide = false;
         } 
