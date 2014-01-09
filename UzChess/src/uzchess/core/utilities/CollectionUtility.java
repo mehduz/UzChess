@@ -6,15 +6,16 @@
 package uzchess.core.utilities;
 
 import java.util.AbstractMap;
+import java.util.Collection;
 import java.util.Map.Entry;
 
 /**
  *
  * @author user
  */
-public class MapUtility {
+public class CollectionUtility {
 
-    public static AbstractMap<Object, Object> clone(AbstractMap<Object, Object> map) {
+    /*public static AbstractMap<Object, Object> clone(AbstractMap<Object, Object> map) {
         AbstractMap<Object, Object> ret = null;
         try{
            ret = map.getClass().newInstance();
@@ -28,6 +29,16 @@ public class MapUtility {
             //ret.put((Piece)entry.getKey(), (Boolean) entry.getValue());
         }
         return null;
-    }
+    }*/
 
+    
+    public static String toStringCollection(Collection list, String sep){
+        StringBuilder sb = new StringBuilder();
+        for (Object s : list)
+        {
+            sb.append(s.toString());
+            sb.append(sep);
+        }
+        return sb.toString();
+    }
 }

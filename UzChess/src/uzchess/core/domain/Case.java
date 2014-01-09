@@ -2,6 +2,7 @@ package uzchess.core.domain;
 
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
+import uzchess.constantes.PosLettres;
 
 public class Case implements Cloneable {
 
@@ -79,5 +80,12 @@ public class Case implements Cloneable {
             dir = Direction.O;
         }
         return dir;
-    } 
+    }
+    
+    @Override
+    public String toString() {
+        return PosLettres.values()[ligne].toString() + String.valueOf(colonne);
+    }
+    
+    
 }

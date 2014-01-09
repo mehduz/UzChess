@@ -35,6 +35,7 @@ public class MoteurDeJeu {
         return false;
     }
 
+   
     private boolean simulerCoup(Case dep, Case arr) {
 
         boolean ret;
@@ -151,10 +152,11 @@ public class MoteurDeJeu {
         }
         return maListMenace;
     }
-
+    
     public boolean detecterEchec(Couleur c) {
 
         Case caseRoiAChecker = ech.getCaseRoi(c);
         return !(isMenace(caseRoiAChecker).isEmpty());
     }
+
 }

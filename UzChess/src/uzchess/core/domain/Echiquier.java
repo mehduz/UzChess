@@ -114,4 +114,6 @@ public class Echiquier implements Cloneable {
         arr.setPiece(p);
         dep.setPiece(null);
     }
+    
 }
+

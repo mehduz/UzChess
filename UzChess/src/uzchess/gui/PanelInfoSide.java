@@ -36,12 +36,11 @@ public class PanelInfoSide extends JPanel {
     private JButton buttonLoad;
     private JButton buttonSave;
     private JButton buttonExit;
-    private VueJeu vue;
+    private JTextArea jListCoups; 
 
     public PanelInfoSide(VueJeu vue) {
 
         super(new BorderLayout());
-        this.vue = vue;
         menu = new JPanel();
         menu.setLayout(new GridLayout(4, 1, 0, 10));
 
@@ -73,7 +72,7 @@ public class PanelInfoSide extends JPanel {
         jtf2.setEditable(false);
 
         listeCoups = new JPanel(new GridLayout(1, 1));
-        JTextArea jListCoups = new JTextArea("\nListe des coups joués : ");
+        jListCoups = new JTextArea("\nListe des coups joués : ");
         jListCoups.setEditable(false);
         final JScrollPane jsp = new JScrollPane(jListCoups);
         listeCoups.add(jListCoups);
@@ -87,6 +86,10 @@ public class PanelInfoSide extends JPanel {
 
     }
 
+    public JTextArea getjListCoups() {
+        return jListCoups;
+    }
+    
     public JPanel getMenu() {
         return menu;
     }
@@ -130,4 +133,5 @@ public class PanelInfoSide extends JPanel {
     public JButton getButtonExit() {
         return buttonExit;
     }
+    
 }

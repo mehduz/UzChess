@@ -20,6 +20,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import uzchess.controllers.EchecsControler;
 import uzchess.core.domain.Case;
+import uzchess.core.utilities.CollectionUtility;
 import uzchess.events.EchecsChangedEvent;
 import uzchess.model.JeuEchecsModel;
 
@@ -105,7 +106,8 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
                  panelInfoTexte.getJta().append("\nCoup invalide ! Veuillez rejouer");
             }
         }
-        
+     
+        panelInfoSide.getjListCoups().setText(CollectionUtility.toStringCollection(jeu.getCoupsJoues(), "\n" ));
         panelInfoTexte.repaint();
         panelBoard.repaint(); 
         panelInfoSide.repaint();
