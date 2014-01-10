@@ -8,6 +8,7 @@ package uzchess.controllers;
 import java.util.ArrayList;
 import uzchess.core.domain.Case;
 import uzchess.gui.EchecsView;
+import uzchess.gui.VueJeu;
 import uzchess.model.JeuEchecsModel;
 
 /**
@@ -48,6 +49,17 @@ public class EchecsControler {
             model.setCasesValides(new ArrayList<Case>());
             selected = null;
         }
+    }
+    
+    public void notifyNewGame() {
+        
+        model = new JeuEchecsModel();
+        model.initialiser("test", "batard");
+        model.addEchecsListener(view);
+        VueJeu viewG =  ((VueJeu)view); 
+        viewG.getPanelBoard().setCases(model.getEchiquier().getCases());
+        viewG.getPanelInfoSide().getjListCoups().setText(null); 
+        view.repaint();
     }
 
 }

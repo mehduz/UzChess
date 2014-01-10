@@ -82,6 +82,7 @@ public class PanelInfoSide extends JPanel {
         this.add(listeCoups, "Center");
         this.add(infoScore, "South");
         
+        buttonNew.addActionListener(vue);
         buttonExit.addActionListener(vue);
 
     }

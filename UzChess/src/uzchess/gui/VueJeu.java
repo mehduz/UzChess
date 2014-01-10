@@ -113,6 +113,15 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         panelInfoSide.repaint();
     }
 
+    public PanelBoard getPanelBoard() {
+        return panelBoard;
+    }
+
+    public PanelInfoSide getPanelInfoSide() {
+        return panelInfoSide;
+    }
+    
+
     @Override
     public void display() {
         this.setVisible(true);
@@ -154,8 +163,16 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        if (e.getSource() == panelInfoSide.getButtonExit()) {
+        Object source = e.getSource();
+        
+        if (source == panelInfoSide.getButtonExit()) {
             this.close();
+            return;
+        }
+     
+        if(source == panelInfoSide.getButtonNew()){
+            this.getCtrl().notifyNewGame();
+            return;
         }
     }
 }
