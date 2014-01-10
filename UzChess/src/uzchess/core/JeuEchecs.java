@@ -45,7 +45,8 @@ public class JeuEchecs {
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
             Joueur j = (tour == Couleur.BLANC) ? jb : jn;
             if(arr.getPiece() != null){
-               j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
+                //setter ici la valeur de la piece, à placer dans le verificateur
+               //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
             echiquier.deplacer(dep, arr);
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
@@ -80,6 +81,11 @@ public class JeuEchecs {
         return echiquier;
     }
 
+    public String getNomPartie() {
+        return nomPartie;
+    }
+
+    
     public void setMoteurDeJeu(MoteurDeJeu mdj) {
         moteurDeJeu = mdj;
     }
@@ -126,8 +132,8 @@ public class JeuEchecs {
         this.jb = jb;
     }
 
-    public String getNomPartie() {
-        return nomPartie;
+    public void setNomPartie(String nomPartie) {
+        this.nomPartie = nomPartie;
     }
-    
+
 }

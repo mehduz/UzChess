@@ -6,7 +6,10 @@
 package uzchess.controllers;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import uzchess.constantes.DaoType;
 import uzchess.core.domain.Case;
+import uzchess.dal.*;
 import uzchess.gui.EchecsView;
 import uzchess.gui.VueJeu;
 import uzchess.model.JeuEchecsModel;
@@ -20,6 +23,8 @@ public class EchecsControler {
     private EchecsView view;
     private JeuEchecsModel model = null;
     private Case selected = null;
+    private Dao dao = DaoFileFactory.getFactory(DaoType.DAO_FILE).getJeuEchecsDao();
+    private static final Logger LOG = Logger.getLogger(EchecsControler.class.getName());
 
     public void displayView() {
         view.display();
@@ -62,12 +67,20 @@ public class EchecsControler {
         view.repaint();
     }
     
-    public void notifyLoad(){
+    public void notifyLoad(String fileName){
         
     }
     
-    public void notifySave(){
+    public void notifySave(String fileName){
         
+        model.setNomPartie(fileName);
+        try{
+            dao.save(model);
+             LOG.info("saved");
+        }
+        catch(DaoException daoe){
+            LOG.info(daoe.getMessage());
+        }
     }
-
+    
 }

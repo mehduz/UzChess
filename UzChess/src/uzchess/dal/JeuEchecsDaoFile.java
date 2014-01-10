@@ -10,6 +10,8 @@ import uzchess.core.JeuEchecs;
 
 public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
 
+    public static final String SAVE_FOLDER = "UzChessSaves";
+    
     @Override
     public void save(JeuEchecs partie) throws DaoException {
 
@@ -24,7 +26,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
             sOut.close();
             fOut.close();
         } catch (IOException e) {
-            throw new DaoException("Erreur lors de la sauvegarde : " , e);
+            throw new DaoException("Erreur lors de la sauvegarde : \n" + e.getStackTrace(), e);
         }
 
     }
@@ -43,7 +45,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
             sIn.close();
             fIn.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DaoException("Erreur lors du  chargement : " , e); 
+            throw new DaoException("Erreur lors du  chargement : \n" + e.getStackTrace(), e); 
         }
         return p;
     }

@@ -82,7 +82,7 @@ public class JeuEchecsModel extends JeuEchecs {
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
             Joueur j = (super.tour == Couleur.BLANC) ? jb : jn;
             if (arr.getPiece() != null) {
-                j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
+                //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
             
             echiquier.deplacer(dep, arr);

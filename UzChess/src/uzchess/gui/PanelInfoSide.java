@@ -84,6 +84,8 @@ public class PanelInfoSide extends JPanel {
         
         buttonNew.addActionListener(vue);
         buttonExit.addActionListener(vue);
+        buttonSave.addActionListener(vue);
+        buttonLoad.addActionListener(vue);
 
     }
 

@@ -59,8 +59,7 @@ public class PanelBoard extends JPanel {
          
          this.repaint();
      } 
-         
-    
+        
     @Override
     protected void paintComponent(Graphics g){
         

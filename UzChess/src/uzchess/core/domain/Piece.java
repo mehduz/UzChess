@@ -7,7 +7,6 @@ import uzchess.gui.RepPieceGraphique;
 public class Piece implements Cloneable{
 
     private Couleur couleur;
-    private byte valeur;
     private Deplacement deplacement;
     private RepPieceGraphique<Object> rep;
 
@@ -16,15 +15,10 @@ public class Piece implements Cloneable{
         couleur = null;
         deplacement = null;
         rep = null;
-        valeur = -1;
     }
 
     public void setCouleur(Couleur couleur) {
         this.couleur = couleur;
-    }
-
-    public void setValeur(byte valeur) {
-        this.valeur = valeur;
     }
 
     public void setDeplacement(Deplacement deplacement) {
@@ -37,10 +31,6 @@ public class Piece implements Cloneable{
 
     public Couleur getCouleur() {
         return couleur;
-    }
-
-    public byte getValeur() {
-        return valeur;
     }
 
     public Deplacement getDeplacement() {

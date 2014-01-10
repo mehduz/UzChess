@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uzchess.model;
 
 import uzchess.core.domain.Case;
@@ -18,14 +17,12 @@ public class Coup {
         this.caseDep = caseDep;
         this.caseArr = caseArr;
     }
-    
+
     private Case caseDep;
     private Case caseArr;
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return caseDep.toString() + "->" + caseArr.toString();
     }
 }
-    
-

@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import uzchess.controllers.EchecsControler;
 import uzchess.core.domain.Case;
@@ -54,7 +55,7 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.panelBoard = new PanelBoard(cases, this);
-        this.panelInfoSide = new PanelInfoSide( this );
+        this.panelInfoSide = new PanelInfoSide(this);
         this.panelInfoTexte = new PanelInfoTexte();
         this.initialise();
     }
@@ -75,41 +76,38 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
 
     @Override
     public void echecsChanged(EchecsChangedEvent event) {
-        
+
         JeuEchecsModel jeu = (JeuEchecsModel) event.getSource();
         this.panelBoard.setCases(jeu.getEchiquier().getCases());
-         
+
         for (Case c : jeu.getCasesToClean()) {
             byte lig = c.getLigne();
             byte col = c.getColonne();
             panelBoard.getSquares()[lig][col].setBorder(null);
         }
-         
+
         for (Case c : jeu.getCasesValides()) {
             byte lig = c.getLigne();
             byte col = c.getColonne();
             panelBoard.getSquares()[lig][col].setBorder(BorderFactory.createLineBorder(Color.green, 3));
         }
-        
-        if(jeu.getCasesValides().isEmpty()){
+
+        if (jeu.getCasesValides().isEmpty()) {
             panelInfoTexte.getJta().setText("\nLe joueur " + jeu.getJoueur(jeu.getTour()).getPseudo() + "a le trait : ");
-            if(jeu.isEchec()){
-                  panelInfoTexte.getJta().append("\nEchec !");
-            }
-            else if(jeu.isMat()){
-                 panelInfoTexte.getJta().append("\nEchec et Mat!");
-            } 
-            else if(jeu.isPat()){
-                 panelInfoTexte.getJta().append("\nPat!");
-            }
-            else if(jeu.isInvalide()){
-                 panelInfoTexte.getJta().append("\nCoup invalide ! Veuillez rejouer");
+            if (jeu.isEchec()) {
+                panelInfoTexte.getJta().append("\nEchec !");
+            } else if (jeu.isMat()) {
+                panelInfoTexte.getJta().append("\nEchec et Mat!");
+            } else if (jeu.isPat()) {
+                panelInfoTexte.getJta().append("\nPat!");
+            } else if (jeu.isInvalide()) {
+                panelInfoTexte.getJta().append("\nCoup invalide ! Veuillez rejouer");
             }
         }
-     
-        panelInfoSide.getjListCoups().setText(CollectionUtility.toStringCollection(jeu.getCoupsJoues(), "\n" ));
+
+        panelInfoSide.getjListCoups().setText(CollectionUtility.toStringCollection(jeu.getCoupsJoues(), "\n"));
         panelInfoTexte.repaint();
-        panelBoard.repaint(); 
+        panelBoard.repaint();
         panelInfoSide.repaint();
     }
 
@@ -120,7 +118,6 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
     public PanelInfoSide getPanelInfoSide() {
         return panelInfoSide;
     }
-    
 
     @Override
     public void display() {
@@ -135,8 +132,8 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (((HashMap) panelBoard.getMapPieces()).containsKey((JPanel)e.getSource())) {
-            this.getCtrl().notifyCaseSelect(panelBoard.getMapPieces().get((JPanel)e.getSource()));
+        if (((HashMap) panelBoard.getMapPieces()).containsKey((JPanel) e.getSource())) {
+            this.getCtrl().notifyCaseSelect(panelBoard.getMapPieces().get((JPanel) e.getSource()));
         }
     }
 
@@ -162,17 +159,36 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         Object source = e.getSource();
-        
+
         if (source == panelInfoSide.getButtonExit()) {
             this.close();
             return;
         }
-     
-        if(source == panelInfoSide.getButtonNew()){
+
+        if (source == panelInfoSide.getButtonNew()) {
             this.getCtrl().notifyNewGame();
             return;
+        }
+
+        if (source == panelInfoSide.getButtonLoad()) {
+            String fileName = "";
+            this.getCtrl().notifyLoad(fileName);
+            return;
+        }
+
+        if (source == panelInfoSide.getButtonSave()) {
+             String fileName = (String) JOptionPane.showInputDialog(
+                    this,
+                    "Nom de sauvegarde : \n",
+                    "Sauvegarde",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    null,
+                    null
+            );
+            this.getCtrl().notifySave(fileName);
         }
     }
 }

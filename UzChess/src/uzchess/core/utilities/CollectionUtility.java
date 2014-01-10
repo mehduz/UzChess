@@ -8,6 +8,7 @@ package uzchess.core.utilities;
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Map.Entry;
+import uzchess.core.domain.Piece;
 
 /**
  *
@@ -15,21 +16,19 @@ import java.util.Map.Entry;
  */
 public class CollectionUtility {
 
-    /*public static AbstractMap<Object, Object> clone(AbstractMap<Object, Object> map) {
+    public static AbstractMap<Object, Object> clone(AbstractMap<Object, Object> map) {
+        
         AbstractMap<Object, Object> ret = null;
         try{
            ret = map.getClass().newInstance();
-        }catch(InstantiationException ie){
+        }catch(  InstantiationException | IllegalAccessException ie){
             ie.printStackTrace(System.err);
         }
-        catch(IllegalAccessException iae){
-             iae.printStackTrace(System.err);
-        }
         for (Entry entry : ret.entrySet()) {
-            //ret.put((Piece)entry.getKey(), (Boolean) entry.getValue());
+            ret.put((Piece)entry.getKey(), (Boolean) entry.getValue());
         }
         return null;
-    }*/
+    }
 
     
     public static String toStringCollection(Collection list, String sep){
