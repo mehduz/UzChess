@@ -61,5 +61,13 @@ public class EchecsControler {
         viewG.getPanelInfoSide().getjListCoups().setText(null); 
         view.repaint();
     }
+    
+    public void notifyLoad(){
+        
+    }
+    
+    public void notifySave(){
+        
+    }
 
 }
