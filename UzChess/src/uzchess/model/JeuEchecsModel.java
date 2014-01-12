@@ -79,14 +79,10 @@ public class JeuEchecsModel extends JeuEchecs {
         if (casesToClean.contains(arr)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
-           
             echiquier.deplacer(dep, arr);
-            
             invalide = false;
             coupsJoues.add(new Coup(dep, arr));
-
-            tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
-         
+            tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;    
             echec = moteurDeJeu.detecterEchec(tour);
             this.detecterFin();
             
@@ -104,7 +100,6 @@ public class JeuEchecsModel extends JeuEchecs {
             if (arr.getPiece() != null) {
                 //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
-
         }
         fireEchecsChanged();
     }

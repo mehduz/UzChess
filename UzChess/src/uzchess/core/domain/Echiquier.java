@@ -123,6 +123,7 @@ public class Echiquier implements Cloneable {
             hm = piecesN;
             hmAdv = piecesB;
         }
+        
         hm.put(p, arr);
         if (arr.getPiece() != null) {
             hmAdv.remove(arr.getPiece());
@@ -137,6 +138,7 @@ public class Echiquier implements Cloneable {
             }
             caseRoiB = arr;
         }
+        
         if (dep == caseRoiN) {
             sr.getRois().put(p, true);
             byte decal = (byte) (arr.getColonne() - dep.getColonne());
@@ -154,7 +156,6 @@ public class Echiquier implements Cloneable {
         
         if (dep.getPiece().getDeplacement() instanceof VerificateurPion) {
 
-                //On se déplace de deux et on ghost la putain de case
                 byte decal = (byte) (arr.getLigne() - dep.getLigne());
                 if (decal == 2) {
                     gNoir = cases[2][dep.getColonne()];
@@ -164,7 +165,6 @@ public class Echiquier implements Cloneable {
                     gBlanc.setGhosted(true);
                 }
                 
-                //La case est ghoster on tejj le pion UZ
                 if (arr.isGhosted()) {
                     Case ghost;
                     if (dep.getPiece().getCouleur() == Couleur.BLANC) {
@@ -177,7 +177,7 @@ public class Echiquier implements Cloneable {
                     }
                     ghost.setPiece(null);
                 }
-            }
+            } 
         
         arr.setPiece(p);
         dep.setPiece(null);

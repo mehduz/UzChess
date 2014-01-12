@@ -69,12 +69,11 @@ public class MoteurDeJeu {
 //Si on a une pièce arrivée et un Pion et que la case visée est ghoster
              if (jeu.getTour() == Couleur.BLANC) {
                 ech.getCases()[arr.getLigne() + 1][arr.getColonne()].setPiece(parr);//On remet la pièce à sa place
-                ech.getPieces(Couleur.BLANC).remove(parr);//On remet la hashmap à jour
+                ech.getPieces(Couleur.NOIR).put(parr , ech.getCases()[arr.getLigne() + 1][arr.getColonne()]);//On remet la hashmap à jour
                 arr.setPiece(null);//La case d'arrivée est null
                 
-
             } else {
-                ech.getPieces(Couleur.NOIR).remove(parr);
+                ech.getPieces(Couleur.BLANC).put(parr, ech.getCases()[arr.getLigne() + 1][arr.getColonne()]);
                 ech.getCases()[arr.getLigne() - 1][arr.getColonne()].setPiece(parr);
                 arr.setPiece(null);
             }
@@ -89,6 +88,7 @@ public class MoteurDeJeu {
         }
        
         if (king) {
+            ech.setCaseRoi(jeu.tour , dep);
             byte decal = (byte) (arr.getColonne() - dep.getColonne());
             if (decal == 2 && pdep.getCouleur() == Couleur.BLANC) {
                 ech.deplacer(ech.getCases()[7][5], ech.getCases()[7][7]);

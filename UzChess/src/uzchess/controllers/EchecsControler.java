@@ -76,7 +76,7 @@ public class EchecsControler {
         model.setNomPartie(fileName);
         try{
             dao.save(model);
-             LOG.info("saved");
+            LOG.info("saved");
         }
         catch(DaoException daoe){
             LOG.info(daoe.getMessage());
