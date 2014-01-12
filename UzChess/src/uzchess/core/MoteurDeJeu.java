@@ -10,6 +10,7 @@ import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Piece;
 import uzchess.core.rules.VerificateurCavalier;
+import uzchess.core.rules.VerificateurPion;
 import uzchess.core.rules.VerificateurRoi;
 import uzchess.core.rules.VerificateurTour;
 
@@ -35,7 +36,6 @@ public class MoteurDeJeu {
         return false;
     }
 
-   
     private boolean simulerCoup(Case dep, Case arr) {
 
         boolean ret;
@@ -45,13 +45,49 @@ public class MoteurDeJeu {
         boolean king = pdep.getDeplacement() instanceof VerificateurRoi;
         boolean tower = pdep.getDeplacement() instanceof VerificateurTour;
         moved = (king) ? ech.getSr().getRois().get(dep.getPiece()) : (tower) ? ech.getSt().getTours().get(dep.getPiece()) : false;
-        ech.deplacer(dep, arr);
+       
+        //Si la case visé est goshted
+       if ( pdep.getDeplacement() instanceof VerificateurPion && arr.isGhosted()){
+           if (jeu.getTour() == Couleur.BLANC) 
+                parr = ech.getCases()[arr.getLigne() + 1][arr.getColonne()].getPiece(); //On défini la pièce visé comme celle du dessous
+           else
+                parr = ech.getCases()[arr.getLigne() - 1][arr.getColonne()].getPiece(); //On défini la pièce visé comme celle du dessous
+       }
+       
+        ech.deplacer(dep, arr);//On effectue le déplacement de la pièce de départ vers la case d'arrivée
         ret = detecterEchec(pdep.getCouleur());
-        ech.deplacer(arr, dep);
-        if (parr != null) {
+
+        //ech.deplacer(arr, dep);
+        dep.setPiece(pdep);//On annule le déplacement de la pièce de départ en remettant la pièce de départ sur la case de départ
+        ech.getPieces(pdep.getCouleur()).put(pdep, dep);//On met à jour la hashmap
+      
+        if (ech.getGhost(jeu.getTour()) != null) {//Si on est dans le cas d'un ghost
+            ech.getGhost(jeu.getTour()).setGhosted(false);//On passe ce ghost à false
+            ech.setGhost(jeu.getTour(), null); //On met le statut ghost à null
+        }
+            if (parr != null &&  pdep.getDeplacement() instanceof VerificateurPion && arr.isGhosted()) {
+//Si on a une pièce arrivée et un Pion et que la case visée est ghoster
+             if (jeu.getTour() == Couleur.BLANC) {
+                ech.getCases()[arr.getLigne() + 1][arr.getColonne()].setPiece(parr);//On remet la pièce à sa place
+                ech.getPieces(Couleur.BLANC).remove(parr);//On remet la hashmap à jour
+                arr.setPiece(null);//La case d'arrivée est null
+                
+
+            } else {
+                ech.getPieces(Couleur.NOIR).remove(parr);
+                ech.getCases()[arr.getLigne() - 1][arr.getColonne()].setPiece(parr);
+                arr.setPiece(null);
+            }
+        }
+        else if(parr != null){
             arr.setPiece(parr);
             ech.getPieces(parr.getCouleur()).put(parr, arr);
         }
+        else
+        {
+            arr.setPiece(null);
+        }
+       
         if (king) {
             byte decal = (byte) (arr.getColonne() - dep.getColonne());
             if (decal == 2 && pdep.getCouleur() == Couleur.BLANC) {
@@ -67,6 +103,7 @@ public class MoteurDeJeu {
         } else if (tower) {
             ech.getSt().getTours().put(pdep, moved);
         }
+
         return !ret;
     }
 
@@ -152,7 +189,7 @@ public class MoteurDeJeu {
         }
         return maListMenace;
     }
-    
+
     public boolean detecterEchec(Couleur c) {
 
         Case caseRoiAChecker = ech.getCaseRoi(c);

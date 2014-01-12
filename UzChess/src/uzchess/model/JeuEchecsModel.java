@@ -24,7 +24,7 @@ public class JeuEchecsModel extends JeuEchecs {
     private EventListenerList listeners;
     private ArrayList<Case> casesValides;
     private ArrayList<Case> casesToClean;
-    private ArrayList<Coup> coupsJoues; 
+    private ArrayList<Coup> coupsJoues;
 
     public JeuEchecsModel() {
         super();
@@ -71,29 +71,41 @@ public class JeuEchecsModel extends JeuEchecs {
     public ArrayList<Coup> getCoupsJoues() {
         return coupsJoues;
     }
-    
-    
+
     /*we can't use super.jouer() here : it won't works*/
     @Override
     public void jouer(Case dep, Case arr) {
         invalide = true;
         if (casesToClean.contains(arr)) {
-            
+
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
-            Joueur j = (super.tour == Couleur.BLANC) ? jb : jn;
+           
+            echiquier.deplacer(dep, arr);
+            
+            invalide = false;
+            coupsJoues.add(new Coup(dep, arr));
+
+            tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
+         
+            echec = moteurDeJeu.detecterEchec(tour);
+            this.detecterFin();
+            
+            Joueur j;
+            if (super.tour == Couleur.BLANC && echiquier.getgBlanc() != null) {
+                j = jb;
+                echiquier.getgBlanc().setGhosted(false);
+                echiquier.setgBlanc(null);
+            } else if (super.tour == Couleur.NOIR && echiquier.getgNoir() != null) {
+                j = jn;
+                echiquier.getgNoir().setGhosted(false);
+                echiquier.setgNoir(null);
+            }
+
             if (arr.getPiece() != null) {
                 //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
-            
-            echiquier.deplacer(dep, arr);
-            invalide = false;
-            coupsJoues.add( new Coup(dep, arr));
-            
-            tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
-            echec = moteurDeJeu.detecterEchec(tour);
-            this.detecterFin();
-           
-        } 
+
+        }
         fireEchecsChanged();
     }
 

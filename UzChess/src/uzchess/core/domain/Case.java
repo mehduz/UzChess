@@ -10,6 +10,7 @@ public class Case implements Cloneable {
     private byte ligne;
     private byte colonne;
     private Piece piece;
+    private boolean ghosted;
 
     public Case(byte l, byte col, Couleur c) {
 
@@ -17,7 +18,18 @@ public class Case implements Cloneable {
         colonne = col;
         couleur = c;
         piece = null;
+        ghosted = false;
     }
+
+    public boolean isGhosted() {
+        return ghosted;
+    }
+
+    public void setGhosted(boolean ghosted) {
+        this.ghosted = ghosted;
+    }
+    
+    
 
     public Couleur getCouleur() {
         return couleur;

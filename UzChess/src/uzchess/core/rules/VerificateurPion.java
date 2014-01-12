@@ -15,7 +15,7 @@ public class VerificateurPion implements Deplacement {
         byte ligArr = arr.getLigne();
         byte dist = (byte) Math.abs(ligArr - ligDep);
 
-        if (arr.getPiece() == null) {
+        if (arr.getPiece() == null && !arr.isGhosted()) {
 
             boolean hasmoved = (ligDep != 6 && ligDep != 1);
             boolean condition1 = (c == Couleur.BLANC && dir == Direction.N) || (c == Couleur.NOIR && dir == Direction.S);

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.core.rules.StatutRoi;
 import uzchess.core.rules.StatutTour;
+import uzchess.core.rules.VerificateurPion;
 import uzchess.core.rules.VerificateurTour;
 
 public class Echiquier implements Cloneable {
@@ -20,6 +21,9 @@ public class Echiquier implements Cloneable {
     private StatutTour st;
     private StatutRoi sr;
 
+    private Case gBlanc;
+    private Case gNoir;
+
     public Echiquier(Case[][] cases, HashMap<Piece, Case> piecesN, HashMap<Piece, Case> piecesB, Case caseRoiN, Case caseRoiB, StatutRoi sr, StatutTour st) {
 
         this.cases = cases;
@@ -29,8 +33,44 @@ public class Echiquier implements Cloneable {
         this.caseRoiN = caseRoiN;
         this.st = st;
         this.sr = sr;
+        this.gBlanc = null;
+        this.gNoir = null;
     }
 
+    public Case getgBlanc() {
+        return gBlanc;
+    }
+
+    public Case getgNoir() {
+        return gNoir;
+    }
+
+
+    public Case getGhost(Couleur c)
+    {
+        if(c == Couleur.BLANC)
+            return gBlanc;
+        return gNoir;
+    }
+    
+    public void setGhost(Couleur c, Case ca)
+    {
+        if(c == Couleur.BLANC)
+            gBlanc = ca;
+        else
+            gNoir = ca;
+    }
+    
+    public void setgBlanc(Case gBlanc) {
+        this.gBlanc = gBlanc;
+    }
+
+    
+
+    public void setgNoir(Case gNoir) {
+        this.gNoir = gNoir;
+    }
+    
     public Case[][] getEchiquier() {
         return cases;
     }
@@ -107,13 +147,40 @@ public class Echiquier implements Cloneable {
             }
             caseRoiN = arr;
         }
-        
+
         if (p.getDeplacement() instanceof VerificateurTour) {
             st.getTours().put(p, true);
         }
+        
+        if (dep.getPiece().getDeplacement() instanceof VerificateurPion) {
+
+                //On se déplace de deux et on ghost la putain de case
+                byte decal = (byte) (arr.getLigne() - dep.getLigne());
+                if (decal == 2) {
+                    gNoir = cases[2][dep.getColonne()];
+                    gNoir.setGhosted(true);
+                } else if (decal == -2) {
+                    gBlanc = cases[5][dep.getColonne()];
+                    gBlanc.setGhosted(true);
+                }
+                
+                //La case est ghoster on tejj le pion UZ
+                if (arr.isGhosted()) {
+                    Case ghost;
+                    if (dep.getPiece().getCouleur() == Couleur.BLANC) {
+                        ghost = cases[arr.getLigne() + 1][arr.getColonne()];
+                        piecesN.remove(ghost.getPiece());  
+                    }
+                    else {
+                        ghost = cases[arr.getLigne() - 1][arr.getColonne()];
+                        piecesB.remove(ghost.getPiece());
+                    }
+                    ghost.setPiece(null);
+                }
+            }
+        
         arr.setPiece(p);
         dep.setPiece(null);
     }
-    
-}
 
+}

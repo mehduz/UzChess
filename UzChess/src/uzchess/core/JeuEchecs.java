@@ -43,12 +43,35 @@ public class JeuEchecs {
         if (moteurDeJeu.verifierCoup(dep, arr)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
-            Joueur j = (tour == Couleur.BLANC) ? jb : jn;
-            if(arr.getPiece() != null){
+            Joueur j;
+            if (tour == Couleur.BLANC) {
+                j = jb;
+                echiquier.getgBlanc().setGhosted(false);
+                echiquier.setgBlanc(null);
+            } else {
+                j = jn;
+                echiquier.getgNoir().setGhosted(false);
+                echiquier.setgNoir(null);
+            }
+
+            if (arr.getPiece() != null) {
                 //setter ici la valeur de la piece, à placer dans le verificateur
-               //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
+                //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
             }
             echiquier.deplacer(dep, arr);
+            
+            if (arr.getPiece().getDeplacement() instanceof VerificateurPion) {
+
+                byte decal = (byte) (arr.getLigne() - dep.getLigne());
+                if (decal == 2) {
+                    echiquier.setgNoir(echiquier.getCases()[2][dep.getColonne()]);
+                    echiquier.getgNoir().setGhosted(true);
+                } else if (decal == -2) {
+                    echiquier.setgBlanc(echiquier.getCases()[5][dep.getColonne()]);
+                    echiquier.getgBlanc().setGhosted(true);
+                }
+
+            }
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             echec = moteurDeJeu.detecterEchec(tour);
             this.detecterFin();
@@ -85,7 +108,6 @@ public class JeuEchecs {
         return nomPartie;
     }
 
-    
     public void setMoteurDeJeu(MoteurDeJeu mdj) {
         moteurDeJeu = mdj;
     }
@@ -110,16 +132,17 @@ public class JeuEchecs {
         return nul;
     }
 
-    public Joueur getJoueur(Couleur c){
-        if(c == Couleur.BLANC)
+    public Joueur getJoueur(Couleur c) {
+        if (c == Couleur.BLANC) {
             return jb;
+        }
         return jn;
     }
-    
+
     public void setJn(Joueur jn) {
         this.jn = jn;
     }
-    
+
     public boolean isInvalide() {
         return invalide;
     }
