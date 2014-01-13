@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import uzchess.core.JeuEchecs;
 
 public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
 
     public static final String SAVE_FOLDER = "UzChessSaves";
+    public static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     @Override
     public void save(JeuEchecs partie) throws DaoException {
@@ -19,7 +23,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
         ObjectOutputStream sOut;
 
         try {
-            fOut = new FileOutputStream(partie.getNomPartie() + ".dat");
+            fOut = new FileOutputStream(SAVE_FOLDER + "/" + partie.getNomPartie() +dateFormat.format(new Date()) +".dat");
             sOut = new ObjectOutputStream(fOut);
             sOut.writeObject(partie);
             sOut.flush();
@@ -45,7 +49,7 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
             sIn.close();
             fIn.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DaoException("Erreur lors du  chargement : \n" + e.getStackTrace(), e); 
+            throw new DaoException("Erreur lors du  chargement : \n" + e.getStackTrace(), e);  
         }
         return p;
     }
