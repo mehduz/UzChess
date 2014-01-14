@@ -1,5 +1,6 @@
 package uzchess.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import uzchess.core.rules.VerificateurPion;
 import uzchess.core.rules.VerificateurRoi;
 import uzchess.core.rules.VerificateurTour;
 
-public class MoteurDeJeu {
+public class MoteurDeJeu implements Serializable{
 
     private Echiquier ech;
     private JeuEchecs jeu;

@@ -1,5 +1,6 @@
 package uzchess.core.domain;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import uzchess.constantes.Couleur;
 import uzchess.core.rules.StatutRoi;
@@ -7,7 +8,7 @@ import uzchess.core.rules.StatutTour;
 import uzchess.core.rules.VerificateurPion;
 import uzchess.core.rules.VerificateurTour;
 
-public class Echiquier implements Cloneable {
+public class Echiquier implements Serializable {
 
     private Case[][] cases;
     private HashMap<Piece, Case> piecesN;

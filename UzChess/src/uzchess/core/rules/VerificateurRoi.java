@@ -1,5 +1,6 @@
 package uzchess.core.rules;
 
+import java.io.Serializable;
 import uzchess.constantes.Direction;
 import uzchess.core.domain.Case;
 import uzchess.core.domain.CaseInterUtility;
@@ -7,7 +8,7 @@ import uzchess.core.domain.CheckCasesInterUtility;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Piece;
 
-public class VerificateurRoi implements Deplacement {
+public class VerificateurRoi implements Deplacement, Serializable {
     
     private Echiquier ech;
     private static VerificateurReine vr;

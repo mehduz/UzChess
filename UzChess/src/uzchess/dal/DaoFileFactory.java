@@ -1,12 +1,12 @@
 package uzchess.dal;
 
-import uzchess.core.JeuEchecs;
+import uzchess.model.JeuEchecsModel;
 
 
 public class DaoFileFactory extends AbstractDaoFactory{
 
     @Override
-    public Dao<JeuEchecs> getJeuEchecsDao() {
+    public Dao<JeuEchecsModel> getJeuEchecsDao() {
        return new JeuEchecsDaoFile(); 
     }
     

@@ -6,11 +6,13 @@
 
 package uzchess.gui;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user
  */
-public class RepPieceUnicode implements RepPieceGraphique{
+public class RepPieceUnicode implements RepPieceGraphique, Serializable{
 
     private String symbol;
 

@@ -1,10 +1,11 @@
 package uzchess.core.domain;
 
+import java.io.Serializable;
 import uzchess.constantes.Couleur;
 import uzchess.core.rules.Deplacement;
 import uzchess.gui.RepPieceGraphique;
 
-public class Piece implements Cloneable{
+public class Piece implements Serializable{
 
     private Couleur couleur;
     private Deplacement deplacement;

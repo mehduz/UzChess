@@ -1,8 +1,9 @@
 package uzchess.core.domain;
 
+import java.io.Serializable;
 import uzchess.constantes.Couleur;
 
-public class Joueur {
+public class Joueur implements Serializable{
 
     private Couleur couleur;
     private String pseudo;

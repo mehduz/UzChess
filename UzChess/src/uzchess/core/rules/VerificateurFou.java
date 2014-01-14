@@ -1,10 +1,11 @@
 package uzchess.core.rules;
 
+import java.io.Serializable;
 import uzchess.core.domain.Case;
 import uzchess.core.domain.CaseInterUtility;
 import uzchess.core.domain.CheckCasesInterUtility;
 
-public class VerificateurFou implements Deplacement {
+public class VerificateurFou implements Deplacement, Serializable {
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr ) {

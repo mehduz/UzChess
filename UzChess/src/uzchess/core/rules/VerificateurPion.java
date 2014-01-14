@@ -1,10 +1,11 @@
 package uzchess.core.rules;
 
+import java.io.Serializable;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.core.domain.Case;
 
-public class VerificateurPion implements Deplacement {
+public class VerificateurPion implements Deplacement, Serializable {
 
     @Override
     public boolean verifierDeplacement(Case dep, Case arr ) {

@@ -1,12 +1,13 @@
 package uzchess.core;
 
+import java.io.Serializable;
 import uzchess.constantes.Couleur;
 import uzchess.core.domain.Case;
 import uzchess.core.domain.Echiquier;
 import uzchess.core.domain.Joueur;
 import uzchess.core.rules.VerificateurPion;
 
-public class JeuEchecs {
+public class JeuEchecs implements Serializable{
 
     protected Couleur tour;
     protected byte compteurCoups;

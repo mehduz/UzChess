@@ -5,13 +5,14 @@
  */
 package uzchess.model;
 
+import java.io.Serializable;
 import uzchess.core.domain.Case;
 
 /**
  *
  * @author user
  */
-public class Coup {
+public class Coup implements Serializable{
 
     public Coup(Case caseDep, Case caseArr) {
         this.caseDep = caseDep;

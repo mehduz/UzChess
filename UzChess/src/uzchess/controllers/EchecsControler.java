@@ -5,6 +5,7 @@
  */
 package uzchess.controllers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import uzchess.constantes.DaoType;
@@ -18,7 +19,7 @@ import uzchess.model.JeuEchecsModel;
  *
  * @author user
  */
-public class EchecsControler {
+public class EchecsControler implements Serializable{
 
     private EchecsView view;
     private JeuEchecsModel model = null;
@@ -68,7 +69,12 @@ public class EchecsControler {
     }
     
     public void notifyLoad(String fileName){
-        
+        try {
+            model = (JeuEchecsModel)dao.load(fileName);
+        } catch (DaoException ex) {
+            LOG.severe("Error loading " + fileName);
+        }
+        view.repaint();
     }
     
     public void notifySave(String fileName){

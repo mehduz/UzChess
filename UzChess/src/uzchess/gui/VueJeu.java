@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,6 +33,7 @@ import uzchess.model.JeuEchecsModel;
 public class VueJeu extends EchecsView implements MouseListener, ActionListener {
 
     private static final String TITRE = "UzChess";
+    private static String SAVE_FOLDER = "UzChessSaves";
 
     private static final int SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
     private static final int SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -173,9 +175,13 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         }
 
         if (source == panelInfoSide.getButtonLoad()) {
-            String fileName = "";
-            this.getCtrl().notifyLoad(fileName);
-            return;
+            
+           JFileChooser jfc = new JFileChooser(SAVE_FOLDER);
+           jfc.showOpenDialog(null);
+           
+           String fileName = jfc.getName();
+           this.getCtrl().notifyLoad(fileName);
+           return;
         }
 
         if (source == panelInfoSide.getButtonSave()) {

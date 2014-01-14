@@ -5,6 +5,7 @@
  */
 package uzchess.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.event.EventListenerList;
 import uzchess.constantes.Couleur;
@@ -19,7 +20,7 @@ import uzchess.events.EchecsListener;
  *
  * @author usere
  */
-public class JeuEchecsModel extends JeuEchecs {
+public class JeuEchecsModel extends JeuEchecs implements Serializable{
 
     private EventListenerList listeners;
     private ArrayList<Case> casesValides;

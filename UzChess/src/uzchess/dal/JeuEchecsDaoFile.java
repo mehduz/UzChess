@@ -1,29 +1,29 @@
 package uzchess.dal;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import uzchess.core.JeuEchecs;
+import uzchess.model.JeuEchecsModel;
 
-public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
+public class JeuEchecsDaoFile extends Dao<JeuEchecsModel> implements Serializable {
 
     public static final String SAVE_FOLDER = "UzChessSaves";
-    public static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     @Override
-    public void save(JeuEchecs partie) throws DaoException {
+    public void save(JeuEchecsModel partie) throws DaoException {
 
         FileOutputStream fOut;
         ObjectOutputStream sOut;
 
         try {
-            fOut = new FileOutputStream(SAVE_FOLDER + "/" + partie.getNomPartie() +dateFormat.format(new Date()) +".dat");
+            
+            String fileName = partie.getNomPartie() + ".dat";
+            File file = new File(SAVE_FOLDER, fileName);
+            fOut = new FileOutputStream( file); 
             sOut = new ObjectOutputStream(fOut);
             sOut.writeObject(partie);
             sOut.flush();
@@ -36,16 +36,16 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecs> implements Serializable {
     }
 
     @Override
-    public JeuEchecs load(Object... criterias) throws DaoException {
+    public JeuEchecsModel load(String fileName) throws DaoException {
 
         FileInputStream fIn;
         ObjectInputStream sIn;
-        JeuEchecs p = null;
+        JeuEchecsModel p = null;
 
         try {
-            fIn = new FileInputStream((String) criterias[0]);
+            fIn = new FileInputStream(fileName);
             sIn = new ObjectInputStream(fIn);
-            p = (JeuEchecs) sIn.readObject();
+            p = (JeuEchecsModel) sIn.readObject();
             sIn.close();
             fIn.close();
         } catch (IOException | ClassNotFoundException e) {

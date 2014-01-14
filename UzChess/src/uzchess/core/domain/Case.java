@@ -1,10 +1,11 @@
 package uzchess.core.domain;
 
+import java.io.Serializable;
 import uzchess.constantes.Couleur;
 import uzchess.constantes.Direction;
 import uzchess.constantes.PosLettres;
 
-public class Case implements Cloneable {
+public class Case implements Serializable {
 
     private Couleur couleur;
     private byte ligne;
