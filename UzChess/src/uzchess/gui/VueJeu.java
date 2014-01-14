@@ -178,8 +178,8 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
             
            JFileChooser jfc = new JFileChooser(SAVE_FOLDER);
            jfc.showOpenDialog(null);
-           
-           String fileName = jfc.getName();
+           jfc.setDialogTitle("Charger");
+           String fileName = jfc.getName(jfc.getSelectedFile());
            this.getCtrl().notifyLoad(fileName);
            return;
         }
@@ -197,4 +197,6 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
             this.getCtrl().notifySave(fileName);
         }
     }
+    
+    
 }

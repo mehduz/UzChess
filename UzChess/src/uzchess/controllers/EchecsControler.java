@@ -71,6 +71,9 @@ public class EchecsControler implements Serializable{
     public void notifyLoad(String fileName){
         try {
             model = (JeuEchecsModel)dao.load(fileName);
+            model.cleanListeners();
+            model.addEchecsListener(view);
+            ((VueJeu)view).getPanelBoard().setCases(model.getEchiquier().getCases());
         } catch (DaoException ex) {
             LOG.severe("Error loading " + fileName);
         }

@@ -51,6 +51,10 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
             el.echecsChanged(new EchecsChangedEvent(this));
         }
     }
+    
+    public void cleanListeners(){
+        this.listeners = null;
+    }
 
     public void setCasesValides(ArrayList<Case> casesValides) {
         this.casesValides = casesValides;

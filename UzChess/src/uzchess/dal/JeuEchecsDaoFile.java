@@ -43,7 +43,8 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecsModel> implements Serializabl
         JeuEchecsModel p = null;
 
         try {
-            fIn = new FileInputStream(fileName);
+            File file = new File(SAVE_FOLDER, fileName);
+            fIn = new FileInputStream( file );
             sIn = new ObjectInputStream(fIn);
             p = (JeuEchecsModel) sIn.readObject();
             sIn.close();
