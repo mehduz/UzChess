@@ -43,7 +43,7 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
         this.listeners.remove(EchecsListener.class, l);
     }
 
-    private void fireEchecsChanged() {
+    public void fireEchecsChanged() {
 
         EchecsListener[] listenerList = (EchecsListener[]) this.listeners.getListeners(EchecsListener.class);
 
@@ -53,7 +53,7 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
     }
     
     public void cleanListeners(){
-        this.listeners = null;
+        this.listeners = new EventListenerList();
     }
 
     public void setCasesValides(ArrayList<Case> casesValides) {

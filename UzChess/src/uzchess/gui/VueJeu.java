@@ -95,7 +95,7 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         }
 
         if (jeu.getCasesValides().isEmpty()) {
-            panelInfoTexte.getJta().setText("\nLe joueur " + jeu.getJoueur(jeu.getTour()).getPseudo() + "a le trait : ");
+            panelInfoTexte.getJta().setText("\nLe joueur " + jeu.getJoueur(jeu.getTour()).getPseudo() + "a le trait");
             if (jeu.isEchec()) {
                 panelInfoTexte.getJta().append("\nEchec !");
             } else if (jeu.isMat()) {
@@ -177,8 +177,8 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         if (source == panelInfoSide.getButtonLoad()) {
             
            JFileChooser jfc = new JFileChooser(SAVE_FOLDER);
+           jfc.setDialogTitle("Charger Partie");
            jfc.showOpenDialog(null);
-           jfc.setDialogTitle("Charger");
            String fileName = jfc.getName(jfc.getSelectedFile());
            this.getCtrl().notifyLoad(fileName);
            return;

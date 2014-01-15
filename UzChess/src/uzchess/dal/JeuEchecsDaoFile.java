@@ -18,11 +18,11 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecsModel> implements Serializabl
 
         FileOutputStream fOut;
         ObjectOutputStream sOut;
-
+        File file = null;
         try {
             
             String fileName = partie.getNomPartie() + ".dat";
-            File file = new File(SAVE_FOLDER, fileName);
+            file = new File(SAVE_FOLDER, fileName);
             fOut = new FileOutputStream( file); 
             sOut = new ObjectOutputStream(fOut);
             sOut.writeObject(partie);
@@ -30,6 +30,9 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecsModel> implements Serializabl
             sOut.close();
             fOut.close();
         } catch (IOException e) {
+            file = null;
+            fOut = null;
+            sOut = null;
             throw new DaoException("Erreur lors de la sauvegarde : \n" + e.getStackTrace(), e);
         }
 
@@ -38,18 +41,24 @@ public class JeuEchecsDaoFile extends Dao<JeuEchecsModel> implements Serializabl
     @Override
     public JeuEchecsModel load(String fileName) throws DaoException {
 
-        FileInputStream fIn;
-        ObjectInputStream sIn;
+        FileInputStream fIn = null;
+        ObjectInputStream sIn = null;
         JeuEchecsModel p = null;
-
+        File file = null;
+        
         try {
-            File file = new File(SAVE_FOLDER, fileName);
+            file = new File(SAVE_FOLDER, fileName);
             fIn = new FileInputStream( file );
-            sIn = new ObjectInputStream(fIn);
-            p = (JeuEchecsModel) sIn.readObject();
+            sIn = new ObjectInputStream( fIn );
+            p = (JeuEchecsModel)sIn.readObject();
             sIn.close();
             fIn.close();
         } catch (IOException | ClassNotFoundException e) {
+            
+            file = null;
+            fIn = null;
+            sIn = null;
+            p = null;
             throw new DaoException("Erreur lors du  chargement : \n" + e.getStackTrace(), e);  
         }
         return p;
