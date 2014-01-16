@@ -45,7 +45,7 @@ public class MoteurDeJeu implements Serializable{
         boolean moved;
         boolean king = pdep.getDeplacement() instanceof VerificateurRoi;
         boolean tower = pdep.getDeplacement() instanceof VerificateurTour;
-        moved = (king) ? ech.getSr().getRois().get(dep.getPiece()) : (tower) ? ech.getSt().getTours().get(dep.getPiece()) : false;
+        moved = (king) ? ech.getSr().getRois().get(dep.getPiece()) : (tower)?(ech.getSt().getTours().containsKey(dep.getPiece()))? ech.getSt().getTours().get(dep.getPiece()):false : false;
        
         //Si la case visé est goshted
        if ( pdep.getDeplacement() instanceof VerificateurPion && arr.isGhosted()){
@@ -58,7 +58,7 @@ public class MoteurDeJeu implements Serializable{
         ech.deplacer(dep, arr);//On effectue le déplacement de la pièce de départ vers la case d'arrivée
         ret = detecterEchec(pdep.getCouleur());
 
-        //ech.deplacer(arr, dep);
+      
         dep.setPiece(pdep);//On annule le déplacement de la pièce de départ en remettant la pièce de départ sur la case de départ
         ech.getPieces(pdep.getCouleur()).put(pdep, dep);//On met à jour la hashmap
       

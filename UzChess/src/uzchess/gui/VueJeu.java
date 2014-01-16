@@ -102,7 +102,7 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
             if (jeu.isEchec()) {
                 panelInfoTexte.getJta().append("\nEchec !");
                 if (jeu.isMat()) {
-                    panelInfoTexte.getJta().append("et Mat!");
+                    panelInfoTexte.getJta().append(" et Mat!");
                 }
             } else if (jeu.isPat()) {
                 panelInfoTexte.getJta().append("\nPat!");

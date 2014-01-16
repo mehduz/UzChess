@@ -117,10 +117,7 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
             
             coupsJoues.add(new Coup(dep, arr));
            
-            tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;    
-       
-            echec = moteurDeJeu.detecterEchec(tour);
-            this.detecterFin();
+            tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             
             Joueur j = null;
             if (super.tour == Couleur.BLANC && echiquier.getgBlanc() != null) {
@@ -132,6 +129,10 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
                 echiquier.getgNoir().setGhosted(false);
                 echiquier.setgNoir(null);
             }
+            
+            echec = moteurDeJeu.detecterEchec(tour);
+            detecterFin();
+            
         }
         fireEchecsChanged();
     }
