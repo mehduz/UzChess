@@ -113,10 +113,7 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
                 }
             }
             
-            
-            
             coupsJoues.add(new Coup(dep, arr));
-           
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;
             
             Joueur j = null;
