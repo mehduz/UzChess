@@ -70,7 +70,7 @@ public class EchecsControler implements Serializable {
     public void notifyNewGame() {
 
         model = new JeuEchecsModel();
-        model.initialiser("test", "batard");
+        model.initialiser("Joueur1", "Joueur2");
         model.addEchecsListener(view);
         VueJeu viewG = ((VueJeu) view);
         viewG.getPanelBoard().setCases(model.getEchiquier().getCases());

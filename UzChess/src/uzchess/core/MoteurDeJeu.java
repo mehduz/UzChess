@@ -154,7 +154,7 @@ public class MoteurDeJeu implements Serializable{
         HashMap<Piece, Case> allies = ech.getPieces(c);
         for (Entry<Piece, Case> entry : allies.entrySet()) {
             for (Case inter : casesInterception) {
-                if (entry.getKey().getDeplacement().verifierDeplacement(entry.getValue(), inter)) {
+                if (verifierCoup(entry.getValue(), inter)) {
                     return false;
                 }
             }
