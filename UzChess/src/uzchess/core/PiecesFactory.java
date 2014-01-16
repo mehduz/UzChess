@@ -15,7 +15,8 @@ public class PiecesFactory {
         if (p == Pieces.PION) {
             piece.setDeplacement(new VerificateurPion());
             piece.setCouleur(c);
-            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.PION_B : PiecesUnicode.PION_N));    
+            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.PION_B : PiecesUnicode.PION_N));   
+            piece.setValue((byte)1);
             return piece;
         }
 
@@ -24,6 +25,7 @@ public class PiecesFactory {
             piece.setDeplacement(new VerificateurFou());
             piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.FOU_B : PiecesUnicode.FOU_N));  
             piece.setCouleur(c);
+            piece.setValue((byte)3);
             return piece;
         }
 
@@ -31,7 +33,8 @@ public class PiecesFactory {
 
             piece.setDeplacement(new VerificateurTour());
             piece.setCouleur(c);
-            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.TOUR_B : PiecesUnicode.TOUR_N));   
+            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.TOUR_B : PiecesUnicode.TOUR_N));
+            piece.setValue((byte)4);
             return piece;
             
         }
@@ -40,6 +43,7 @@ public class PiecesFactory {
             piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.CAVALIER_B : PiecesUnicode.CAVALIER_N));
             piece.setCouleur(c);
             piece.setDeplacement(new VerificateurCavalier());
+            piece.setValue((byte)5);
             return piece;
         }
 
@@ -53,7 +57,8 @@ public class PiecesFactory {
         if (p == Pieces.REINE) {
             piece.setDeplacement(new VerificateurReine());
             piece.setCouleur(c);
-            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.DAME_B : PiecesUnicode.DAME_N));   
+            piece.setRep( new RepPieceUnicode(( c == Couleur.BLANC )? PiecesUnicode.DAME_B : PiecesUnicode.DAME_N));
+            piece.setValue((byte)8);
             return piece;
         }
 

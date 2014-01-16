@@ -10,12 +10,14 @@ public class Piece implements Serializable{
     private Couleur couleur;
     private Deplacement deplacement;
     private RepPieceGraphique<Object> rep;
+    private byte value;
 
     public Piece() {
 
         couleur = null;
         deplacement = null;
         rep = null;
+        value = 0;
     }
 
     public void setCouleur(Couleur couleur) {
@@ -41,4 +43,17 @@ public class Piece implements Serializable{
     public RepPieceGraphique<Object> getRep() {
         return rep;
     }
+
+    public byte getValue() {
+        return value;
+    }
+    
+    public void setValue(byte value) {
+        this.value = value;
+    }
+    
+    
+    
 }
+
+

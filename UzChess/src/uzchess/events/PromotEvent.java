@@ -6,16 +6,14 @@
 
 package uzchess.events;
 
-import java.util.EventListener;
+import java.util.EventObject;
 
 /**
  *
  * @author user
  */
-public interface EchecsListener extends EventListener{
-    
-    public void echecsChanged(EchecsChangedEvent event);
-
-    public void onPromote(PromotEvent promotEvent);
-    
+public class PromotEvent extends EventObject{
+     public PromotEvent(Object source ){
+        super(source);  
+    }
 }

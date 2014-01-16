@@ -4,7 +4,7 @@ import java.io.Serializable;
 import uzchess.core.domain.Case;
 
 public class VerificateurCavalier implements Deplacement, Serializable {
-
+    
     @Override
     public boolean verifierDeplacement(Case dep, Case arr) {
 

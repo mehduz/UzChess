@@ -20,10 +20,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import uzchess.constantes.Couleur;
+import uzchess.constantes.Pieces;
 import uzchess.controllers.EchecsControler;
 import uzchess.core.domain.Case;
 import uzchess.core.utilities.CollectionUtility;
 import uzchess.events.EchecsChangedEvent;
+import uzchess.events.PromotEvent;
 import uzchess.model.JeuEchecsModel;
 
 /**
@@ -98,16 +101,20 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
             panelInfoTexte.getJta().setText("\nLe joueur " + jeu.getJoueur(jeu.getTour()).getPseudo() + "a le trait");
             if (jeu.isEchec()) {
                 panelInfoTexte.getJta().append("\nEchec !");
-            } else if (jeu.isMat()) {
-                panelInfoTexte.getJta().append("\nEchec et Mat!");
+                if (jeu.isMat()) {
+                    panelInfoTexte.getJta().append("et Mat!");
+                }
             } else if (jeu.isPat()) {
                 panelInfoTexte.getJta().append("\nPat!");
             } else if (jeu.isInvalide()) {
                 panelInfoTexte.getJta().append("\nCoup invalide ! Veuillez rejouer");
             }
         }
-
         panelInfoSide.getjListCoups().setText(CollectionUtility.toStringCollection(jeu.getCoupsJoues(), "\n"));
+        panelInfoSide.getJlb1().setText("Score " + jeu.getJoueur(Couleur.BLANC).getPseudo() + " : ");
+        panelInfoSide.getJlb2().setText("Score " + jeu.getJoueur(Couleur.NOIR).getPseudo() + " : ");
+        panelInfoSide.getJtf1().setText(new Byte(jeu.getJoueur(Couleur.BLANC).getScore()).toString());
+        panelInfoSide.getJtf2().setText(new Byte(jeu.getJoueur(Couleur.NOIR).getScore()).toString());
         panelInfoTexte.repaint();
         panelBoard.repaint();
         panelInfoSide.repaint();
@@ -175,17 +182,17 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
         }
 
         if (source == panelInfoSide.getButtonLoad()) {
-            
-           JFileChooser jfc = new JFileChooser(SAVE_FOLDER);
-           jfc.setDialogTitle("Charger Partie");
-           jfc.showOpenDialog(null);
-           String fileName = jfc.getName(jfc.getSelectedFile());
-           this.getCtrl().notifyLoad(fileName);
-           return;
+
+            JFileChooser jfc = new JFileChooser(SAVE_FOLDER);
+            jfc.setDialogTitle("Charger Partie");
+            jfc.showOpenDialog(null);
+            String fileName = jfc.getName(jfc.getSelectedFile());
+            this.getCtrl().notifyLoad(fileName);
+            return;
         }
 
         if (source == panelInfoSide.getButtonSave()) {
-             String fileName = (String) JOptionPane.showInputDialog(
+            String fileName = (String) JOptionPane.showInputDialog(
                     this,
                     "Nom de sauvegarde : \n",
                     "Sauvegarde",
@@ -197,6 +204,16 @@ public class VueJeu extends EchecsView implements MouseListener, ActionListener 
             this.getCtrl().notifySave(fileName);
         }
     }
-    
-    
+
+    public void onPromote(PromotEvent e) {
+        Case c = (Case) e.getSource();
+        Pieces[] choix = {Pieces.REINE, Pieces.TOUR, Pieces.CAVALIER, Pieces.FOU};
+        JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+        int rang = JOptionPane.showOptionDialog(null, "Veuillez choisir votre piece promue :", "UzChess Promotion !",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, choix, choix[3]);
+        JOptionPane.showMessageDialog(null, "Votre nouvelle piece est " + choix[rang], "UzChess Promotion!", JOptionPane.INFORMATION_MESSAGE);
+
+        this.getCtrl().notifyPromote(c, choix[rang]);
+
+    }
 }

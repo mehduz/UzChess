@@ -15,6 +15,7 @@ import uzchess.core.domain.Joueur;
 import uzchess.core.rules.VerificateurPion;
 import uzchess.events.EchecsChangedEvent;
 import uzchess.events.EchecsListener;
+import uzchess.events.PromotEvent;
 
 /**
  *
@@ -84,14 +85,44 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
         if (casesToClean.contains(arr)) {
 
             compteurCoups = (dep.getPiece().getDeplacement() instanceof VerificateurPion || arr.getPiece() != null) ? 0 : (byte) (compteurCoups + 1);
+            if (arr.getPiece() != null || arr.isGhosted()) {
+                if( arr.isGhosted()){
+                    this.getJoueur(tour).setScore((byte)(this.getJoueur(tour).getScore() + 1));
+                }
+                else
+                {
+                    this.getJoueur(tour).setScore((byte)(this.getJoueur(tour).getScore() + arr.getPiece().getValue()));
+                }
+            }
             echiquier.deplacer(dep, arr);
             invalide = false;
+            
+            
+            if(arr.getPiece().getDeplacement() instanceof VerificateurPion)
+            {
+                if(tour == Couleur.BLANC && arr.getLigne() == 0 )
+                {
+                    //envoyer a la vue event promotion
+                    //class event promotion herite eventechec
+                    firePromotion(arr);
+                      
+                }
+                else if(tour == Couleur.NOIR && arr.getLigne() == 7 )
+                {
+                       firePromotion(arr);   
+                }
+            }
+            
+            
+            
             coupsJoues.add(new Coup(dep, arr));
+           
             tour = (tour == Couleur.BLANC) ? Couleur.NOIR : Couleur.BLANC;    
+       
             echec = moteurDeJeu.detecterEchec(tour);
             this.detecterFin();
             
-            Joueur j;
+            Joueur j = null;
             if (super.tour == Couleur.BLANC && echiquier.getgBlanc() != null) {
                 j = jb;
                 echiquier.getgBlanc().setGhosted(false);
@@ -101,12 +132,17 @@ public class JeuEchecsModel extends JeuEchecs implements Serializable{
                 echiquier.getgNoir().setGhosted(false);
                 echiquier.setgNoir(null);
             }
-
-            if (arr.getPiece() != null) {
-                //j.setScore((byte) (j.getScore() + arr.getPiece().getValeur()));
-            }
         }
         fireEchecsChanged();
+    }
+    
+    private void firePromotion(Case arr) {
+
+        EchecsListener[] listenerList = (EchecsListener[]) this.listeners.getListeners(EchecsListener.class);
+
+        for (EchecsListener el : listenerList) {
+            el.onPromote(new PromotEvent(arr));
+        }
     }
 
 }

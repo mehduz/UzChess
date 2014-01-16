@@ -12,7 +12,7 @@ public class VerificateurRoi implements Deplacement, Serializable {
     
     private Echiquier ech;
     private static VerificateurReine vr;
-
+    
      public VerificateurRoi(){
         vr = new VerificateurReine();
         ech = null;
